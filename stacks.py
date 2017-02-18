@@ -38,9 +38,9 @@ class Stack(object):
 
 
 #Practice Problem
-#Check if expressions are ballanced
+#Check if expressions are balanced
 # (A+B) => True
-# ((A+b) => False
+# ((A+B) => False
 
 test_string = [
     "(A+B",
