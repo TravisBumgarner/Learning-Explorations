@@ -1,7 +1,10 @@
-a = True and not False
-b = True
-c = b and not not b
-d = b is not b
+from linked_lists import Node, LinkedList
+import random
+my_ll = LinkedList()
+for i in range(0,10):
+    my_ll.insert(i)
 
 
-print("{}\n {}\n {}\n {}\n".format(a,b,c,d))
+while my_ll.get_nth(0).get_data():
+    print(my_ll.pop())
+
