@@ -1,4 +1,9 @@
+"""
+Given a string, check if it is a permutation of a palindrome.
+"""
+
 def pal_per(input_string):
+    #This first part would be O(len(input_string))
     input_string = input_string.lower()
     char_dict = {}
     for char in input_string:
@@ -7,6 +12,8 @@ def pal_per(input_string):
         elif char in char_dict:
             char_dict[char] += 1
 
+    #This second part would be O(26) because char_dict has a len(26)
+    #Overall this function would be O(len(input_string))
     odd_count = 0
     palindrome = True
     for value in char_dict.values():

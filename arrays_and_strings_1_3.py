@@ -13,10 +13,14 @@ def urlify_with_new_string(url,length):
     return result
 
 def urlify_in_place(url,url_length):
+    #This first part would be O(len(url))
     for index in reversed(range(0,url_length)):
         if url[index] == " ":
             url = url[0:index] + "%20" + url[index+1:]
     spaces = True
+
+    #This second part I believe would evaluate to O(len(white_space_at_end))
+    # len(url) >> len(white_space_at_end) therefore this function is O(len(url))
     while spaces:
         if url[-1] == " ":
             url = url[:-1]
