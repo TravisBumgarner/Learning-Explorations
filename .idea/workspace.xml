@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="096c46be-d566-4442-b8ec-896719a87213" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queues.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/queues_sandbox.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/arrays_and_strings_1_3.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/arrays_and_strings_1_4.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stacks.py" afterPath="$PROJECT_DIR$/stacks.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stacks_sandbox.py" afterPath="$PROJECT_DIR$/stacks_sandbox.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/queues_sandbox.py" afterPath="$PROJECT_DIR$/queues_sandbox.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,18 +33,38 @@
       <file leaf-file-name="queues.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/queues.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="28" column="45" lean-forward="false" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+            <state relative-caret-position="175">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="queues_sandbox.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="queues_sandbox.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/queues_sandbox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="50">
+              <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="arrays_and_strings_1_3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/arrays_and_strings_1_3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="arrays_and_strings_1_4.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/arrays_and_strings_1_4.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="99">
+              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,8 +89,10 @@
         <option value="$PROJECT_DIR$/linked_lists_sandbox.py" />
         <option value="$PROJECT_DIR$/stacks.py" />
         <option value="$PROJECT_DIR$/stacks_sandbox.py" />
-        <option value="$PROJECT_DIR$/queues_sandbox.py" />
         <option value="$PROJECT_DIR$/queues.py" />
+        <option value="$PROJECT_DIR$/arrays_and_strings_1_3.py" />
+        <option value="$PROJECT_DIR$/queues_sandbox.py" />
+        <option value="$PROJECT_DIR$/arrays_and_strings_1_4.py" />
       </list>
     </option>
   </component>
@@ -117,41 +138,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Python.stacks_sandbox">
-    <configuration default="false" name="linked_lists_sandbox" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Intro To Algorithms Course" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linked_lists_sandbox.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="linked_lists" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Intro To Algorithms Course" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linked_lists.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.arrays_and_strings_1_4">
     <configuration default="false" name="stacks_sandbox" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -182,6 +169,57 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Intro To Algorithms Course" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/stacks.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="queues_sandbox" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Intro To Algorithms Course" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/queues_sandbox.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="arrays_and_strings_1_3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Intro To Algorithms Course" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/arrays_and_strings_1_3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="arrays_and_strings_1_4" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Intro To Algorithms Course" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/arrays_and_strings_1_4.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -320,18 +358,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Python.linked_lists_sandbox" />
-      <item index="1" class="java.lang.String" itemvalue="Python.linked_lists" />
-      <item index="2" class="java.lang.String" itemvalue="Python.stacks_sandbox" />
-      <item index="3" class="java.lang.String" itemvalue="Python.stacks" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.stacks_sandbox" />
+      <item index="1" class="java.lang.String" itemvalue="Python.stacks" />
+      <item index="2" class="java.lang.String" itemvalue="Python.queues_sandbox" />
+      <item index="3" class="java.lang.String" itemvalue="Python.arrays_and_strings_1_3" />
+      <item index="4" class="java.lang.String" itemvalue="Python.arrays_and_strings_1_4" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.stacks_sandbox" />
-        <item index="1" class="java.lang.String" itemvalue="Python.stacks" />
-        <item index="2" class="java.lang.String" itemvalue="Python.linked_lists_sandbox" />
-        <item index="3" class="java.lang.String" itemvalue="Python.linked_lists" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.arrays_and_strings_1_4" />
+        <item index="1" class="java.lang.String" itemvalue="Python.queues_sandbox" />
+        <item index="2" class="java.lang.String" itemvalue="Python.arrays_and_strings_1_3" />
+        <item index="3" class="java.lang.String" itemvalue="Python.stacks_sandbox" />
+        <item index="4" class="java.lang.String" itemvalue="Python.stacks" />
       </list>
     </recent_temporary>
   </component>
@@ -375,7 +415,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -392,7 +434,7 @@
         <state relative-caret-position="250">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -415,16 +457,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/queues.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="28" column="45" lean-forward="false" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+        <state relative-caret-position="175">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/queues_sandbox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="50">
+          <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arrays_and_strings_1_3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arrays_and_strings_1_4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
