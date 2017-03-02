@@ -18,12 +18,10 @@
       <file leaf-file-name="tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="99" column="3" lean-forward="false" selection-start-line="99" selection-start-column="3" selection-end-line="99" selection-end-column="3" />
+            <state relative-caret-position="227">
+              <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#1930#1994#0" expanded="false" />
-                <element signature="e#2027#2124#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -32,8 +30,8 @@
       <file leaf-file-name="grid_max.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grid_max.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="73" lean-forward="false" selection-start-line="29" selection-start-column="73" selection-end-line="29" selection-end-column="73" />
+            <state relative-caret-position="189">
+              <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -58,13 +56,18 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>print</find>
+    </findStrings>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test_data.py" />
         <option value="$PROJECT_DIR$/sandbox.py" />
-        <option value="$PROJECT_DIR$/grid_max.py" />
         <option value="$PROJECT_DIR$/tests.py" />
+        <option value="$PROJECT_DIR$/grid_max.py" />
       </list>
     </option>
   </component>
@@ -111,7 +114,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python tests.Unittest BadInputs.test_grid_not_rectangular">
+  <component name="RunManager" selected="Python tests.Unittests in tests">
     <configuration default="false" name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -365,11 +368,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittest BadInputs.test_grid_not_rectangular" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in GoodInputs" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_diagonal_down_left_search" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_horizontal_search" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest BadInputs.test_grid_not_rectangular" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in GoodInputs" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_diagonal_down_left_search" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_horizontal_search" />
       </list>
     </recent_temporary>
   </component>
@@ -396,38 +399,38 @@
     <history-entry file="Unittest_BadInputs_test_grid_not_rectangular - 2017.03.02 at 15h 46m 46s.xml">
       <configuration name="Unittest BadInputs.test_grid_not_rectangular" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_diagonal_down_left_search - 2017.03.02 at 15h 36m 58s.xml">
-      <configuration name="Unittest GoodInputs.test_diagonal_down_left_search" configurationId="tests" />
+    <history-entry file="Unittest_BadInputs_test_grid_not_rectangular - 2017.03.02 at 15h 51m 12s.xml">
+      <configuration name="Unittest BadInputs.test_grid_not_rectangular" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittest_GoodInputs_test_diagonal_down_left_search - 2017.03.02 at 15h 37m 23s.xml">
       <configuration name="Unittest GoodInputs.test_diagonal_down_left_search" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_horizontal_search - 2017.03.02 at 15h 34m 46s.xml">
-      <configuration name="Unittest GoodInputs.test_horizontal_search" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_horizontal_search - 2017.03.02 at 15h 35m 02s.xml">
-      <configuration name="Unittest GoodInputs.test_horizontal_search" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_GoodInputs - 2017.03.02 at 15h 34m 00s.xml">
-      <configuration name="Unittests in GoodInputs" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_GoodInputs - 2017.03.02 at 15h 35m 44s.xml">
-      <configuration name="Unittests in GoodInputs" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_GoodInputs - 2017.03.02 at 15h 37m 51s.xml">
       <configuration name="Unittests in GoodInputs" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2017.03.02 at 15h 51m 31s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2017.03.02 at 15h 51m 37s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2017.03.02 at 15h 52m 11s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2017.03.02 at 15h 53m 09s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-1288" y="-8" width="1296" height="1040" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08828125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -449,14 +452,14 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/grid_max.py</url>
-          <line>54</line>
+          <line>52</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -467,8 +470,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#1930#1994#0" expanded="false" />
-            <element signature="e#2027#2124#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -491,20 +492,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grid_max.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="73" lean-forward="false" selection-start-line="29" selection-start-column="73" selection-end-line="29" selection-end-column="73" />
+        <state relative-caret-position="189">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="99" column="3" lean-forward="false" selection-start-line="99" selection-start-column="3" selection-end-line="99" selection-end-column="3" />
+        <state relative-caret-position="227">
+          <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#1930#1994#0" expanded="false" />
-            <element signature="e#2027#2124#0" expanded="false" />
           </folding>
         </state>
       </provider>

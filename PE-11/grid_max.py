@@ -15,8 +15,6 @@ class Grid:
             self.max_val = -1
             self.local_max_val = []
 
-            print("{} by {}".format(self.width, self.height))
-
         except TypeError:
             raise ValueError("The input grid needs a minimum size of 4x4 integers")
 

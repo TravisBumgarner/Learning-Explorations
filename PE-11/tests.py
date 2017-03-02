@@ -52,11 +52,11 @@ class GoodInputs(unittest.TestCase):
 
     def test_diagonal_down_right_search(self):
         grid6 = Grid([
-                [1, 9, 1, 1, 1],
-                [1, 1, 9, 1, 1],
-                [1, 1, 1, 9, 1],
-                [1, 1, 1, 1, 9],
-                [1, 1, 1, 1, 1]
+            [1, 9, 1, 1, 1],
+            [1, 1, 9, 1, 1],
+            [1, 1, 1, 9, 1],
+            [1, 1, 1, 1, 9],
+            [1, 1, 1, 1, 1]
         ])
         self.assertEqual(grid6.compute_max(), 6561)
 
@@ -73,19 +73,6 @@ class GoodInputs(unittest.TestCase):
 
 class BadInputs(unittest.TestCase):
 
-    grid_too_small = [
-        [1, 1, 1],
-        [1, 1, 1],
-        [1, 1, 1],
-    ]
-    grid_contains_non_numbers = [
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-        [1, "A", 4, 5],
-        [1, 2, 4, 5],
-    ]
-    all_around_bad_input1 = "a"
-    all_around_bad_input2 = ["a", 5, 5]
 
     def test_grid_not_rectangular(self):
         with self.assertRaises(ValueError):
@@ -97,19 +84,26 @@ class BadInputs(unittest.TestCase):
             ])
             grid1b.compute_max()
 
-"""
-
     def test_grid_too_small(self):
-        # Checks if the function on two lines below raises a ValueError
-        with self.assertRaises("ValueError"):
-            grid_max(self.grid_too_small)
+        with self.assertRaises(ValueError):
+            grid2b = Grid([
+                [1, 1, 1],
+                [1, 1, 1],
+                [1, 1, 1],
+            ])
+            grid2b.compute_max()
 
     def test_grid_contains_non_numbers(self):
-        with self.assertRaises("ValueError"):
-            grid_max(self.grid_contains_non_numbers)
+        with self.assertRaises(TypeError):
+            grid3b = Grid([
+                [1, 1, 1, 1],
+                [1, 1, 1, 1],
+                [1, "A", 4, 5],
+                [1, 2, 4, 5],
+            ])
+            grid3b.compute_max()
 
-    def test_all_around_bad_input(self):
-        with self.assertRaises("ValueError"):
-            grid_max(self.all_around_bad_input1)
-        with self.assertRaises("ValueError"):
-            grid_max(self.all_around_bad_input2)
+    def test_grid_is_not_list_of_lists(self):
+        with self.assertRaises(ValueError):
+            grid4b = Grid("A")
+            grid4b.compute_max()
