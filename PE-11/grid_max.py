@@ -1,9 +1,4 @@
-myGrid =[
-    [1, 2, 3, 4, 100],
-    [5, 6, 0, 99, 0],
-    [1, 11, 1, 3, 22],
-    [1, 1, 1, 1, 55]
-]
+import test_data
 
 class Grid:
     def __init__(self, input_grid):
@@ -79,3 +74,5 @@ class Grid:
         return self.max_val
 
 
+grid = Grid(test_data.TEST_DATA)
+print(grid.compute_max())
