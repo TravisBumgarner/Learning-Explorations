@@ -28,40 +28,28 @@ class Grid:
                 raise ValueError("The input is a grid of numbers only, check row {}".format(row))
 
     def calculate_horizontal(self, x_start, y_start):
-        max_product = -1
         current_product = 1
-        for x_current in range(x_start,x_start + 4):
+        for x_current in range(x_start, x_start + 4):
             current_product *= self.grid[y_start][x_current]
-            if current_product > max_product:
-                max_product = current_product
-        return max_product
+        return current_product
 
     def calculate_vertical(self, x_start, y_start):
-        max_product = -1
         current_product = 1
-        for y_current in range(y_start,y_start + 4):
+        for y_current in range(y_start, y_start + 4):
             current_product *= self.grid[y_current][x_start]
-            if current_product > max_product:
-                max_product = current_product
-        return max_product
+        return current_product
 
     def calculate_diagonal1(self, x_start, y_start):
-        max_product = -1
         current_product = 1
-        for i in range(0,4):
+        for i in range(0, 4):
             current_product *= self.grid[y_start + i][x_start - i]
-            if current_product > max_product:
-                max_product = current_product
-        return max_product
+        return current_product
 
     def calculate_diagonal2(self, x_start, y_start):
-        max_product = -1
         current_product = 1
-        for i in range(0,4):
+        for i in range(0, 4):
             current_product *= self.grid[y_start + i][x_start + i]
-            if current_product > max_product:
-                max_product = current_product
-        return max_product
+        return current_product
 
     def compute_max(self):
         for y in range(0, self.height):
@@ -89,5 +77,3 @@ class Grid:
         return self.max_val
 
 
-grid = Grid(myGrid)
-print(grid.compute_max())

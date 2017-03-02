@@ -3,12 +3,6 @@ from grid_max import Grid
 
 
 class GoodInputs(unittest.TestCase):
-    grid_0 = [
-        [1, 2, 3, 0],
-        [2, 0, 5, 3],
-        [5, 2, 0, 0],
-        [0, 0, 3, 2]
-    ]
     grid_1 = [
         [1, 1, 1, 1],
         [1, 1, 1, 1],
@@ -54,10 +48,16 @@ class GoodInputs(unittest.TestCase):
         ])
         self.assertEqual(grid.compute_max(), 1680)
 
-
-"""
     def test_0_grid_equals_0(self):
-        self.assertEqual(grid_max(self.grid_0), 0)
+        grid2 = Grid([
+            [1, 2, 3, 0],
+            [2, 0, 5, 3],
+            [5, 2, 0, 0],
+            [0, 0, 3, 2]
+        ])
+        self.assertEqual(grid2.compute_max(), 0)
+
+    """
 
     def test_1_grid_equals_1(self):
         self.assertEqual(grid_max(self.grid_1), 1)
@@ -73,7 +73,6 @@ class GoodInputs(unittest.TestCase):
 
     def test_diagonal_down_left_search(self):
         self.assertEqual(grid_max(self.grid_6562_diagonal_down_left), 6562)
-
 
 class BadInputs(unittest.TestCase):
     grid_not_rectangular = [
