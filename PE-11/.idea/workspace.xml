@@ -18,18 +18,12 @@
       <file leaf-file-name="tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="59" selection-end-column="7" />
+            <state relative-caret-position="329">
+              <caret line="99" column="3" lean-forward="false" selection-start-line="99" selection-start-column="3" selection-end-line="99" selection-end-column="3" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#94#188#0" expanded="false" />
-                <element signature="e#216#347#0" expanded="false" />
-                <element signature="e#373#504#0" expanded="false" />
-                <element signature="e#541#672#0" expanded="false" />
-                <element signature="e#708#839#0" expanded="false" />
-                <marker date="1488484027188" expanded="false" signature="1917:2012" ph="..." />
-                <marker date="1488484027188" expanded="false" signature="2036:2098" ph="..." />
-                <marker date="1488484027188" expanded="false" signature="2133:2228" ph="..." />
+                <element signature="e#1930#1994#0" expanded="false" />
+                <element signature="e#2027#2124#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -38,8 +32,8 @@
       <file leaf-file-name="grid_max.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grid_max.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="50" column="36" lean-forward="false" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+            <state relative-caret-position="493">
+              <caret line="29" column="73" lean-forward="false" selection-start-line="29" selection-start-column="73" selection-end-line="29" selection-end-column="73" />
               <folding />
             </state>
           </provider>
@@ -48,8 +42,8 @@
       <file leaf-file-name="sandbox.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="17">
+              <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -68,9 +62,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test_data.py" />
-        <option value="$PROJECT_DIR$/tests.py" />
         <option value="$PROJECT_DIR$/sandbox.py" />
         <option value="$PROJECT_DIR$/grid_max.py" />
+        <option value="$PROJECT_DIR$/tests.py" />
       </list>
     </option>
   </component>
@@ -117,24 +111,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in GoodInputs">
-    <configuration default="false" name="grid_max" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="PE-11" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/grid_max.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Unittest BadInputs.test_grid_not_rectangular">
     <configuration default="false" name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -179,7 +156,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittest GoodInputs.test_0_grid_equals_0" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Unittest GoodInputs.test_horizontal_search" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -191,7 +168,7 @@
       <module name="PE-11" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests.py" />
       <option name="CLASS_NAME" value="GoodInputs" />
-      <option name="METHOD_NAME" value="test_0_grid_equals_0" />
+      <option name="METHOD_NAME" value="test_horizontal_search" />
       <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_METHOD" />
       <option name="PATTERN" value="" />
@@ -201,21 +178,48 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="sandbox" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="Unittest GoodInputs.test_diagonal_down_left_search" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
+      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="PE-11" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sandbox.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests.py" />
+      <option name="CLASS_NAME" value="GoodInputs" />
+      <option name="METHOD_NAME" value="test_diagonal_down_left_search" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittest BadInputs.test_grid_not_rectangular" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="PE-11" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests.py" />
+      <option name="CLASS_NAME" value="BadInputs" />
+      <option name="METHOD_NAME" value="test_grid_not_rectangular" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -353,19 +357,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.grid_max" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in GoodInputs" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_0_grid_equals_0" />
-      <item index="4" class="java.lang.String" itemvalue="Python.sandbox" />
+      <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in GoodInputs" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_horizontal_search" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_diagonal_down_left_search" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest BadInputs.test_grid_not_rectangular" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in GoodInputs" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_0_grid_equals_0" />
-        <item index="2" class="java.lang.String" itemvalue="Python.sandbox" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
-        <item index="4" class="java.lang.String" itemvalue="Python.grid_max" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittest BadInputs.test_grid_not_rectangular" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in GoodInputs" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_diagonal_down_left_search" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest GoodInputs.test_horizontal_search" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
       </list>
     </recent_temporary>
   </component>
@@ -383,34 +387,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 14h 56m 46s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittest_BadInputs_test_grid_not_rectangular - 2017.03.02 at 15h 42m 09s.xml">
+      <configuration name="Unittest BadInputs.test_grid_not_rectangular" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 14h 57m 09s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittest_BadInputs_test_grid_not_rectangular - 2017.03.02 at 15h 44m 17s.xml">
+      <configuration name="Unittest BadInputs.test_grid_not_rectangular" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 14h 57m 34s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittest_BadInputs_test_grid_not_rectangular - 2017.03.02 at 15h 46m 46s.xml">
+      <configuration name="Unittest BadInputs.test_grid_not_rectangular" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 14h 58m 46s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittest_GoodInputs_test_diagonal_down_left_search - 2017.03.02 at 15h 36m 58s.xml">
+      <configuration name="Unittest GoodInputs.test_diagonal_down_left_search" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 15h 01m 11s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittest_GoodInputs_test_diagonal_down_left_search - 2017.03.02 at 15h 37m 23s.xml">
+      <configuration name="Unittest GoodInputs.test_diagonal_down_left_search" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 15h 01m 37s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittest_GoodInputs_test_horizontal_search - 2017.03.02 at 15h 34m 46s.xml">
+      <configuration name="Unittest GoodInputs.test_horizontal_search" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 15h 02m 10s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittest_GoodInputs_test_horizontal_search - 2017.03.02 at 15h 35m 02s.xml">
+      <configuration name="Unittest GoodInputs.test_horizontal_search" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 15h 02m 16s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittests_in_GoodInputs - 2017.03.02 at 15h 34m 00s.xml">
+      <configuration name="Unittests in GoodInputs" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_GoodInputs_test_0_grid_equals_0 - 2017.03.02 at 15h 03m 54s.xml">
-      <configuration name="Unittest GoodInputs.test_0_grid_equals_0" configurationId="tests" />
+    <history-entry file="Unittests_in_GoodInputs - 2017.03.02 at 15h 35m 44s.xml">
+      <configuration name="Unittests in GoodInputs" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_GoodInputs - 2017.03.02 at 15h 04m 00s.xml">
+    <history-entry file="Unittests_in_GoodInputs - 2017.03.02 at 15h 37m 51s.xml">
       <configuration name="Unittests in GoodInputs" configurationId="tests" />
     </history-entry>
   </component>
@@ -423,7 +427,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -442,10 +446,17 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/grid_max.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="10" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -456,14 +467,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#94#188#0" expanded="false" />
-            <element signature="e#216#347#0" expanded="false" />
-            <element signature="e#373#504#0" expanded="false" />
-            <element signature="e#541#672#0" expanded="false" />
-            <element signature="e#708#839#0" expanded="false" />
-            <marker date="1488484027188" expanded="false" signature="1917:2012" ph="..." />
-            <marker date="1488484027188" expanded="false" signature="2036:2098" ph="..." />
-            <marker date="1488484027188" expanded="false" signature="2133:2228" ph="..." />
+            <element signature="e#1930#1994#0" expanded="false" />
+            <element signature="e#2027#2124#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -478,34 +483,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="17">
+          <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grid_max.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="50" column="36" lean-forward="false" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+        <state relative-caret-position="493">
+          <caret line="29" column="73" lean-forward="false" selection-start-line="29" selection-start-column="73" selection-end-line="29" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="59" selection-end-column="7" />
+        <state relative-caret-position="329">
+          <caret line="99" column="3" lean-forward="false" selection-start-line="99" selection-start-column="3" selection-end-line="99" selection-end-column="3" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#94#188#0" expanded="false" />
-            <element signature="e#216#347#0" expanded="false" />
-            <element signature="e#373#504#0" expanded="false" />
-            <element signature="e#541#672#0" expanded="false" />
-            <element signature="e#708#839#0" expanded="false" />
-            <marker date="1488484027188" expanded="false" signature="1917:2012" ph="..." />
-            <marker date="1488484027188" expanded="false" signature="2036:2098" ph="..." />
-            <marker date="1488484027188" expanded="false" signature="2133:2228" ph="..." />
+            <element signature="e#1930#1994#0" expanded="false" />
+            <element signature="e#2027#2124#0" expanded="false" />
           </folding>
         </state>
       </provider>

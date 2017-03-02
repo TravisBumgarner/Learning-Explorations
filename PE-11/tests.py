@@ -3,42 +3,6 @@ from grid_max import Grid
 
 
 class GoodInputs(unittest.TestCase):
-    grid_1 = [
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1]
-    ]
-    grid_6562_horizontal = [
-        [1, 1, 1, 1, 1],
-        [1, 9, 9, 9, 9],
-        [1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1]
-    ]
-    grid_6562_vertical = [
-        [1, 1, 1, 1, 1],
-        [1, 1, 9, 1, 1],
-        [1, 1, 9, 1, 1],
-        [1, 1, 9, 1, 1],
-        [1, 1, 9, 1, 1]
-    ]
-    grid_6562_diagonal_down_right = [
-        [1, 9, 1, 1, 1],
-        [1, 1, 9, 1, 1],
-        [1, 1, 1, 9, 1],
-        [1, 1, 1, 1, 9],
-        [1, 1, 1, 1, 1]
-    ]
-    grid_6562_diagonal_down_left = [
-        [1, 1, 1, 9, 1],
-        [1, 1, 9, 1, 1],
-        [1, 9, 1, 1, 1],
-        [9, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1]
-    ]
-
-
     def test_normal_grid_search_works(self):
         grid = Grid([
             [1, 2, 3, 4],
@@ -57,30 +21,58 @@ class GoodInputs(unittest.TestCase):
         ])
         self.assertEqual(grid2.compute_max(), 0)
 
-    """
-
     def test_1_grid_equals_1(self):
-        self.assertEqual(grid_max(self.grid_1), 1)
+        grid3 = Grid([
+            [1, 1, 1, 1],
+            [1, 1, 1, 1],
+            [1, 1, 1, 1],
+            [1, 1, 1, 1]
+        ])
+        self.assertEqual(grid3.compute_max(), 1)
 
     def test_horizontal_search(self):
-        self.assertEqual(grid_max(self.grid_6562_horizontal), 6562)
+        grid4 = Grid([
+            [1, 1, 1, 1, 1],
+            [1, 9, 9, 9, 9],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1]
+        ])
+        self.assertEqual(grid4.compute_max(), 6561)
 
     def test_vertical_search(self):
-        self.assertEqual(grid_max(self.grid_6562_vertical), 6562)
+        grid5 = Grid([
+            [1, 1, 1, 1, 1],
+            [1, 1, 9, 1, 1],
+            [1, 1, 9, 1, 1],
+            [1, 1, 9, 1, 1],
+            [1, 1, 9, 1, 1]
+        ])
+        self.assertEqual(grid5.compute_max(), 6561)
 
     def test_diagonal_down_right_search(self):
-        self.assertEqual(grid_max(self.grid_6562_diagonal_down_right), 6562)
+        grid6 = Grid([
+                [1, 9, 1, 1, 1],
+                [1, 1, 9, 1, 1],
+                [1, 1, 1, 9, 1],
+                [1, 1, 1, 1, 9],
+                [1, 1, 1, 1, 1]
+        ])
+        self.assertEqual(grid6.compute_max(), 6561)
 
     def test_diagonal_down_left_search(self):
-        self.assertEqual(grid_max(self.grid_6562_diagonal_down_left), 6562)
+        grid7 = Grid([
+            [1, 1, 1, 9, 1],
+            [1, 1, 9, 1, 1],
+            [1, 9, 1, 1, 1],
+            [9, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1]
+        ])
+        self.assertEqual(grid7.compute_max(), 6561)
+
 
 class BadInputs(unittest.TestCase):
-    grid_not_rectangular = [
-        [1, 2, 3, 4, 5],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-        [1, 2, 4, 5]
-    ]
+
     grid_too_small = [
         [1, 1, 1],
         [1, 1, 1],
@@ -96,8 +88,16 @@ class BadInputs(unittest.TestCase):
     all_around_bad_input2 = ["a", 5, 5]
 
     def test_grid_not_rectangular(self):
-        with self.assertRaises("ValueError"):
-            grid_max(self.grid_not_rectangular)
+        with self.assertRaises(ValueError):
+            grid1b = Grid([
+                [1, 2, 3, 4, 5],
+                [1, 1, 1, 1],
+                [1, 1, 1, 1],
+                [1, 2, 4, 5]
+            ])
+            grid1b.compute_max()
+
+"""
 
     def test_grid_too_small(self):
         # Checks if the function on two lines below raises a ValueError
@@ -113,4 +113,3 @@ class BadInputs(unittest.TestCase):
             grid_max(self.all_around_bad_input1)
         with self.assertRaises("ValueError"):
             grid_max(self.all_around_bad_input2)
-"""

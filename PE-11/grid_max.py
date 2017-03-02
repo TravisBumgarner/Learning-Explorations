@@ -15,6 +15,8 @@ class Grid:
             self.max_val = -1
             self.local_max_val = []
 
+            print("{} by {}".format(self.width, self.height))
+
         except TypeError:
             raise ValueError("The input grid needs a minimum size of 4x4 integers")
 
@@ -24,6 +26,8 @@ class Grid:
         for row in self.grid:
             try:
                 sum(row)
+                if len(row) != self.width:
+                    raise ValueError("The grid consists of unequal rows")
             except SyntaxError:
                 raise ValueError("The input is a grid of numbers only, check row {}".format(row))
 
@@ -42,13 +46,13 @@ class Grid:
     def calculate_diagonal1(self, x_start, y_start):
         current_product = 1
         for i in range(0, 4):
-            current_product *= self.grid[y_start + i][x_start - i]
+            current_product *= self.grid[y_start + i][x_start + i]
         return current_product
 
     def calculate_diagonal2(self, x_start, y_start):
         current_product = 1
         for i in range(0, 4):
-            current_product *= self.grid[y_start + i][x_start + i]
+            current_product *= self.grid[y_start + i][x_start - i]
         return current_product
 
     def compute_max(self):
@@ -65,8 +69,8 @@ class Grid:
                 if x + 3 < self.width and y + 3 < self.height:
                     self.local_max_val.append(self.calculate_diagonal1(x, y))
 
-                if x - 3 > 0 and y + 3 < self.height:
-                    self.local_max_val.append(self.calculate_diagonal1(x, y))
+                if x - 3 >= 0 and y + 3 < self.height:
+                    self.local_max_val.append(self.calculate_diagonal2(x, y))
 
                 try:
                     if max(self.local_max_val) > self.max_val:
