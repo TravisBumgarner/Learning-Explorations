@@ -39,6 +39,6 @@ class Latice:
 import datetime
 
 start = datetime.datetime.now()
-latice = Latice(20)
+latice = Latice(10)
 print(latice.build_tree(latice.tree))
 print(datetime.datetime.now() - start)
