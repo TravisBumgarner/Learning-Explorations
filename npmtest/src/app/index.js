@@ -9,25 +9,48 @@ import { Footer } from "./components/Footer"
 class App extends React.Component {
 	// render() returns what needs to be rendered
 	// jsx renders JavaScript that then writes the html out
+	constructor(){
+		super();
+		this.state = {
+			homeLink: "Home"
+		};
+		console.log("Constructor");
+	}
+
+	componentWillMount(){
+		console.log("Component Will Mount");
+	}
+
+	onGreet() {
+		alert("Hello");
+	} 
+
+	onChangeLinkName(newName){
+		this.setState({
+			homeLink: newName
+		})
+	}
+
 	render(){ 
-
-		var user = {
-			name: "Bob",
-			age: 25,
-			hobbies: ["x", "y", "z"]
-		}
-
-
 		return (
 			<div className = "container">
 				<div className = "row">
 					<div className = "col-xs-10 col-xs-offset-1">
-						<Header/>
+						<Header homeLink = {this.state.homeLink}>
+							<p> More header text</p>
+						</Header>
 					</div>
 				</div>
 				<div className = "row">
 					<div className = "col-xs-10 col-xs-offset-1">
-						<Home name={"Travis"} age={27} user={user}/> {/* These are props */}
+						<Home 
+							name={"Travis"} 
+							initialAge={27} 
+							greet = {this.onGreet}
+							changeLink = {this.onChangeLinkName.bind(this)}
+							initialLinkName = {this.state.homeLink}
+
+						/>
 					</div>
 				</div>
 				<div className = "row">
@@ -38,6 +61,11 @@ class App extends React.Component {
 			</div>
 		);
 	} 
+}
+
+Home.PropTypes = {
+	name: React.PropTypes.string,
+	user: React.PropTypes.string
 }
 
 render(<App/>, window.document.getElementById("app")); // How it should be rendered

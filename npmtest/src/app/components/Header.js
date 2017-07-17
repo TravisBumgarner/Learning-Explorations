@@ -7,7 +7,7 @@ export class Header extends React.Component { // Make available in index.js
                 <div className="container">
                     <div className="navbar-header">
                         <ul className="nav navbar-nav">
-                            <li><a href = "#">Home</a></li>
+                            <li><a href = "#">{this.props.homeLink}</a></li>
                         </ul>
                     </div>
                 </div>
