@@ -4,7 +4,7 @@ import { render } from "react-dom";
 import { Header } from "./components/Header"
 import { Home } from "./components/Home"
 import { Footer } from "./components/Footer"
-
+import { Container } from "./components/Container"
 
 class App extends React.Component {
 	// render() returns what needs to be rendered
@@ -34,7 +34,8 @@ class App extends React.Component {
 	render(){ 
 		return (
 			<div className = "container">
-				<div className = "row">
+				<Container /
+>				<div className = "row">
 					<div className = "col-xs-10 col-xs-offset-1">
 						<Header homeLink = {this.state.homeLink}>
 							<p> More header text</p>
