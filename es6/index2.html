@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+<script>
+class Project {
+	constructor(name){
+		console.log(`Project Name ${name}`);
+	}
+}
+
+class SoftwareProject extends Project{
+	constructor(name){
+		super(name);
+		console.log("SoftwareProject");
+
+	}
+}
+
+let p = new SoftwareProject("XYZ");
+</script>
+</body>
+</html>
