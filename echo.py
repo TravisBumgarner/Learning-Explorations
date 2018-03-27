@@ -1,28 +1,43 @@
 import socket
 
-port = 8001
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-is_no_port = True
-while is_no_port:
-    try:
-        s.bind(('0.0.0.0', port))
-        is_no_port = False
+class Server:
+    def __init__(self, host='0.0.0.0', desired_port=8000, max_listen_queue=5):
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    except OSError:
-        port += 1
+        is_no_port = True
+        while is_no_port:
+            try:
+                self.socket.bind((host, desired_port))
+                is_no_port = False
+                print('Bound to {} on port {}'.format(host, desired_port))
 
-print('listening on port {}'.format(port))
-s.listen(5)
-while True:
-    try:
-        conn, addr = s.accept()
-        print(conn, addr)
+            except OSError:
+                desired_port += 1
+
+        self.socket.listen(max_listen_queue)
+
+    def listen(self):
         while True:
-            data = conn.recv(1024)
-            if data:
-                print(data)
-    finally:
-        conn.close()
+            try:
+                conn, addr = self.socket.accept()
+                print('Connection received from {}'.format(addr))
 
-s.close()
+                while True:
+                    data = conn.recv(1024)
+                    if data:
+                        print(data)
+            finally:
+                conn.close()
+
+        self.socket.close()
+
+
+class Client:
+    def __init__(self, host='0.0.0.0', port=8000):
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.connect((host, port))
+        print('Bound to {} on port {}'.format(host, port))
+
+    def send(self, message):
+        self.socket.sendall(message.encode('utf-8'))
