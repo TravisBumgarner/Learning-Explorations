@@ -1,6 +1,7 @@
 from config import ACTIVE_NETWORK_ESSID, ACTIVE_NETWORK_PASSWORD
 
 
+
 def connect():
     import network
     sta_if = network.WLAN(network.STA_IF)

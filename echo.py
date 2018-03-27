@@ -1,8 +1,14 @@
 import socket
+import network
 
 
 class Server:
-    def __init__(self, host='0.0.0.0', desired_port=8000, max_listen_queue=5):
+    def __init__(
+            self,
+            host='0.0.0.0',  # Empty string so we can receive requests from other computers
+            desired_port=8000,
+            max_listen_queue=5
+    ):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         is_no_port = True
@@ -10,6 +16,9 @@ class Server:
             try:
                 self.socket.bind((host, desired_port))
                 is_no_port = False
+                if not host:
+                    ap_if = network.WLAN(network.AP_IF)
+                    host = ap_if.ifconfig()[0]
                 print('Bound to {} on port {}'.format(host, desired_port))
 
             except OSError:
@@ -18,6 +27,7 @@ class Server:
         self.socket.listen(max_listen_queue)
 
     def listen(self):
+        print('Listening...')
         while True:
             try:
                 conn, addr = self.socket.accept()
@@ -29,12 +39,15 @@ class Server:
                         print(data)
             finally:
                 conn.close()
-
-        self.socket.close()
+                self.socket.close()
 
 
 class Client:
-    def __init__(self, host='0.0.0.0', port=8000):
+    def __init__(
+            self,
+            host='0.0.0.0',
+            port=8000
+    ):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((host, port))
         print('Bound to {} on port {}'.format(host, port))
