@@ -5,7 +5,7 @@ import network
 class Server:
     def __init__(
             self,
-            host='0.0.0.0',  # Empty string so we can receive requests from other computers
+            host='',  # Empty string so we can receive requests from other computers, use 0.0.0.0 for localhost
             desired_port=8000,
             max_listen_queue=5
     ):
@@ -17,8 +17,8 @@ class Server:
                 self.socket.bind((host, desired_port))
                 is_no_port = False
                 if not host:
-                    ap_if = network.WLAN(network.AP_IF)
-                    host = ap_if.ifconfig()[0]
+                    sta_if = network.WLAN(network.STA_IF)
+                    host = sta_if.ifconfig()[0]
                 print('Bound to {} on port {}'.format(host, desired_port))
 
             except OSError:
