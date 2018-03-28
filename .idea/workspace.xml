@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="44aa9cbe-0a25-49e0-9235-b4f2c8994343" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/echo.py" afterPath="$PROJECT_DIR$/echo.py" />
-    </list>
+    <list default="true" id="44aa9cbe-0a25-49e0-9235-b4f2c8994343" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,9 +14,12 @@
       <file leaf-file-name="echo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/echo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="59" column="31" lean-forward="false" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
-              <folding />
+            <state relative-caret-position="75">
+              <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+              <folding>
+                <element signature="e#161#1794#0" expanded="false" />
+                <element signature="e#1815#2412#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -307,9 +308,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/echo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="59" column="31" lean-forward="false" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
-          <folding />
+        <state relative-caret-position="75">
+          <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <folding>
+            <element signature="e#161#1794#0" expanded="false" />
+            <element signature="e#1815#2412#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

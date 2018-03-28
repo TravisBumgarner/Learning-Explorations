@@ -1,11 +1,19 @@
 import socket
-import json
-import network
 import ujson
+import network
+from machine import Pin
+from time import sleep
 
-MSG_FORMAT_JSON   = 'JSON'
-MSG_FORMAT_STRING = 'STRING'
-MSG_FORMAT_HTML_POST = 'POST'
+
+
+def blink(blink_count):
+    p0 = Pin(0, Pin.OUT)
+    for i in range(0, blink_count):
+        p0.value(1)
+        sleep(0.1)
+        p0.value(0)
+        sleep(0.1)
+
 
 # Server only runs on esp2866
 class Server:
@@ -53,30 +61,14 @@ class Server:
                 self.socket.close()
 
     def process_request(self, request):
-        data_type, raw_data = request.decode('utf-8').split('__')
-        if data_type == MSG_FORMAT_STRING:
-            print(raw_data)
-        elif data_type == MSG_FORMAT_JSON:
-            print(raw_data)
-            print(type(raw_data))
-            print(ujson.loads(raw_data))
+        data = request.decode('utf-8').split('\r\n')
+        if data[0] == 'POST / HTTP/1.1':
+            print(data[-1])
+            post_data = ujson.loads(data[-1])
+            print(type(post_data))
+            print(post_data)
+            print(post_data['blink_count'])
+            blink(int(post_data['blink_count']))
 
 
-class Client:
-    def __init__(
-            self,
-            host='0.0.0.0',
-            port=8000
-    ):
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.connect((host, port))
-        print('Bound to {} on port {}'.format(host, port))
 
-    def send_str(self, data):
-        message = '{}__{}'.format(MSG_FORMAT_STRING, data)
-        self.socket.sendall(message.encode('utf-8'))
-
-    def send_json(self, data):
-        message = json.dumps(data, sort_keys=True)
-        message = '{}__{}'.format(MSG_FORMAT_JSON, data)
-        self.socket.sendall(message.encode('utf-8'))

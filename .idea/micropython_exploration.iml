@@ -12,6 +12,7 @@
     <orderEntry type="jdk" jdkName="Python 3.6.3 virtualenv at ~/.virtualenvs/huzzah" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="MicroPython" level="project" />
+    <orderEntry type="library" name="MicroPython" level="project" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
