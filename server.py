@@ -33,15 +33,26 @@ class Server:
                 self.conn, addr = self.socket.accept()
                 print('Connection received from {}'.format(addr))
 
-                while True:
+                is_connected = True
+
+                while is_connected:
                     request = self.conn.recv(1024)
                     if request:
                         print('Request Received {}'.format(request))
-                        self.process_request(request)
-                        self.make_response('Hello to you too!')
+                        # self.process_request(request)
+
+                        body = 'Hello to you too!'
+                        headers = {}
+
+                        response = self.format_response(headers=headers, body=body)
+                        pretty_print_message('Response', response)
+                        print(response)
+                        self.conn.sendall(response)
+                        is_connected = False
 
             finally:
-                self.socket.close()
+                self.conn.close()
+                print('Closing connection from {}'.format(addr))
 
     def process_request(self, request):
         request = request.decode('utf-8').strip()
@@ -66,7 +77,7 @@ class Server:
 
         print("{}\n{}\n{}\n{}\n{}".format(method, path, protocol, headers_dict, body))
 
-    def generate_response(self, status_code='200 OK', protocol='HTTP/1.1', headers={}, body=''):
+    def format_response(self, status_code='200 OK', protocol='HTTP/1.1', headers={}, body=''):
         response = "{} {}\r\n".format(protocol, status_code)
         for h in headers.keys():
             response += "{}: {}\r\n".format(h, headers[h])
@@ -74,13 +85,4 @@ class Server:
         response += body
         return str.encode(response)
 
-    def make_response(self, body):
-        headers = {
-        }
-
-        response = self.generate_response(headers=headers, body=body)
-        pretty_print_message('Response', response)
-        print(response)
-        self.conn.sendall(response)
-        self.conn.close()
 
