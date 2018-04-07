@@ -1,7 +1,7 @@
 import socket
 
 from utils import pretty_print_message, Request
-
+from url import get_body_content
 
 class Server:
     def __init__(
@@ -42,9 +42,9 @@ class Server:
                             pretty_print_message('Request', request)
                             r = Request(request_byte_str=request)
                             print(r)
-                            with open('./src/index.html') as f:
-                                body = f.read()
+
                             headers = {}
+                            body = get_body_content(r)
 
                             response = self.format_response(headers=headers, body=body)
                             pretty_print_message('Response', response)
