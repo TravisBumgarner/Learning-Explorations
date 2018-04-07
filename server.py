@@ -1,6 +1,6 @@
 import socket
 
-from utils import pretty_print_message
+from utils import pretty_print_message, Request
 
 
 class Server:
@@ -40,7 +40,8 @@ class Server:
                         request = conn.recv(1024)
                         if request:
                             pretty_print_message('Request', request)
-                            # self.process_request(request)
+                            r = Request(request_byte_str=request)
+                            print(r)
                             with open('./src/index.html') as f:
                                 body = f.read()
                             headers = {}
@@ -61,29 +62,6 @@ class Server:
         finally:
             print('\nClosing Socket')
             self.socket.close()
-
-    def process_request(self, request):
-        request = request.decode('utf-8').strip()
-
-        request = request.split('\r\n\r\n')
-
-        if len(request) == 2:
-            headers, body = request
-        else:
-            headers = request[0]
-            body = ''
-        headers = headers.split('\r\n')
-
-        request_line = headers[0]
-        method, path, protocol = request_line.split(' ')
-
-        raw_headers = headers[1:]
-        headers_dict = {}
-        for h in raw_headers:
-            k, v = h.split(': ')
-            headers_dict[k] = v
-
-        print("{}\n{}\n{}\n{}\n{}".format(method, path, protocol, headers_dict, body))
 
     def format_response(self, status_code='200 OK', protocol='HTTP/1.1', headers={}, body=''):
         response = "{} {}\r\n".format(protocol, status_code)
