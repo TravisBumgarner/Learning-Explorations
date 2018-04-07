@@ -1,6 +1,6 @@
-from connect import Client
+from server import Server
 
 
 if __name__ == "__main__":
-    c = Client(host='google.com', port=80)
-
+    s = Server()
+    s.listen()
