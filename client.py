@@ -5,14 +5,14 @@ class Client:
     def __init__(
             self,
             host='0.0.0.0',
-            port=8000
+            port=8001
     ):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.host = host
         self.socket.connect((host, port))
         print('Bound to {} on port {}\n'.format(host, port))
 
-    def generate_headers(self, method='GET', path = '/', protocol='HTTP/1.1', headers={}, body=''):
+    def generate_request(self, method='GET', path ='/', protocol='HTTP/1.1', headers={}, body=''):
         response = "{} {} {}\r\n".format(method, path, protocol)
         for h in headers.keys():
             response += "{}: {}\r\n".format(h, headers[h])
@@ -32,7 +32,7 @@ class Client:
             'Host': self.host
         }
 
-        request = self.generate_headers(headers=headers, body='Hello World!')
+        request = self.generate_request(headers=headers, body='Hello World!')
         self.pretty_print_message('Request', request)
 
         self.socket.sendall(request)

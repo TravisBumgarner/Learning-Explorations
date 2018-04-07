@@ -29,19 +29,20 @@ class Server:
         print('Listening...')
         while True:
             try:
-                conn, addr = self.socket.accept()
+                self.conn, addr = self.socket.accept()
                 print('Connection received from {}'.format(addr))
 
                 while True:
-                    request = conn.recv(1024)
+                    request = self.conn.recv(1024)
                     if request:
                         print('Request Received {}'.format(request))
                         self.process_request(request)
+                        self.make_response('Hello to you too!')
 
             finally:
-                conn.close()
+                self.conn.close()
                 self.socket.close()
-        self.socket.close()
+        # self.socket.close()
 
     def process_request(self, request):
         request = request.decode('utf-8').strip()
@@ -65,3 +66,29 @@ class Server:
             headers_dict[k] = v
 
         print("{}\n{}\n{}\n{}\n{}".format(method, path, protocol, headers_dict, body))
+
+    def generate_response(self, status_code='200 OK', protocol='HTTP/1.1', headers={}, body=''):
+        response = "{} {}\r\n".format(protocol, status_code)
+        for h in headers.keys():
+            response += "{}: {}\r\n".format(h, headers[h])
+        response += '\r\n'
+        response += body
+        return str.encode(response)
+
+    def pretty_print_message(self, type, message):
+        message = message.decode('utf-8').split('\r\n')
+        print('[>] {}'.format(type))
+        for line in message:
+            print('[>]     {}'.format(line))
+        print('\n')
+
+    def make_response(self, body):
+        headers = {
+        }
+
+        response = self.generate_response(headers=headers, body=body)
+        self.pretty_print_message('Response', response)
+        print(response)
+        self.conn.sendall(response)
+        self.conn.close()
+
