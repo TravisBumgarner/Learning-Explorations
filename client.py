@@ -13,7 +13,7 @@ class Client:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.host = host
         self.socket.connect((host, port))
-        print('Connected to host:port\n'.format(host, port))
+        print('Connected to {}:{}'.format(host, port))
 
     def format_request(
             self,

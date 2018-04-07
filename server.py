@@ -28,31 +28,39 @@ class Server:
 
     def listen(self):
         print('Listening...')
-        while True:
-            try:
-                self.conn, addr = self.socket.accept()
-                print('Connection received from {}'.format(addr))
+        try:
+            while True:
+                try:
+                    conn, addr = self.socket.accept()
+                    print('\nConnection received from {}'.format(addr))
 
-                is_connected = True
+                    is_connected = True
 
-                while is_connected:
-                    request = self.conn.recv(1024)
-                    if request:
-                        print('Request Received {}'.format(request))
-                        # self.process_request(request)
+                    while is_connected:
+                        request = conn.recv(1024)
+                        if request:
+                            pretty_print_message('Request', request)
+                            # self.process_request(request)
 
-                        body = 'Hello to you too!'
-                        headers = {}
+                            body = 'Hello to you too!'
+                            headers = {}
 
-                        response = self.format_response(headers=headers, body=body)
-                        pretty_print_message('Response', response)
-                        print(response)
-                        self.conn.sendall(response)
-                        is_connected = False
+                            response = self.format_response(headers=headers, body=body)
+                            pretty_print_message('Response', response)
+                            conn.sendall(response)
+                            is_connected = False
 
-            finally:
-                self.conn.close()
-                print('Closing connection from {}'.format(addr))
+                finally:
+                    conn.close()
+                    print('\nClosing connection from {}'.format(addr))
+
+        except KeyboardInterrupt:
+            print('\nClosing Socket')
+            self.socket.close()
+        
+        finally:
+            print('\nClosing Socket')
+            self.socket.close()
 
     def process_request(self, request):
         request = request.decode('utf-8').strip()
