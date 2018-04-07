@@ -1,8 +1,9 @@
 import socket
 
+from utils import pretty_print_message
+
 
 class Server:
-
     def __init__(
             self,
             host='0.0.0.0',  # Empty string so we can receive requests from other computers, use 0.0.0.0 for localhost
@@ -40,9 +41,7 @@ class Server:
                         self.make_response('Hello to you too!')
 
             finally:
-                self.conn.close()
                 self.socket.close()
-        # self.socket.close()
 
     def process_request(self, request):
         request = request.decode('utf-8').strip()
@@ -75,19 +74,12 @@ class Server:
         response += body
         return str.encode(response)
 
-    def pretty_print_message(self, type, message):
-        message = message.decode('utf-8').split('\r\n')
-        print('[>] {}'.format(type))
-        for line in message:
-            print('[>]     {}'.format(line))
-        print('\n')
-
     def make_response(self, body):
         headers = {
         }
 
         response = self.generate_response(headers=headers, body=body)
-        self.pretty_print_message('Response', response)
+        pretty_print_message('Response', response)
         print(response)
         self.conn.sendall(response)
         self.conn.close()
