@@ -41,8 +41,8 @@ class Server:
                         if request:
                             pretty_print_message('Request', request)
                             # self.process_request(request)
-
-                            body = 'Hello to you too!'
+                            with open('./src/index.html') as f:
+                                body = f.read()
                             headers = {}
 
                             response = self.format_response(headers=headers, body=body)
@@ -57,7 +57,7 @@ class Server:
         except KeyboardInterrupt:
             print('\nClosing Socket')
             self.socket.close()
-        
+
         finally:
             print('\nClosing Socket')
             self.socket.close()
