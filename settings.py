@@ -3,7 +3,8 @@ HTML_ROOT_DIR = './resources/html'
 
 # Mapping between endpoints requested and filenames. Data is fed to url.py
 URL_TO_RESOURCE = {
-    '/': 'index.html'
+    '/': 'index.html',
+    '/about': 'about.html',
 }
 
 HTML_404 = '404.html'
