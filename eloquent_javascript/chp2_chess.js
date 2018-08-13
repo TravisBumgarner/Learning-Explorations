@@ -18,3 +18,12 @@ function buildChessboard(size){
         console.log(index % 2 ? oddRow : evenRow)
     })
 }
+
+// Probably the shortest this could be. Not so clean though. 
+function buildChessboard2(size){
+    R.range(0, size).map(row => {
+        console.log(R.range(0, size).map(col => (row + col) % 2 === 0 ? '#' : ' '))
+    })
+}
+
+buildChessboard2(8)
