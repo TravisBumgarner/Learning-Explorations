@@ -1,23 +1,27 @@
 #python3
 
-def mpp(length, numbers):
+# Takeaways - 
+
+def mpp(length, user_inputs):
     length = int(length)
-    numbers = [int(x) for x in numbers.split(" ")]
+    inputs = [int(x) for x in user_inputs.split(" ")]
 
     if length < 2:
         raise(IndexError)
 
-    m = [float("-inf"), float("-inf")]
+    max_vals = [float("-inf"), float("-inf")]
 
-    for n in numbers:
-        if n > m[0]:
-            m[1] = m[0]
-            m[0] = n
+    for number in inputs:
+        print(max_vals)
+        if number > max_vals[0]:
+            max_vals.insert(0, number)
+            max_vals.pop()
+            
+        elif number > max_vals[1]:
+            max_vals.insert(1,number)
+            max_vals.pop()
         
-        elif n > m[1]:
-            m[1] = n
-
-    return m[0] * m[1]
+    return max_vals[0] * max_vals[1]
 
     
 if __name__ == "__main__":
