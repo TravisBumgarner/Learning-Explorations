@@ -1,5 +1,5 @@
 import unittest
-from maximum_pairwise_product import mpp
+from .maximum_pairwise_product import mpp
 
 class TestPairwiseProduct(unittest.TestCase):
     def test_invalid_input_fails(self):
