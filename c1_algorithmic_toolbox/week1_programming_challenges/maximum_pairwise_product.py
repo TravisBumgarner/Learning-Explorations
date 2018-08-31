@@ -4,6 +4,9 @@ def mpp(length, numbers):
     length = int(length)
     numbers = [int(x) for x in numbers.split(" ")]
 
+    if length < 2:
+        raise(IndexError)
+
     m = [float("-inf"), float("-inf")]
 
     for n in numbers:
