@@ -13,7 +13,6 @@ def calc_fib(n):
 
 # Semi Optimization
 def calc_fib_semi_optimized(n, previous_calculations={0:0, 1:1}):
-def calc_fib_semi_optimized(n, previous_calculations={0:0, 1:1}):
     existing_calculation = previous_calculations.get(n, None)
     if (existing_calculation is not None):
         return existing_calculation
@@ -25,14 +24,5 @@ def calc_fib_semi_optimized(n, previous_calculations={0:0, 1:1}):
 
 if __name__ == "__main__":
     n = int(input())
-
-    start = datetime.now()
     print(calc_fib_semi_optimized(n))
-    end = datetime.now()
-    print(end-start)
-
-    start = datetime.now()
-    print(calc_fib(n))
-    end = datetime.now()
-    print(end-start)
 
