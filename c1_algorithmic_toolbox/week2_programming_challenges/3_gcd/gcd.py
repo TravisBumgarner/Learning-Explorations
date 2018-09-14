@@ -55,6 +55,9 @@ def gcd_optimized_2(a, b):
             if max_val % i == 0 and min_val % i == 0:
                 gcd = i
                 max_iterable_val = min_val // i
+                if max_val % max_iterable_val == 0 and min_val % max_iterable_val == 0:
+                    gcd = max_iterable_val
+                    break
             i += 1
 
     return gcd
