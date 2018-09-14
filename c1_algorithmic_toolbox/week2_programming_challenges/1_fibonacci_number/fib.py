@@ -9,7 +9,10 @@ def calc_fib(n):
 
     return calc_fib(n - 1) + calc_fib(n - 2)
 
+
+
 # Semi Optimization
+def calc_fib_semi_optimized(n, previous_calculations={0:0, 1:1}):
 def calc_fib_semi_optimized(n, previous_calculations={0:0, 1:1}):
     existing_calculation = previous_calculations.get(n, None)
     if (existing_calculation is not None):
