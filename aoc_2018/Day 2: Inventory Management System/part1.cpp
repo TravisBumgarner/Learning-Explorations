@@ -23,18 +23,6 @@ vector<string> process_input(string filename)
     return output;
 }
 
-bool check_twos(string input)
-{
-    return false;
-}
-
-//  std::pair<std::map<char,int>::iterator,bool> ret;
-//   ret = mymap.insert ( std::pair<char,int>('z',500) );
-//   if (ret.second==false) {
-//     std::cout << "element 'z' already existed";
-//     std::cout << " with a value of " << ret.first->second << '\n';
-//   }
-
 map<char, int> count_letters(string input)
 {
     map<char, int> letter_counts;
