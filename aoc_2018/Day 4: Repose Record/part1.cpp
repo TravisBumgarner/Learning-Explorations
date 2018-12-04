@@ -44,9 +44,15 @@ int main(){
     int active_guard_id = -1;
     int falls_alseep_minute = -1;
     int wakes_up_minute = -1;
-    vector<int> guard_log{0};
-
+    
     map<int, vector<int>> guard_logs;
+
+    cout << "   ";
+    for (int m = 0; m<=59; m++){
+        if(m< 10) cout << 0;
+        cout << m << " " ;
+    }
+    cout << endl;
 
     for (auto line: input){
         regex_search(line, matches, rgx_input);
@@ -64,12 +70,73 @@ int main(){
             falls_alseep_minute = minute;
         } else if(message.find("wakes") == 0) {
             wakes_up_minute = minute;
+
+            bool log_exists = guard_logs.find(active_guard_id) != guard_logs.end();
+            if(log_exists){
+                for (int m = falls_alseep_minute; m < wakes_up_minute; m++){
+                    guard_logs[active_guard_id][m] += 1;
+                    // cout << guard_logs[active_guard_id][m];
+                }
+
+                cout << "#"<< active_guard_id << " ";
+                for (auto g: guard_logs[active_guard_id]){
+                    cout << g << "  "; 
+                }
+                cout << endl;
+
+            } else {
+                vector<int> guard_log{};
+                for (int m = 0; m<=59; m++){
+                    if (m >= falls_alseep_minute && m < wakes_up_minute){
+                        guard_log.push_back(1);
+                    } else {
+                        guard_log.push_back(0);
+                    }
+                }
+
+                cout << "#"<< active_guard_id << " ";
+                for (auto g: guard_log){
+                    cout << g << "  "; 
+                }
+                cout << endl;
+                guard_logs[active_guard_id] = guard_log;
+            }
         }
-        cout << endl;
-
-        // cout << message << endl;
-
     }
+
+    cout << endl << endl;
+
+    int sleepiest_guard_id = -1;
+    int sleepiest_guard_max_sleep_minute = 0;
+    int sleepiest_guard_total_sleep_time = 0;
+
+    for (auto gl: guard_logs){
+        // cout << gl.first << " " << endl;
+        int total_sleep_time = 0;
+        int max_sleep_time = -1;
+        int max_sleep_minute = -1;
+        int minute = 0;
+
+        for (auto l: gl.second){
+            // cout << l << " ";
+            total_sleep_time += l;
+            if (l > max_sleep_time){
+                max_sleep_time = l;
+                max_sleep_minute = minute;
+            }
+            minute++;
+        }
+
+        if (total_sleep_time > sleepiest_guard_total_sleep_time){
+            sleepiest_guard_id = gl.first;
+            sleepiest_guard_max_sleep_minute = max_sleep_minute;
+            sleepiest_guard_total_sleep_time = total_sleep_time;
+        }
+
+        cout << "#" << gl.first<< " max_sleep_minute:" << max_sleep_minute << " total_sleep_time:" << total_sleep_time << " max_sleep_time:" << max_sleep_time;
+        cout << endl;
+    }
+    cout << "Part 1: " << sleepiest_guard_id * sleepiest_guard_max_sleep_minute;
 
     return 0;
 }
