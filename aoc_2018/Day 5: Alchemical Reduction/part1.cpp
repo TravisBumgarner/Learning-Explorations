@@ -89,7 +89,7 @@ int main(){
     //     }
     // }
 
-    while (still_searching){
+        while (still_searching){
         bool reaction_found = false;
         for (int i = 0; i < output.length() - 1; i++){
             bool do_react = check_reactions(output[i], output[i+1]);
