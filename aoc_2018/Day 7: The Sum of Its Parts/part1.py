@@ -52,9 +52,32 @@ def get_letter_pairs(input):
     return matches.groups()
 
 
-def main():
+def search_nodes_by_value(node, value):
+    decendent_values = node.get_decendent_values()
+    children_values = node.get_children_values()
+
+    print(node.value)
+    print(f"    children:{children_values}")
+    print(f"    decendents:{decendent_values}\n")
+
+    if(not children_values):
+        print(f"No children for {node.value}")
+        return None
+
+    elif(value not in decendent_values):
+        print(f"{value} doesn't exist in the subtree of {node.value}")
+        return None
+
+    elif(value in children_values):
+        return node.get_child_by_value(value)
+
+    else:
+        for child_node in node.children_nodes:
+            return search_nodes_by_value(child_node, value)
+
+
+def build_tree(raw_instructions):
     root_node = Node()
-    raw_instructions = process_file("./input.txt")
     for instruction in raw_instructions:
         start_value, end_value = get_letter_pairs(instruction)
         print(f"Given {start_value} and {end_value}")
@@ -64,18 +87,53 @@ def main():
             root_node.value = start_value
             root_node.add_child(Node(value=end_value))
 
-        
-
+        # Self Explaining
         elif start_value == root_node.value:
             root_node.add_child(Node(value=end_value))
 
-        elif start_value in root_node.get_children_values():
-            node = root_node.get_child_by_value(start_value)
-            node.add_child(Node(value=end_value))
+        # Look through the rest of the tree to add a value
+        else:
+            node_with_start_value = search_nodes_by_value(root_node, start_value)
 
-    print(f"{root_node.value} has decendents {root_node.get_decendent_values()}")
+            if(not node_with_start_value):
+                print("Something went wrong.")
+            else:
+                node_with_start_value.add_child(Node(value=end_value))
+    return root_node
+
+
+def make_instructions(tree):
+    pass
+
+
+def main():
+    raw_instructions = process_file("./input.txt")
+    root_node = build_tree(raw_instructions)
+
+    available_nodes = []
+    output = root_node.value
+
+    if(root_node.has_children()):
+        available_nodes += root_node.children_nodes
+        available_nodes = sorted(available_nodes, reverse=True, key=lambda x: x.value)
+        node_to_append = available_nodes.pop()
+        output += node_to_append.value
+
     for node in root_node.children_nodes:
-        print(f"{node.value} has children {node.get_children_values()}")
+        if(node.has_children()):
+            available_nodes += node.children_nodes
+            available_nodes = sorted(available_nodes, reverse=True, key=lambda x: x.value)
+            node_to_append = available_nodes.pop()
+            output += node_to_append.value
+
+            for n in node.children_nodes:
+                if(n.has_children()):
+                    available_nodes += n.children_nodes
+                    available_nodes = sorted(available_nodes, reverse=True, key=lambda x: x.value)
+                    node_to_append = available_nodes.pop()
+                    output += node_to_append.value
+
+    print(output)
 
 
 if __name__ == "__main__":
