@@ -17,6 +17,8 @@
         "typeinfo": "cpp",
         "algorithm": "cpp",
         "regex": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "tuple": "cpp",
+        "ostream": "cpp"
     }
 }
