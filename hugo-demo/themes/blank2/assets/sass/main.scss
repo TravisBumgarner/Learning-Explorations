@@ -1,3 +1,52 @@
+$colors: (
+    primary: green,
+    secondary: red,
+    tertiary: white,
+);
+
+@function color($color-name){
+    @return map-get($colors, $color-name)
+}
+
+$spacing: (
+    small: 0.25em,
+    medium: 0.5em,
+    large: 1em,
+    xlarge: 2em,
+);
+
+$primary_border: 5px solid color(secondary);
+
 body {
-    background-color: red;
+    background-color: color(primary);
+    border: $primary_border;
+
+    header {
+        background-color: color(tertiary);
+        padding: map-get($spacing, large);
+
+        &:hover {
+            background-color: color(secondary)
+        }
+    }
+}
+
+.single-article {
+    h1 {
+        color: color(primary)
+    }
+
+    h2 {
+        color: color(primary)
+    }
+}
+
+.article-list {
+        h1 {
+            color: color(primary)
+        }
+    
+        h2 {
+            color: color(primary)
+        }
 }
