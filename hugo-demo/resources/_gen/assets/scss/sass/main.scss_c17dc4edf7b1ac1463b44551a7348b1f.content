@@ -1,3 +1,0 @@
-body{background-color:green;border:5px solid red}body header{background-color:#fff;padding:1em}body header:hover{background-color:red}.single-article h1{color:green}.single-article h2{color:green}.article-list h1{color:green}.article-list h2{color:green}
-
-/*# sourceMappingURL=style.css.map */

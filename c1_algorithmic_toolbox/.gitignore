@@ -1,6 +1,0 @@
-.DS_Store
-*.iml
-*.xml
-__pycache__/
-.vscode/
-.pytest_cache/
