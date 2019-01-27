@@ -2,7 +2,6 @@ import random
 
 # Todo
 # 1. Add way to add more than 12 cards
-# 2. Add Styling
 # 3. Add way to handle end of game
 
 SHAPES = ["<>", "()", "$$"]
@@ -19,6 +18,7 @@ DARK = '255'
 
 BOARD_SIZE = 12
 CARDS_PER_ROW = 3
+CARD_WIDTH = 9
 
 
 class Card(object):
@@ -34,7 +34,7 @@ class Card(object):
     def __str__(self):
         foreground = f'\033[38;5;{self.color}m'
         background = ''  # f'\033[48;5;{self.shading}m'
-        symbols = ' [' + ' '.join([self.shape] * self.quantity).center(9) + '] '
+        symbols = '[' + ' '.join([self.shape] * self.quantity).center(CARD_WIDTH) + ']'
         reset = '\u001b[0m'
 
         return foreground + background + symbols + reset
@@ -82,7 +82,10 @@ class Board(object):
         output = ''
         cards_in_row_counter = 0
         for card in self.board:
-            output += str(card)
+            if card is not None:
+                output += str(card)
+            else:
+                output += '[' + ' ' * (CARD_WIDTH) + ']'
             cards_in_row_counter += 1
             if cards_in_row_counter % CARDS_PER_ROW == 0 and cards_in_row_counter != BOARD_SIZE:
                 output += '\n'
@@ -105,6 +108,14 @@ class Board(object):
         index -= SHIFT_BY_ONE
         self.board[index] = card
 
+    def remove_card_at_index(self, index):
+        SHIFT_BY_ONE = 1
+        index -= SHIFT_BY_ONE
+        self.board[index] = None
+
+    def has_cards(self):
+        return len(self.board) > 0
+
 
 def is_set(potential_set):
     shapes = set()
@@ -113,6 +124,9 @@ def is_set(potential_set):
     # shadings = set()
 
     for card in potential_set:
+        if card is None:
+            return False  # Can't match on empty card
+
         shapes.add(card.shape)
         quantities.add(card.quantity)
         colors.add(card.color)
@@ -150,9 +164,9 @@ def main():
     deck = Deck()
     board = Board(deck)
 
-    while deck.has_cards():
+    while deck.has_cards() or board.has_cards():
         print(board)
-        print(str(deck.remaining_cards()) + " remaining cards\n")
+        print(str(deck.remaining_cards()) + " remaining cards in deck\n")
 
         card_indices = get_card_indices_from_player()
 
@@ -165,8 +179,11 @@ def main():
         if is_set(potential_set):
             print('Set!\n')
             for card_index in card_indices:
-                new_card = deck.next_card()
-                board.replace_card_at_index(new_card, card_index)
+                if deck.has_cards():
+                    new_card = deck.next_card()
+                    board.replace_card_at_index(new_card, card_index)
+                else:
+                    board.remove_card_at_index(card_index)
 
         else:
             print('Whoops, that doesn\'t look like a set.\n')
