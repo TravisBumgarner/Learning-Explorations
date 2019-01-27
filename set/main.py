@@ -16,9 +16,9 @@ MEDIUM = '250'
 DARK = '255'
 # SHADINGS = [LIGHT, MEDIUM, DARK]
 
-BOARD_SIZE = 12
+STARTING_BOARD_SIZE = 12
 CARDS_PER_ROW = 3
-CARD_WIDTH = 9
+CARD_WIDTH = 10
 
 
 class Card(object):
@@ -34,7 +34,7 @@ class Card(object):
     def __str__(self):
         foreground = f'\033[38;5;{self.color}m'
         background = ''  # f'\033[48;5;{self.shading}m'
-        symbols = '[' + ' '.join([self.shape] * self.quantity).center(CARD_WIDTH) + ']'
+        symbols = '[' + '  '.join([self.shape] * self.quantity).center(CARD_WIDTH) + ']'
         reset = '\u001b[0m'
 
         return foreground + background + symbols + reset
@@ -93,25 +93,26 @@ class Board(object):
 
     def populate_board(self, deck):
         board = []
-        for _ in range(BOARD_SIZE):
+        for _ in range(STARTING_BOARD_SIZE):
             board.append(deck.next_card())
         return board
 
     def get_card_by_index(self, index):
-        SHIFT_BY_ONE = 1
-        index -= SHIFT_BY_ONE
-
         return self.board[index]
 
+    def size(self):
+        return len(self.board)
+
     def replace_card_at_index(self, card, index):
-        SHIFT_BY_ONE = 1
-        index -= SHIFT_BY_ONE
         self.board[index] = card
 
-    def remove_card_at_index(self, index):
-        SHIFT_BY_ONE = 1
-        index -= SHIFT_BY_ONE
-        self.board[index] = None
+    def remove_cards(self, indices_to_remove):
+        modified_board = []
+
+        for index, card in enumerate(self.board):
+            if index not in indices_to_remove:
+                modified_board.append(card)
+        self.board = modified_board
 
     def has_cards(self):
         return len(self.board) > 0
@@ -127,9 +128,6 @@ def is_set(potential_set):
     # shadings = set()
 
     for card in potential_set:
-        if card is None:
-            return False  # Can't match on empty card
-
         shapes.add(card.shape)
         quantities.add(card.quantity)
         colors.add(card.color)
@@ -147,20 +145,24 @@ def get_user_input():
     return raw_input
 
 
-def get_card_incides(raw_input):
+def get_card_indices(raw_input):
+    SHIFT_BY_ONE = 1
+
     if len(raw_input) == 0:
         return []
 
-    card_indices = [int(card_index.strip()) for card_index in raw_input.split(',')]
-    return card_indices
+    try:
+        return [int(card_index.strip()) - SHIFT_BY_ONE for card_index in raw_input.split(',')]
+    except ValueError:
+        return []
 
 
-def is_valid_input(card_indices):
+def is_valid_input(card_indices, current_board_size):
     if len(card_indices) != 3:
         return False
 
     for index in card_indices:
-        if type(index) != int or index < 1 or index > 12:
+        if type(index) != int or index < 0 or index > current_board_size:
             return False
 
     return True
@@ -186,8 +188,8 @@ def main():
         if raw_input == "end":
             break
 
-        card_indices = get_card_incides(raw_input)
-        if not is_valid_input(card_indices):
+        card_indices = get_card_indices(raw_input)
+        if not is_valid_input(card_indices, board.size()):
             print("Input is invalid. A valid input is '1,5,7'\n")
             continue
 
@@ -196,17 +198,18 @@ def main():
         if is_set(potential_set):
             print('Set!\n')
             sets_found += 1
-            for card_index in card_indices:
-                if deck.has_cards():
+            if deck.has_cards() and board.size() < STARTING_BOARD_SIZE:
+                for card_index in card_indices:
                     new_card = deck.next_card()
                     board.replace_card_at_index(new_card, card_index)
-                else:
-                    board.remove_card_at_index(card_index)
+            else:
+                board.remove_cards(card_indices)
 
         else:
             print('Whoops, that doesn\'t look like a set.\n')
 
     print(f'Your score was {sets_found}')
+
 
 if __name__ == "__main__":
     main()
