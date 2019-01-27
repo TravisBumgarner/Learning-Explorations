@@ -198,7 +198,8 @@ def main():
         if is_set(potential_set):
             print('Set!\n')
             sets_found += 1
-            if deck.has_cards() and board.size() < STARTING_BOARD_SIZE:
+            print(board.size())
+            if deck.has_cards() and board.size() <= STARTING_BOARD_SIZE:
                 for card_index in card_indices:
                     new_card = deck.next_card()
                     board.replace_card_at_index(new_card, card_index)
