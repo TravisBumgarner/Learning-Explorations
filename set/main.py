@@ -87,7 +87,7 @@ class Board(object):
             else:
                 output += '[' + ' ' * (CARD_WIDTH) + ']'
             cards_in_row_counter += 1
-            if cards_in_row_counter % CARDS_PER_ROW == 0 and cards_in_row_counter != BOARD_SIZE:
+            if cards_in_row_counter % CARDS_PER_ROW == 0:  # and cards_in_row_counter != BOARD_SIZE:
                 output += '\n'
         return output
 
@@ -116,6 +116,9 @@ class Board(object):
     def has_cards(self):
         return len(self.board) > 0
 
+    def add_card(self, card):
+        self.board.append(card)
+
 
 def is_set(potential_set):
     shapes = set()
@@ -138,10 +141,13 @@ def is_set(potential_set):
     return True
 
 
-def get_card_indices_from_player():
+def get_user_input():
     raw_input = input('Enter 3 numbers, separated by commas of next moves: ')
     print('\n')
+    return raw_input
 
+
+def get_card_incides(raw_input):
     if len(raw_input) == 0:
         return []
 
@@ -163,13 +169,24 @@ def is_valid_input(card_indices):
 def main():
     deck = Deck()
     board = Board(deck)
+    sets_found = 0
 
     while deck.has_cards() or board.has_cards():
         print(board)
         print(str(deck.remaining_cards()) + " remaining cards in deck\n")
 
-        card_indices = get_card_indices_from_player()
+        raw_input = get_user_input()
 
+        if raw_input == "more":
+            for _ in range(3):
+                card = deck.next_card()
+                board.add_card(card)
+            continue
+
+        if raw_input == "end":
+            break
+
+        card_indices = get_card_incides(raw_input)
         if not is_valid_input(card_indices):
             print("Input is invalid. A valid input is '1,5,7'\n")
             continue
@@ -178,6 +195,7 @@ def main():
 
         if is_set(potential_set):
             print('Set!\n')
+            sets_found += 1
             for card_index in card_indices:
                 if deck.has_cards():
                     new_card = deck.next_card()
@@ -188,6 +206,7 @@ def main():
         else:
             print('Whoops, that doesn\'t look like a set.\n')
 
+    print(f'Your score was {sets_found}')
 
 if __name__ == "__main__":
     main()
