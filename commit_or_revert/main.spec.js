@@ -32,7 +32,7 @@ describe('fib', () => {
         [8,21],
         [9,34]
     ].forEach(([input, output]) => {
-        it('should return 1 when given 2', () => {
+        it(`should return ${output} when given ${input}`, () => {
             assert.equal(main.fib(input), output)
         })
     }) 
