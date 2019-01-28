@@ -23,4 +23,7 @@ describe('fib', () => {
     it('should return 0 when given 0', () => {
         assert.equal(main.fib(0), 0)
     })
+    it('should return 1 when given 1', () => {
+        assert.equal(main.fib(1), 1)
+    })
 })

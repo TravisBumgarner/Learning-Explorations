@@ -13,7 +13,10 @@ const fizzbuzz = (value) => {
 }
 
 const fib = (value) => {
-    return 0
+    if (value === 0 || value === 1){
+        return value
+    }
+    return value
 }
 
 module.exports = { fizzbuzz, fib }
