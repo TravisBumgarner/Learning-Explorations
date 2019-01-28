@@ -1,0 +1,12 @@
+{
+  "name": "commit_or_revert",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "ship-it-or-sink-it": "git add .;"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
