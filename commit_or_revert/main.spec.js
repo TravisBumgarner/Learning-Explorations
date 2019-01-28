@@ -13,7 +13,7 @@ describe('fizzbuzz', () => {
         assert.equal(main.fizzbuzz(15), "fizzbuzz")
     })
     ;[2,4,7,8,9, 99].forEach(value => {
-        it('should return the number when not divisible by 3, 5, or 15', () => {
+        it(`should return {value} when not divisible by 3, 5, or 15`, () => {
             return assert.equal(main.fizzbuzz(14), "14") 
         })
     })
