@@ -1,8 +1,9 @@
 const fizzbuzz = (value) => {
     let output = ""
-    if(value === 3) {
+    if(value % 3 === 0) {
         output += "fizz"
-    } else if(value === 5){
+    }
+    if(value % 5 === 0){
         output += "buzz"
     }
     return output
