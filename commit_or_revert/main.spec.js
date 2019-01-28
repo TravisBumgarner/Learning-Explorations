@@ -9,4 +9,7 @@ describe('fizzbuzz', () => {
     it('should return buzz when given five', () => {
         assert.equal(main.fizzbuzz(5), "buzz")
     })
+    it('should return buzz when given fifteen', () => {
+        assert.equal(main.fizzbuzz(15), "fizzbuzz")
+    })
 })
