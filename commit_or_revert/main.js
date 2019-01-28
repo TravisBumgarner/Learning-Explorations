@@ -6,6 +6,9 @@ const fizzbuzz = (value) => {
     if(value % 5 === 0){
         output += "buzz"
     }
+    if(!output.length){
+        output += value
+    }
     return output
 }
 

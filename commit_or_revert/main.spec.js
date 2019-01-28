@@ -12,4 +12,7 @@ describe('fizzbuzz', () => {
     it('should return buzz when given fifteen', () => {
         assert.equal(main.fizzbuzz(15), "fizzbuzz")
     })
+    it('should return the number when not divisible by 3, 5, or 15', () => {
+        assert.equal(main.fizzbuzz(14), "14")
+    })
 })
