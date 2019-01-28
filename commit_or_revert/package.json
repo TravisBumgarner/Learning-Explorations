@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "gamble": "git add . && (npm run test && git commit -m $1) || (git reset --hard && git clean -f -d)"
+    "gamble": "git add . && (./node_modules/mocha/bin/mocha *.spec.js ./ && git commit -m $1) || (git reset --hard && git clean -f -d)"
   },
   "keywords": [],
   "author": "",
