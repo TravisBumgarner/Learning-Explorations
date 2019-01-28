@@ -18,3 +18,9 @@ describe('fizzbuzz', () => {
         })
     })
 })
+
+describe('fib', () => {
+    it('should return 0 when given 0', () => {
+        assert.equal(main.fib(0), 0)
+    })
+})

@@ -12,4 +12,8 @@ const fizzbuzz = (value) => {
     return output
 }
 
-module.exports = { fizzbuzz }
+const fib = (value) => {
+    return 0
+}
+
+module.exports = { fizzbuzz, fib }
