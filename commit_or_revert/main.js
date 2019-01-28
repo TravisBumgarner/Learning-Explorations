@@ -16,7 +16,7 @@ const fib = (value) => {
     if (value === 0 || value === 1){
         return value
     }
-    return value
+    return fib(value - 1) + fib(value - 2)
 }
 
 module.exports = { fizzbuzz, fib }
