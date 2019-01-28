@@ -2,8 +2,8 @@ const assert = require('assert')
 
 const main = require('./main.js')
 
-describe('sum', () => {
-    it('should return 3 when given 1 and 2', () => {
-        assert.equal(main.sum(1,2), 3)
+describe('fizzbuzz', () => {
+    it('should return fizz when given three', () => {
+        assert.equal(main.fizzbuzz(3), "fizz")
     })
 })

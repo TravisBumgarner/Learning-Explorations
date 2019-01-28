@@ -1,3 +1,5 @@
-const sum = (a,b) => a + b
+const fizzbuzz = (number) => {
+    return "fizz"
+}
 
-module.exports = { sum }
+module.exports = { fizzbuzz }
