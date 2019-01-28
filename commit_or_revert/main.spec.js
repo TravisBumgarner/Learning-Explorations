@@ -20,14 +20,21 @@ describe('fizzbuzz', () => {
 })
 
 describe('fib', () => {
-    it('should return 0 when given 0', () => {
-        assert.equal(main.fib(0), 0)
-    })
-    it('should return 1 when given 1', () => {
-        assert.equal(main.fib(1), 1)
-    })
-    it('should return 1 when given 2', () => {
-        assert.equal(main.fib(2), 1)
-    })
+    [
+        [0,0],
+        [1,1],
+        [2,1],
+        [3,2],
+        [4,3],
+        [5,5],
+        [6,8],
+        [7,13],
+        [8,21],
+        [9,34]
+    ].forEach(([input, output]) => {
+        it('should return 1 when given 2', () => {
+            assert.equal(main.fib(input), output)
+        })
+    }) 
 
 })
