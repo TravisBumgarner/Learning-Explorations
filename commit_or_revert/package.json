@@ -4,9 +4,12 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "ship-it-or-sink-it": "git add .;"
+    "test": "mocha *.spec.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
 }
