@@ -30,3 +30,13 @@ Array.from({length:100},(v,k)=>k+1).map(n=> {
 
 Array.from({length:100},(v,k)=>k+1).map(n=>{Array.from({length:n},(v,k)=>k+1).map(d=>{if(!(n%d)){write(d+' ')}});print()})
 
+// Attempt 3: 131 Char
+f=n=>Array.from({length:n},(v,k)=>k+1);f(100).map(n=> {
+    f(n).map(d=> {
+        if(!(n % d)){write(d + ' ')}
+    })
+  print()
+})
+
+// Attempt 3 Minified:
+f=n=>Array.from({length:n},(v,k)=>k+1);f(100).map(n=> {f(n).map(d=>{if(!(n%d)){write(d+' ')}});print()})
