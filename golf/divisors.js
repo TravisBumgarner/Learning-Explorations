@@ -38,5 +38,18 @@ f=n=>Array.from({length:n},(v,k)=>k+1);f(100).map(n=> {
   print()
 })
 
-// Attempt 3 Minified:
+// Attempt 3 Minified: 105
 f=n=>Array.from({length:n},(v,k)=>k+1);f(100).map(n=> {f(n).map(d=>{if(!(n%d)){write(d+' ')}});print()})
+
+// Attempt 4: 78
+for(n=1;n<=100;n++){
+    for(d=1;d<=n;d++){!(n%d)&&write(d+" ")}
+    print()
+}
+
+// Attempt 4 Minified: 67
+for(n=1;n<=100;n++){for(d=1;d<=n;d++){!(n%d)&&write(d+" ")}print()}
+for(n=1;n<=100;n++){for(d=1;d<=n;d++){n%d||write(d+" ")}print()}
+for(n=1;n<=100;n++){for(d=1;d<=n;d++)n%d||write(d+" ");print()}
+for(n=1;n<101;n++){for(d=1;d<=n;d++)n%d||write(d+" ");print()}
+
