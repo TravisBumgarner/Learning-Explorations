@@ -1,0 +1,41 @@
+-- 7 Billion Humans (2215) --
+-- 9: Dynamic Angles --
+
+step s
+if c == 25:
+	pickup c
+	step s
+	drop
+endif
+if c == 32:
+	pickup c
+	step s
+	step s
+	drop
+endif
+if c == 75:
+	pickup c
+	step s
+	step s
+	step s
+	drop
+endif
+if c == 16:
+	pickup c
+	step s
+	step s
+	step s
+	step s
+	drop
+endif
+if c == 46:
+	pickup c
+	step s
+	step s
+	step s
+	step s
+	step s
+	drop
+endif
+
+
