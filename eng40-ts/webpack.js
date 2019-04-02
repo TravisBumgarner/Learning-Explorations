@@ -3,25 +3,25 @@ const webpack = require('webpack')
 
 module.exports = {
     entry: {
-        app: "./index.tsx"
+        app: './index.tsx'
     },
     output: {
-        filename: "app.bundle.js",
-        path: path.resolve(__dirname, 'dist')
+        filename: 'app.bundle.js',
+        path: path.resolve(__dirname, './')
     },
-    devtool: "source-map",
+    devtool: 'source-map',
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json"]
+        extensions: ['.ts', '.tsx', '.js', '.json']
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+            { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
         ]
     },
     externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
+        react: 'React',
+        'react-dom': 'ReactDOM'
     },
     devServer: {
         publicPath: '/',
@@ -36,7 +36,7 @@ module.exports = {
             }
         })
     ]
-};
+}
 
 // module.exports = {
 //     entry: {
