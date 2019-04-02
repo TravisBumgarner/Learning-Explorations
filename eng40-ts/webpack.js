@@ -11,7 +11,10 @@ module.exports = {
     },
     devtool: 'source-map',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json']
+        extensions: ['.ts', '.tsx', '.js', '.json'],
+        alias: {
+            SharedComponents: path.resolve(__dirname, '.src/sharedComponents/')
+        }
     },
     module: {
         rules: [
@@ -58,12 +61,12 @@ module.exports = {
 //         filename: '[name].bundle.js',
 //         path: path.resolve(__dirname, 'dist')
 //     },
-//     resolve: {
-//         alias: {
-//             SharedComponents: path.resolve(__dirname, 'src/sharedComponents/'),
-//             Theme: path.resolve(__dirname, 'src/theme.js'),
-//             Content: path.resolve(__dirname, 'src/content')
-//         }
+// resolve: {
+//     alias: {
+//         SharedComponents: path.resolve(__dirname, 'src/sharedComponents/'),
+//         Theme: path.resolve(__dirname, 'src/theme.js'),
+//         Content: path.resolve(__dirname, 'src/content')
+//     }
 //     },
 //     devtool: 'inline-source-map',
 
