@@ -1,5 +1,0 @@
-#!/bin/sh
-/sbin/pidof /home/tbumgarner/webapps/eng40/bin/node > /dev/null 2>&1 && exit 0
-mkdir -p /home/tbumgarner/webapps/eng40/run
-nohup /home/tbumgarner/webapps/eng40/bin/node /home/tbumgarner/webapps/eng40/server.js > /dev/null 2>&1 &
-/sbin/pidof /home/tbumgarner/webapps/eng40/bin/node > /home/tbumgarner/webapps/eng40/run/node.pid
