@@ -7,17 +7,16 @@
         "lib": "lib"
     },
     "scripts": {
-        "start": "NODE_ENV=develop webpack-dev-server  --mode=development --open --hot --inline --config webpack.js",
-        "build": "NODE_ENV=production webpack --config webpack.js"
+        "start": "webpack-dev-server --content-base ./dist --hot --inline --colors --port 3000 --open",
+        "build": "webpack --config webpack.config.js --watch"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "react": "^16.4.2",
-        "react-dom": "^16.4.2",
+        "react-dom": "^16.4.2"
     },
     "devDependencies": {
-        "@babel/core": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
         "@babel/preset-react": "^7.0.0",
         "babel-loader": "^8.0.0",

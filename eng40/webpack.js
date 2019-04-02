@@ -3,32 +3,26 @@ var webpack = require('webpack')
 
 module.exports = {
     entry: {
-        app: './src/index.js'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['@babel/preset-env', '@babel/preset-react']
-                }
-            }
-        ]
+        app: './src/index.tsx'
     },
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        publicPath: "/build/",
+        path: "./dist/build/"
     },
     resolve: {
-        alias: {
-            SharedComponents: path.resolve(__dirname, 'src/sharedComponents/'),
-            Theme: path.resolve(__dirname, 'src/theme.js'),
-            Content: path.resolve(__dirname, 'src/content')
-        }
+        extensions: [".ts", ".tsx", ".js", ".json"]
     },
-    devtool: 'inline-source-map',
+    module: {
+        rules: [
+            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+        ]
+    },
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    },
     devServer: {
         publicPath: '/',
         contentBase: './dist',
