@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -7,7 +8,7 @@ module.exports = {
     },
     output: {
         filename: 'app.bundle.js',
-        path: path.resolve(__dirname, './')
+        path: path.resolve(__dirname, './dist')
     },
     devtool: 'source-map',
     resolve: {
@@ -22,13 +23,9 @@ module.exports = {
             { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
         ]
     },
-    externals: {
-        react: 'React',
-        'react-dom': 'ReactDOM'
-    },
     devServer: {
         publicPath: '/',
-        contentBase: path.resolve(__dirname, './'),
+        contentBase: path.resolve(__dirname, './dist'),
         port: 3000,
         historyApiFallback: true
     },
@@ -37,45 +34,10 @@ module.exports = {
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
+        }),
+        new HtmlWebpackPlugin({
+            template: './index.template.ejs',
+            inject: 'body'
         })
     ]
 }
-
-// module.exports = {
-//     entry: {
-//         app: './src/index.tsx'
-//     },
-//     module: {
-//         rules: [
-//             {
-//                 test: /\.js$/,
-//                 exclude: /node_modules/,
-//                 loader: 'babel-loader',
-//                 query: {
-//                     presets: ['@babel/preset-env', '@babel/preset-react']
-//                 }
-//             }
-//         ]
-//     },
-//     output: {
-//         filename: '[name].bundle.js',
-//         path: path.resolve(__dirname, 'dist')
-//     },
-// resolve: {
-//     alias: {
-//         SharedComponents: path.resolve(__dirname, 'src/sharedComponents/'),
-//         Theme: path.resolve(__dirname, 'src/theme.js'),
-//         Content: path.resolve(__dirname, 'src/content')
-//     }
-//     },
-//     devtool: 'inline-source-map',
-
-//     devtool: 'source-map',
-//     plugins: [
-//         new webpack.DefinePlugin({
-//             'process.env': {
-//                 NODE_ENV: JSON.stringify('production')
-//             }
-//         })
-//     ]
-// }
