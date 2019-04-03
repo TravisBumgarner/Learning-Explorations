@@ -3,28 +3,44 @@ import * as React from 'react'
 //TODO: Use .tsx and Webpack.Resolve together
 import { Button } from '../../sharedComponents/'
 
-const validActions = {
-    addItem: 'addItem',
-    removeItem: 'removeItem'
+type TodoListItemType = {
+    task: string
+    id: number
 }
 
 type TodoListStateType = {
-    items: string[]
+    items: TodoListItemType[]
 }
+
+type newItemActionType = {
+    type: 'addItem'
+    task: string
+}
+
+type removeItemActionType = {
+    type: 'removeItem'
+    id: number
+}
+
+type actionType = newItemActionType | removeItemActionType
 
 const initialState: TodoListStateType = {
     items: []
 }
 
+let currentId = 0 // LOL don't do this
 const reducer = (state: TodoListStateType, action: any): TodoListStateType => {
-    console.log('I happen')
-    console.log(action)
+    console.log(state)
     switch (action.type) {
-        case validActions.addItem: {
-            return { ...state, items: [...state.items, action.item] }
+        case 'addItem': {
+            currentId += 1
+            const newItem: TodoListItemType = { task: action.task, id: currentId }
+            return { ...state, items: [...state.items, newItem] }
         }
-        case validActions.removeItem: {
-            return state
+        case 'removeItem': {
+            console.log('i happen')
+            const modifiedItems = state.items.filter(({ id }) => id !== action.id)
+            return { ...state, items: modifiedItems }
         }
         default: {
             return state
@@ -35,20 +51,37 @@ const reducer = (state: TodoListStateType, action: any): TodoListStateType => {
 const TodoList = () => {
     const [{ items }, dispatch] = React.useReducer(reducer, initialState)
 
-    const Items = items.map(item => <li>{item}</li>)
-    // const Items = items.join(', ')
-    // console.log(Items, 'i')
+    const Items =
+        items &&
+        items.map(({ task, id }) => (
+            <li key={id}>
+                {task}
+                <button
+                    onClick={() => {
+                        const action: actionType = {
+                            type: 'removeItem',
+                            id
+                        }
+                        dispatch(action)
+                    }}
+                >
+                    Remove {id}
+                </button>
+            </li>
+        ))
+
     return (
         <div>
             <Button
                 text="Add Item"
-                // TODO: how to type check on dispatch()
-                onClick={() =>
-                    dispatch({
-                        type: validActions.addItem,
-                        item: 'New Item'
-                    })
-                }
+                // TODO: how to type check on dispatch() properly
+                onClick={() => {
+                    const action: actionType = {
+                        type: 'addItem',
+                        task: 'New Items'
+                    }
+                    dispatch(action)
+                }}
             />
             <ul>{Items}</ul>
         </div>
