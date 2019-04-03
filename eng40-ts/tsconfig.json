@@ -6,8 +6,7 @@
         "module": "commonjs",
         "target": "es5",
         "jsx": "react"
+        // "noEmitOnError": false
     },
-    "include": [
-        "index.tsx"
-    ]
+    "include": ["index.tsx"]
 }
