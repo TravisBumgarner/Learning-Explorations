@@ -7,3 +7,4 @@
 # Todo
 
 -   Figure out how hard it is to setup Styled-Components
+-   Ask: How hard is it to go fast and break stuff with TypeScript?

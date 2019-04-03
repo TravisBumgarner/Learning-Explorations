@@ -3,36 +3,54 @@ import * as React from 'react'
 //TODO: Use .tsx and Webpack.Resolve together
 import { Button } from '../../sharedComponents/'
 
-type TodoListState = {
-    x: number
+const validActions = {
+    addItem: 'addItem',
+    removeItem: 'removeItem'
 }
 
-const initialState: TodoListState = {
-    x: 1
+type TodoListStateType = {
+    items: string[]
 }
 
-const reducer = (state: TodoListState, action: any): TodoListState => {
-    console.log(state)
-    switch (state) {
+const initialState: TodoListStateType = {
+    items: []
+}
+
+const reducer = (state: TodoListStateType, action: any): TodoListStateType => {
+    console.log('I happen')
+    console.log(action)
+    switch (action.type) {
+        case validActions.addItem: {
+            return { ...state, items: [...state.items, action.item] }
+        }
+        case validActions.removeItem: {
+            return state
+        }
         default: {
-            return { x: state.x + 1 }
+            return state
         }
     }
 }
 
 const TodoList = () => {
-    const [state, dispatch] = React.useReducer(reducer, initialState)
+    const [{ items }, dispatch] = React.useReducer(reducer, initialState)
+
+    const Items = items.map(item => <li>{item}</li>)
+    // const Items = items.join(', ')
+    // console.log(Items, 'i')
     return (
         <div>
             <Button
                 text="Add Item"
+                // TODO: how to type check on dispatch()
                 onClick={() =>
                     dispatch({
-                        type: 'addItem',
-                        x: 5
+                        type: validActions.addItem,
+                        item: 'New Item'
                     })
                 }
             />
+            <ul>{Items}</ul>
         </div>
     )
 }
