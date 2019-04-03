@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 //TODO: Use .tsx and Webpack.Resolve together
-import { Button } from '../../sharedComponents/'
+import { Button } from '../sharedComponents'
 
 type TodoListItemType = {
     task: string
@@ -50,6 +50,7 @@ const reducer = (state: TodoListStateType, action: any): TodoListStateType => {
 
 const TodoList = () => {
     const [{ items }, dispatch] = React.useReducer(reducer, initialState)
+    const [input, setInput] = React.useState('')
 
     const Items =
         items &&
@@ -72,15 +73,22 @@ const TodoList = () => {
 
     return (
         <div>
+            <input
+                value={input}
+                onChange={event => {
+                    setInput(event.target.value)
+                }}
+            />
             <Button
                 text="Add Item"
                 // TODO: how to type check on dispatch() properly
                 onClick={() => {
                     const action: actionType = {
                         type: 'addItem',
-                        task: 'New Items'
+                        task: input
                     }
                     dispatch(action)
+                    setInput('')
                 }}
             />
             <ul>{Items}</ul>
