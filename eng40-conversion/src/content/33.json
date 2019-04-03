@@ -1,0 +1,45 @@
+{
+    "id": 33,
+    "name": "Nightstand",
+    "category": [10],
+    "organization": [{ "id": 5, "name": "Personal" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": "",
+    "description": "First piece of handmade furniture.",
+    "start_date": "2017-05-01",
+    "end_date": "2017-06-01",
+    "skill": [3, 27],
+    "image": [
+        {
+            "id": 202,
+            "name": "DSC03929.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/DSC03929.jpg"
+        },
+        {
+            "id": 203,
+            "name": "0510162250.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/0510162250.jpg"
+        },
+        {
+            "id": 204,
+            "name": "DSC03930.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/DSC03930_LIdsTci.jpg"
+        },
+        {
+            "id": 205,
+            "name": "DSC03926.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/DSC03926.jpg"
+        },
+        {
+            "id": 206,
+            "name": "DSC03927.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/DSC03927.jpg"
+        }
+    ],
+    "link": [],
+    "preview_img": {
+        "id": 38,
+        "name": "nightstand preview",
+        "src": "https://eng40api.travisbumgarner.com/media/DSC03930.jpg"
+    }
+}

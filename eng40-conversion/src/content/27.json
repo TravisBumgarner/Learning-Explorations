@@ -1,0 +1,19 @@
+{
+    "id": 27,
+    "name": "Join Workout Club",
+    "category": [6, 9],
+    "organization": [{ "id": 12, "name": "Cogo Labs" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": "",
+    "description": "(Note: The website is not under my control anymore and might be changed at some point in the future.)\r\n\r\nReact and Django powered Workout Community. I was responsible for the engineering work on the workouts page and parts of the dashboard page.",
+    "start_date": "2017-09-01",
+    "end_date": "2018-02-01",
+    "skill": [11, 12, 13, 20, 28, 34, 35, 36, 37, 38],
+    "image": [],
+    "link": [{ "id": 31, "name": "Website", "src": "https://www.joinworkoutclub.com/" }],
+    "preview_img": {
+        "id": 29,
+        "name": "workout club preview image",
+        "src": "https://eng40api.travisbumgarner.com/media/Screen_Shot_2018-03-09_at_1.16.45_PM.png"
+    }
+}

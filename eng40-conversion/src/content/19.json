@@ -1,0 +1,31 @@
+{
+    "id": 19,
+    "name": "Engineering Portfolio V3.0",
+    "category": [6, 7],
+    "organization": [{ "id": 5, "name": "Personal" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": "Engineering Portfolio overhaul with a focus on using Django instead of WordPress",
+    "description": "This is the third version of my personal engineering portfolio. Version 2.0 was created with WordPress. While it's a great Content Management System(CMS), it was not the ideal solution. I learned Django to create a CMS that served my needs for a single page website. Furthermore, I learned Less to simplify writing CSS.",
+    "start_date": "2016-09-01",
+    "end_date": "2016-11-01",
+    "skill": [11, 12, 13, 14, 15, 16, 19, 20, 28, 29, 41],
+    "image": [
+        {
+            "id": 143,
+            "name": "eng30.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/eng30.jpg"
+        }
+    ],
+    "link": [
+        {
+            "id": 20,
+            "name": "GitHub Repo",
+            "src": "https://github.com/TravisBumgarner/Django_Single_Page_Site"
+        }
+    ],
+    "preview_img": {
+        "id": 21,
+        "name": "engineering portfolio v3.0 preview",
+        "src": "https://eng40api.travisbumgarner.com/media/eng30.png"
+    }
+}

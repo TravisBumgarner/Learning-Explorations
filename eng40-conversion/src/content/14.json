@@ -1,0 +1,53 @@
+{
+    "id": 14,
+    "name": "Pan & Tilt Camera Rig",
+    "category": [2, 5, 6, 8],
+    "organization": [{ "id": 5, "name": "Personal" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": "DIY rig for taking timelapse photos",
+    "description": "Why buy a camera pan and tilt tool when you can build one yourself with laser cut parts, some motors, and an Arduino?\r\nThis project began on a breadboard where I created a user interface to control panning, tilting, direction, and number of photos. Three servos total controlled panning, tilting, and taking photos. Once I knew what had to be housed, I created the case and arm to mount the camera in SolidWorks. These parts were then laser cut and glued together.",
+    "start_date": "2016-06-01",
+    "end_date": "2016-07-01",
+    "skill": [3, 8, 9, 10, 21, 22, 23, 24, 26],
+    "image": [
+        {
+            "id": 123,
+            "name": "DSC08258.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/DSC08258.jpg"
+        },
+        {
+            "id": 124,
+            "name": "DSC08264.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/DSC08264.jpg"
+        },
+        {
+            "id": 125,
+            "name": "DSC08278.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/DSC08278.jpg"
+        },
+        {
+            "id": 126,
+            "name": "DSC08268.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/DSC08268.jpg"
+        },
+        {
+            "id": 127,
+            "name": "0610162137a.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/0610162137a.jpg"
+        },
+        {
+            "id": 128,
+            "name": "0611161250.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/0611161250.jpg"
+        }
+    ],
+    "link": [
+        { "id": 14, "name": "GitHub Repo", "src": "https://github.com/TravisBumgarner/PanTilt/" },
+        { "id": 47, "name": "Video", "src": "https://www.youtube.com/watch?v=E8Qu_i_7nHc" }
+    ],
+    "preview_img": {
+        "id": 16,
+        "name": "pan & tilt preview image",
+        "src": "https://eng40api.travisbumgarner.com/media/pantilt.jpg"
+    }
+}

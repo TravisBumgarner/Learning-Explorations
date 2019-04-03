@@ -1,0 +1,43 @@
+{
+    "id": 1,
+    "name": "Water System",
+    "category": [1, 2, 3],
+    "organization": [{ "id": 1, "name": "Engineers Without Borders" }],
+    "location": [{ "id": 3, "name": "New Jersey" }, { "id": 4, "name": "Kenya" }],
+    "headline": "Rutgers University Engineers Without Borders\u00a0Chapter borehole well in Kolunje, Kenya",
+    "description": "The community of Kolunje, Kenya was in need of a water system and reached out to Engineers Without Borders for assistance and the Rutgers University Chapter accepted the proposal. During my year with the team, I helped prepare technical drawings of the system layout and finalized documents required to get approval to travel to Kenya to begin construction.",
+    "start_date": "2012-06-01",
+    "end_date": "2013-05-01",
+    "skill": [1, 2],
+    "image": [
+        {
+            "id": 59,
+            "name": "ewb0.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/ewb0.jpg"
+        },
+        {
+            "id": 61,
+            "name": "ewb1.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/ewb1.jpg"
+        },
+        {
+            "id": 62,
+            "name": "ewb3.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/ewb3.jpg"
+        },
+        {
+            "id": 63,
+            "name": "ewb2.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/ewb2.jpg"
+        }
+    ],
+    "link": [
+        { "id": 7, "name": "Project Website", "src": "http://ewb.rutgers.edu/projects/kenya.html" },
+        { "id": 8, "name": "Engineers Without Borders Website", "src": "https://www.ewb-usa.org/" }
+    ],
+    "preview_img": {
+        "id": 3,
+        "name": "water system preview image",
+        "src": "https://eng40api.travisbumgarner.com/media/ewb.jpg"
+    }
+}

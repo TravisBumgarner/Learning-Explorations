@@ -1,0 +1,25 @@
+{
+    "id": 16,
+    "name": "Dr. Becker Portfolio",
+    "category": [6],
+    "organization": [{ "id": 5, "name": "Personal" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": "Freelance WordPress project",
+    "description": "(Note: The website is not under my control anymore and might be changed at some point in the future.)\r\n\r\nDr. Lauren Becker needed a website for her practice. I assisted a designer to create a WordPress website.",
+    "start_date": "2016-07-01",
+    "end_date": "2016-08-01",
+    "skill": [11, 12, 13, 14, 15, 17, 18, 42],
+    "image": [
+        {
+            "id": 137,
+            "name": "dr-lb.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/dr-lb.jpg"
+        }
+    ],
+    "link": [{ "id": 16, "name": "Website", "src": "http://drlaurenbecker.com/" }],
+    "preview_img": {
+        "id": 18,
+        "name": "dr. becker preview",
+        "src": "https://eng40api.travisbumgarner.com/media/lb.jpg"
+    }
+}

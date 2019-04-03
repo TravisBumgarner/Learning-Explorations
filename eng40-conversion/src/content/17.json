@@ -1,0 +1,35 @@
+{
+    "id": 17,
+    "name": "Baby Gym",
+    "category": [10],
+    "organization": [{ "id": 5, "name": "Personal" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": "Homemade mobile for my niece",
+    "description": "I wanted to get my niece-to-be a gift. However, I didn't like the idea of buying something, so I purchased some wood and got to building her a baby gym. I originally planned to build the entire thing out wood, but due to choking hazards, I opted to purchase already baby-proof toys.",
+    "start_date": "2016-08-01",
+    "end_date": "2016-09-01",
+    "skill": [3, 27],
+    "image": [
+        {
+            "id": 138,
+            "name": "IMG_20161103_180829.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/IMG_20161103_180829.jpg"
+        },
+        {
+            "id": 139,
+            "name": "IMG_20161103_181053.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/IMG_20161103_181053.jpg"
+        },
+        {
+            "id": 140,
+            "name": "IMG_20161103_181008.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/IMG_20161103_181008.jpg"
+        }
+    ],
+    "link": [],
+    "preview_img": {
+        "id": 19,
+        "name": "baby gym preview",
+        "src": "https://eng40api.travisbumgarner.com/media/babygym.jpg"
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "id": 35,
+    "name": "Engineering Portfolio V4.0",
+    "category": [6, 7, 8],
+    "organization": [{ "id": 5, "name": "Personal" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": ".",
+    "description": "It seems to be a continuing trend that as I learn new technologies, I have to rebuild my portfolio with them. This is the 4th iteration of my portfolio built with React and Django Rest Framework. I focused on improving my skills in those two libraries, and CSS. I also took time to learn Sketch to design the site.",
+    "start_date": "2018-02-01",
+    "end_date": "2018-04-01",
+    "skill": [11, 12, 13, 15, 19, 20, 22, 28, 34, 35, 37, 38, 40, 41],
+    "image": [
+        {
+            "id": 218,
+            "name": "site image 1",
+            "src": "https://eng40api.travisbumgarner.com/media/Screen_Shot_2018-03-09_at_4.41.37_PM.png"
+        },
+        {
+            "id": 219,
+            "name": "site image 2",
+            "src": "https://eng40api.travisbumgarner.com/media/Screen_Shot_2018-03-13_at_4.12.18_PM.png"
+        },
+        {
+            "id": 220,
+            "name": "site image 3",
+            "src": "https://eng40api.travisbumgarner.com/media/Screen_Shot_2018-03-18_at_3.22.18_PM_7WRSmtc.png"
+        },
+        {
+            "id": 221,
+            "name": "site image 4",
+            "src": "https://eng40api.travisbumgarner.com/media/Screen_Shot_2018-03-24_at_10.24.06_PM.png"
+        }
+    ],
+    "link": [
+        { "id": 60, "name": "Github (React)", "src": "https://github.com/TravisBumgarner/eng40" },
+        {
+            "id": 61,
+            "name": "Github (Django)",
+            "src": "https://github.com/TravisBumgarner/eng40_api"
+        }
+    ],
+    "preview_img": {
+        "id": 217,
+        "name": "eng40 preview",
+        "src": "https://eng40api.travisbumgarner.com/media/Screen_Shot_2018-03-18_at_3.22.18_PM.png"
+    }
+}

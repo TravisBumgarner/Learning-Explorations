@@ -1,0 +1,25 @@
+{
+    "id": 10,
+    "name": "Spanish Vocabulary Translator",
+    "category": [6],
+    "organization": [{ "id": 5, "name": "Personal" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": "Translate and track common Spanish vocabulary encountered while reading",
+    "description": "The process of looking up Spanish words in a translator is rather easy for one or two words but when reading books with 15 to 20 unknown words per page, it can get rather tedious. This program takes an input of either words typed into the console or imported from a txt file, and translates them all through SpanishDict. It implements various checks to see if a word is spelled correctly and offers alternatives if it is not found.\r\nOnce all words are looked up, the Spanish Word, English Word, and form of the word seen are appended to the list of words looked up in the past. If a word is already in the list, the new form of the word seen is added to the existing dictionary entry as well as +1 to the counter for the times the word has been seen.\r\nThe dictionary can be saved for later use or exported to Anki to be used as flash cards.",
+    "start_date": "2016-02-01",
+    "end_date": "2016-03-01",
+    "skill": [4, 20],
+    "image": [],
+    "link": [
+        {
+            "id": 9,
+            "name": "GitHub Repo",
+            "src": "https://github.com/TravisBumgarner/Spanish-Word-Lookup"
+        }
+    ],
+    "preview_img": {
+        "id": 12,
+        "name": "spanish vocab translator preview",
+        "src": "https://eng40api.travisbumgarner.com/media/spanish-dict.jpg"
+    }
+}

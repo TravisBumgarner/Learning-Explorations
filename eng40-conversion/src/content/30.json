@@ -1,0 +1,66 @@
+{
+    "id": 30,
+    "name": "2D Plotter",
+    "category": [6, 8],
+    "organization": [{ "id": 5, "name": "Personal" }],
+    "location": [{ "id": 5, "name": "Massachusetts" }],
+    "headline": "Several attempts at exploring the intersection of photography, programming, and 2D plotting",
+    "description": "I have always had a fascination with (terrible name, I know) Rasterbation (https://rasterbator.net/). The process takes an image and spits out a grid of circles of varying diameters that represent the original image. It was pretty much how I made all of my wall art in college.\r\nSince then, I've made several attempts to create 2D plotters that can make rasterbations and do other robotic artistic tasks. I've never actually got a plotter fully functioning but I've made attempts at all aspects of the project from 3D modeling to K'Nex structures to Python scripts.",
+    "start_date": "2016-06-01",
+    "end_date": "2018-01-31",
+    "skill": [1, 3, 8, 9, 10, 15, 20, 22, 26],
+    "image": [
+        {
+            "id": 187,
+            "name": "IMG_20180130_202458.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/IMG_20180130_202458.jpg"
+        },
+        {
+            "id": 188,
+            "name": "20130409_202136.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/20130409_202136.jpg"
+        },
+        {
+            "id": 189,
+            "name": "IMG_20161219_190837.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/IMG_20161219_190837.jpg"
+        },
+        {
+            "id": 215,
+            "name": "hey.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/pp1.jpgSpacing-10__Dots-6_3_1.5_0.75_0___Lum-50_90_130_170_220.jpg"
+        },
+        {
+            "id": 216,
+            "name": "test_cats.jpg",
+            "src": "https://eng40api.travisbumgarner.com/media/test_cats.jpg"
+        }
+    ],
+    "link": [
+        {
+            "id": 34,
+            "name": "GitHub Repo (Attempt #0)",
+            "src": "https://github.com/TravisBumgarner/Halftone-Photographs"
+        },
+        {
+            "id": 35,
+            "name": "GitHub Repo (Attempt #1)",
+            "src": "https://github.com/TravisBumgarner/Robot-Painter"
+        },
+        {
+            "id": 36,
+            "name": "GitHub Repo (Attempt #2)",
+            "src": "https://github.com/TravisBumgarner/PlotterRevisted"
+        },
+        {
+            "id": 37,
+            "name": "GitHub Repo (Attempt #3)",
+            "src": "https://github.com/TravisBumgarner/raster_cutter/"
+        }
+    ],
+    "preview_img": {
+        "id": 30,
+        "name": "2d plotter previews",
+        "src": "https://eng40api.travisbumgarner.com/media/Untitled-1.jpg"
+    }
+}
