@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 
 import projects from '../content'
@@ -8,7 +8,7 @@ import { GlobalStyle } from '../theme'
 
 import { AppWrapper } from './App.styles'
 
-class App extends Component {
+class App extends React.Component {
     componentDidUpdate(prevProps) {
         if (this.props.location.pathname !== prevProps.location.pathname) {
             window.scrollTo(0, 0)
@@ -19,6 +19,7 @@ class App extends Component {
         const sortedProjects = projects.sort(
             (a, b) => Date.parse(b.end_date) - Date.parse(a.end_date)
         )
+
         return (
             <AppWrapper>
                 <GlobalStyle />
@@ -40,6 +41,4 @@ class App extends Component {
     }
 }
 
-const App2 = () => <div>Hi</div>
-
-export default App2
+export default App

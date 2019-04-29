@@ -4,6 +4,7 @@
 -   Getting `.tsx` correct is going to take some time with muscle memory. There are some weird bugs, perhaps just with `webpack-dev-server` that cause you to have to kill the running process and restart to get things chugging along again.
 -   Build will just fail if you get types wrong.
 -   Can go super lax in the beginning with `noEmitOnError` to still build with ts errors.
+-   Crazy amounts of red lining. Luckily all bugs that show up will do so at the top of the Chrome console. Could probably look into a way to supress the errors.
 
 # Todo
 
@@ -21,3 +22,5 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'```
 ````
+
+5. Done...?!?
