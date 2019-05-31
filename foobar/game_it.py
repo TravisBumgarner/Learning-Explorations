@@ -1,13 +1,12 @@
-import time
-import pyautogui
-import random
+from time import sleep
+from pyautogui import typewrite, press 
+from random import random
 
 while(True):
-    pyautogui.typewrite('b')
-    time.sleep(random.random())
-    pyautogui.press('backspace')
-    time.sleep(random.random())
+    typewrite('b')
+    sleep(random())
+    press('backspace')
+    sleep(random())
 
-    if(random.random() > 0.95):
-        time.sleep(random.random()* 60)
-
+    if(random() > 0.95):
+        time.sleep(random() * 60)
