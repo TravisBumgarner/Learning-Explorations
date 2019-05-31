@@ -1,1 +1,3 @@
-alert('hello')
+const doAThing = () => {
+    alert('hi')
+}
