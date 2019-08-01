@@ -19,14 +19,14 @@ def readcsv(filename):
 
 def linear_regression(points):
     # h = theta_0 + theta_1 * x
-    theta_0 = 0
-    theta_1 = 0
+    theta_0 = -5000
+    theta_1 = -100000
     alpha = 1
     m = len(points)
-    for i in range(0,6):
+    for i in range(0,100):
         for x, _ in points:
             h = theta_0 + theta_1 * x
-            plt.scatter(x,h, c=COLORS[i])
+            plt.scatter(x,h, c=COLORS[i % len(COLORS) - 1])
 
         delta_theta_0 = 0
         delta_theta_1 = 0
