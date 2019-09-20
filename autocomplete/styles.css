@@ -1,5 +1,7 @@
 :root {
+  --bone: #f2f2f2;
   --gray01: #cccccc;
+  --gray02: #aaaaaa;
   --gray04: #363636;
   --gray05: #222222;
   --gray06: #181818;
@@ -13,7 +15,9 @@ h4,
 h5,
 h6,
 p,
-div {
+div,
+ul,
+li {
   margin: 0;
   padding: 0;
 }
@@ -29,6 +33,11 @@ h1 {
   margin-right: 16px;
 }
 
+h2 {
+  padding: 16px;
+  font-size: 1.25em;
+}
+
 header {
   background-color: var(--gray05);
   border-bottom: 1px solid var(--gray04);
@@ -40,10 +49,27 @@ header {
   display: none;
   width: 500px;
   border-radius: 4px;
-  padding: 16px;
-  background-color: var(--gray01);
+  padding: 16px 0;
+  background-color: white;
   position: absolute;
   transform: translateY(calc(+8px));
+}
+
+#results-wrapper ul {
+  list-style: none;
+}
+
+#results-wrapper li {
+  padding: 8px 16px;
+  color: var(--gray04);
+}
+
+#results-wrapper li:hover {
+  background-color: var(--bone);
+}
+
+#results-wrapper li strong {
+  font-weight: 900;
 }
 
 .autocomplete-wrapper {
@@ -52,4 +78,11 @@ header {
 
 .autocomplete-wrapper input {
   width: 300px;
+}
+
+.divider {
+  height: 1px;
+  width: calc(100% - 10px);
+  margin: 16 5px;
+  background-color: var(--gray04);
 }
