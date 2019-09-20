@@ -1,0 +1,55 @@
+:root {
+  --gray01: #cccccc;
+  --gray04: #363636;
+  --gray05: #222222;
+  --gray06: #181818;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--gray06);
+  font-size: 16px;
+}
+
+h1 {
+  color: var(--gray01);
+  font-size: 1.5em;
+  margin-right: 16px;
+}
+
+header {
+  background-color: var(--gray05);
+  border-bottom: 1px solid var(--gray04);
+  padding: 16px;
+  display: flex;
+}
+
+#results-wrapper {
+  display: none;
+  width: 500px;
+  border-radius: 4px;
+  padding: 16px;
+  background-color: var(--gray01);
+  position: absolute;
+  transform: translateY(calc(+8px));
+}
+
+.autocomplete-wrapper {
+  box-sizing: border-box;
+}
+
+.autocomplete-wrapper input {
+  width: 300px;
+}
