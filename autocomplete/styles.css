@@ -45,6 +45,14 @@ header {
   display: flex;
 }
 
+input {
+  border-radius: 4px;
+  background-color: var(--gray05);
+  color: var(--bone);
+  border: 2px solid var(--gray04);
+  padding: 10px;
+}
+
 #results-wrapper {
   display: none;
   width: 500px;
