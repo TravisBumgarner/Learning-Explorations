@@ -60,3 +60,8 @@ buck-out/
 **/node_modules
 *.out
 .DS_Store
+
+# For F#
+bin/
+obj/
+symbolCache.db
