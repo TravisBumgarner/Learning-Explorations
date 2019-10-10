@@ -1,5 +1,4 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
 # Global Variables
 SQLITE = 'sqlite'
 
@@ -16,7 +15,7 @@ class MyDatabase:
 
     # Main DB Connection Ref Obj
     db_engine = None
-    def __init__(self, dbtype, username='', password='', dbname=''):
+    def __init__(self, dbtype, dbname=''):
         dbtype = dbtype.lower()
         if dbtype in self.DB_ENGINE.keys():
             engine_url = self.DB_ENGINE[dbtype].format(DB=dbname)
