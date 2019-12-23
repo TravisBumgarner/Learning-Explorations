@@ -16,8 +16,8 @@ vs = VideoStream(src=0).start()
 
 time.sleep(2)
 
-WIDTH = 100
-HEIGHT = 56
+WIDTH = 200
+HEIGHT = 112
 
 FRAMES_TO_COUNT = 60
 counter = 0
@@ -36,8 +36,15 @@ while True:
     color_buckets = np.where(color_buckets == [2,2,2], np.array([139,172,15]),color_buckets)
     color_buckets = np.where(color_buckets == [3,3,3], np.array([15,56,15]),color_buckets)
     color_buckets = color_buckets.astype(np.uint8)
+
+    # pixel_map = np.array([np.array([15,56,15]), #'0f380f' Black
+    #     np.array([48,246,35]), #'30f6230' Dark Gray
+    #     np.array([139,172,15]), #'8bac0f' Light Gray
+    #     np.array([155,188,15])]) # '9bbc0f' White
     
-    img = imutils.resize(color_buckets, height=HEIGHT * 10, width=WIDTH * 10)
+    # color_buckets = np.take(pixel_map, grayscale_buckets, axis=0).astype(np.uint8)
+
+    img = imutils.resize(color_buckets, height=HEIGHT * 5, width=WIDTH * 5)
     cv2.imshow('image', img)
     key = cv2.waitKey(1) & 0xFF
     if key == 27:
