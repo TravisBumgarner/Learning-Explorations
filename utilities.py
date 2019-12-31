@@ -4,7 +4,7 @@ import cv2
 
 def text(image, text):
     font = cv2.FONT_HERSHEY_SIMPLEX
-    fontScale = 1
+    fontScale = 2
     fontColor = (255, 255, 255)
     lineType = 2
     width, height = image.shape

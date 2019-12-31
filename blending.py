@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-from utilities import write_text
+from utilities import text
 
 
 def generate_cross_fade(window_size, image_size, reverse=False):
@@ -32,6 +32,9 @@ def cross_fade(filename_left, filename_right, filename_out, window_size):
     left_width, left_height = left_image.shape
     right_width, right_height = right_image.shape
 
+    if left_height != left_width and right_height != right_width:
+        raise ValueError("Doesn't support non square images. Meh.")
+
     if left_height != right_height and left_width != right_width:
         raise ValueError("Width and height of each image must be equal.")
 
@@ -46,9 +49,9 @@ def cross_fade(filename_left, filename_right, filename_out, window_size):
     right_image = right_image * right_linear_weight
 
     merged = left_image + right_image
-    merged2 = write_text(merged, "Cross Fade")
+    merged2 = text(merged, "Cross Fade")
     cv2.imwrite(filename_out, merged2)
 
 
-cross_fade("./sample.jpg", "./sample.jpg", "./output.jpg", window_size=100)
+cross_fade("./sample4.jpg", "./sample4.jpg", "./output.jpg", window_size=100)
 
