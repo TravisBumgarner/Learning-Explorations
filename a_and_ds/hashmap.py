@@ -1,6 +1,6 @@
 class HashMap:
     def __init__(self):
-        self.size = 10
+        self.size = 64
         self.map = [None] * self.size
 
     def _get_hash(self, key):
