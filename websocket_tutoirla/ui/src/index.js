@@ -14,10 +14,16 @@ const Wrapper = styled.div`
     flex-direction: column;
 `
 
-const ChatBox = styled.input`
-    width: 100%;
-    box-sizing: border-box;
+const ChatBoxWrapper = styled.div`
+    display: flex;
 `
+
+const ChatBox = styled.input`
+    box-sizing: border-box;
+    flex-grow: 1;
+`
+
+const ChatboxSubmit = styled.button``
 
 const ChatMessage = styled.div`
 `
@@ -29,27 +35,56 @@ const ReceivedMessages = styled.div`
 `
 
 const App = () => {
-    React.useEffect(() => {
-        client.onopen = () => {
-            console.log('WebSocket Client Connected');
-        }
+    const [messagesReceived, setMessagesReceived] = React.useState([])
+    const [user, setUser] = React.useState('')
+    const [hasUserPickedName, setHasUserPickedName] = React.useState(false)
 
-        client.onmessage = (message) => {
-            const dataFromServer = JSON.parse(message.data);
-            console.log(dataFromServer)
-        };
+    client.onopen = () => {
+        console.log('WebSocket Client Connected');
+    }
 
+    client.onmessage = (message) => {
+        const dataFromServer = JSON.parse(message.data);
+        console.log(messagesReceived)
+        setMessagesReceived([...messagesReceived, dataFromServer])
+    };
 
-    }, [])
+    const [messageToSend, setMessageToSend] = React.useState('')
 
-    return <Wrapper>
+    const login = () => {
+        setHasUserPickedName(true)
+    }
+
+    const submit = () => {
+        client.send(JSON.stringify({
+            "content": messageToSend,
+            "sender": user
+        }))
+        setMessageToSend('')
+    }
+    const chatMessages = messagesReceived.map(({ content, sender }) => {
+        return <ChatMessage><strong>{sender}</strong>: {content}</ChatMessage>
+    })
+
+    const ChatApp = <>
         <ReceivedMessages>
-            <ChatMessage>ChatMessage</ChatMessage>
-            <ChatMessage>ChatMessage</ChatMessage>
-            <ChatMessage>ChatMessage</ChatMessage>
+            {chatMessages}
         </ReceivedMessages>
-        <ChatBox />
-    </Wrapper>
+        <ChatBoxWrapper>
+            <ChatBox value={messageToSend} onChange={(event) => setMessageToSend(event.target.value)} />
+            <ChatboxSubmit onClick={submit}>Send</ChatboxSubmit>
+        </ChatBoxWrapper>
+    </>
+
+
+    const ChatLogin = <div>
+        <p>What's your name?</p>
+        <input onChange={(event) => setUser(event.target.value)} />
+        <button onClick={login}>Login!</button>
+    </div >
+
+
+    return <Wrapper>{hasUserPickedName ? ChatApp : ChatLogin}</Wrapper>
 }
 
 ReactDOM.render(
