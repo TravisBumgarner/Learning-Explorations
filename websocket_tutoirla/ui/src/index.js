@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
+import { w3cwebsocket as W3CWebSocket } from "websocket"
+
+const client = new W3CWebSocket('ws://127.0.0.1:5000');
+
 
 const Wrapper = styled.div`
     margin: 20vh 20vw;
@@ -25,6 +29,19 @@ const ReceivedMessages = styled.div`
 `
 
 const App = () => {
+    React.useEffect(() => {
+        client.onopen = () => {
+            console.log('WebSocket Client Connected');
+        }
+
+        client.onmessage = (message) => {
+            const dataFromServer = JSON.parse(message.data);
+            console.log(dataFromServer)
+        };
+
+
+    }, [])
+
     return <Wrapper>
         <ReceivedMessages>
             <ChatMessage>ChatMessage</ChatMessage>
