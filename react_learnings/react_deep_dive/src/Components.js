@@ -4,19 +4,44 @@ import DataContext from './DataContext'
 const HelloWorld = () => {
     return (
         <DataContext.Consumer>
-            {({ value }) => <p>Hello {value}</p>}
+            {({ state }) => (
+                <p>
+                    {state.greeting} {state.name}
+                </p>
+            )}
         </DataContext.Consumer>
     )
 }
 
+const Delete = () => {
+    const { dispatch } = React.useContext(DataContext)
+    return (
+        <button onClick={() => dispatch({ type: 'deleteName' })}>Delete</button>
+    )
+}
+
+const ChangeGreeting = () => {
+    const { dispatch } = React.useContext(DataContext)
+    return (
+        <button onClick={() => dispatch({ type: 'changeGreeting' })}>
+            Change Greeting
+        </button>
+    )
+}
+
 const Input = () => {
-    const { value, setValue } = React.useContext(DataContext)
+    const { state, dispatch } = React.useContext(DataContext)
     return (
         <input
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
+            value={state.name}
+            onChange={(event) =>
+                dispatch({
+                    type: 'updateName',
+                    name: event.target.value,
+                })
+            }
         />
     )
 }
 
-export { HelloWorld, Input }
+export { HelloWorld, Input, Delete, ChangeGreeting }
