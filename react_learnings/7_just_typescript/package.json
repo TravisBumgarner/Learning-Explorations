@@ -1,0 +1,16 @@
+{
+    "name": "just_babel",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "compile-ts": "rm -rf dist/ && tsc"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {},
+    "dependencies": {
+        "typescript": "^3.9.6"
+    }
+}
