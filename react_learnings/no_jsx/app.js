@@ -44,19 +44,19 @@ const List = props => {
         [
             e(
                 'ul',
-                null,
+                { key: "list" },
                 [...listItems.map(i => e(
                     ListItem,
-                    { title: i }),
+                    { title: i, key: i }),
                     null
                 ),
                 e(
                     Input,
-                    { onChange: handleOnChange, type: "text", value }
+                    { onChange: handleOnChange, type: "text", value, key: "input" }
                 ),
                 e(
                     Button,
-                    { onClick: handleOnClick }
+                    { onClick: handleOnClick, key: "add" }
                 )
                 ]
             )
