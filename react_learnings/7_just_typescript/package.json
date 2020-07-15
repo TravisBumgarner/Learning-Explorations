@@ -12,5 +12,6 @@
     "devDependencies": {},
     "dependencies": {
         "typescript": "^3.9.6"
+        
     }
 }
