@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script>
+        const fakeReactDOM = {
+            buildTree: function (reactTree, dom = undefined) {
+                console.log(reactTree)
+                const currentElement = document.createElement(reactTree.type)
+                console.log(reactTree.type)
+                const { props: { children } } = reactTree
+
+                if (!dom) {
+                    dom = currentElement
+                }
+
+                if (Array.isArray(children)) {
+                    children.forEach(c => dom.appendChild(this.buildTree(c)))
+                } else if (typeof children === 'object' && children !== null) {
+                    dom.appendChild(this.buildTree(children))
+                } else if (typeof children === 'string') {
+                    currentElement.innerHTML = children
+                }
+                return dom
+            },
+            render: function (reactTree, root) {
+                const domTree = this.buildTree(reactTree)
+                root.appendChild(domTree)
+            }
+        }
+
+        const reactTree = React.createElement(
+            "div",
+            null,
+            React.createElement(
+                "p",
+                { style: { color: "red" } },
+                "Hello form a red P tag.")
+        )
+        fakeReactDOM.render(reactTree, document.getElementById("root"))
+
+    </script>
+
+</body>
+
+</html>
