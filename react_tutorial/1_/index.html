@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+
+
+    <script>
+        const buildTree = (reactTree, dom = undefined) => {
+            const currentElement = document.createElement(reactTree.type)
+
+            if (!dom) {
+                dom = currentElement
+            }
+
+            if (!reactTree.props.children) {
+                // if no children
+                return dom
+            }
+
+            if (Array.isArray(reactTree.props.children)) {
+                // If array of children elements
+                console.log('isarray')
+                reactTree.props.children.forEach(reactElement => {
+                    const tree = buildTree(reactElement)
+                    dom.appendChild(tree)
+                })
+                return dom
+            }
+
+            if (!Array.isArray(reactTree.props.children) && typeof reactTree.props.children === 'object') {
+                // If single child element
+                const childElement = buildTree(reactTree.props.children)
+                dom.appendChild(childElement)
+                return dom
+            }
+
+
+            if (typeof reactTree.props.children === 'string') {
+                // if child is string
+                currentElement.innerHTML = reactTree.props.children
+                return dom
+            }
+        }
+
+        // const myReactElement = React.createElement("div", null, [React.createElement('p'), React.createElement('span')])
+        const foo = React.createElement("div", null, React.createElement("p", null, "HEllo"))
+        console.log(foo)
+        const tree = buildTree(foo)
+        console.log(tree)
+        // const element = document.createElement(myReactElement.type)
+        // element.innerHTML = myReactElement.props.children
+        // const root = document.getElementById("root")
+        // root.appendChild(element)
+
+
+        // console.log(myReactElement)
+        // const myRoot = document.getElementById("root")
+        // React.render(myReactElement, myRoot)
+    </script>
+
+</body>
+
+</html>
