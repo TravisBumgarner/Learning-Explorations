@@ -1,5 +1,5 @@
 const App = () => {
-  return /*#__PURE__*/React.createElement("div", null, "Hello");
+  return 
 };
 
-ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('app'));
+ReactDOM.render( React.createElement(App, null), document.getElementById('app'));

@@ -1,0 +1,12 @@
+{
+  "name": "ts-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "scripts": {
+    "doit": "tsc hello.ts && node hello.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
