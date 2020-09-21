@@ -9,9 +9,9 @@
     "@babel/core": "^7.10.5",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "babel-loader": "^8.1.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
-    "babel-loader": "^8.1.0"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "react": "^16.13.1",

@@ -14,9 +14,8 @@
     <script>
         const fakeReactDOM = {
             buildTree: function (reactTree, dom = undefined) {
-                console.log(reactTree)
                 const currentElement = document.createElement(reactTree.type)
-                console.log(reactTree.type)
+                
                 const { props: { children } } = reactTree
 
                 if (!dom) {
