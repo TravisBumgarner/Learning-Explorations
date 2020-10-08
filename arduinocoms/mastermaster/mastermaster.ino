@@ -1,5 +1,6 @@
 #include <Wire.h>
- 
+
+/* Swap the next numbers for the next two lines depending on the device you're on */
 #define I2C_ADDRESS_OTHER 0x2
 #define I2C_ADDRESS_ME 0x1
  
@@ -11,7 +12,7 @@ void setup() {
  
 void loop() {
  delay(5000);
- Wire.beginTransmission(I2C_ADDRESS_LCD);
+ Wire.beginTransmission(I2C_ADDRESS_OTHER);
  Wire.write("hello world from 0x1 to 0x2");
  Wire.endTransmission();
 }
