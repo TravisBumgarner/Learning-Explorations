@@ -11,10 +11,13 @@ void setup() {
 }
  
 void loop() {
- delay(5000);
  Wire.beginTransmission(I2C_ADDRESS_OTHER);
- Wire.write("hello world from 0x1 to 0x2");
- Wire.endTransmission();
+ if(Serial.available() > 0) {
+    char incomingMessage = Serial.read();
+    Wire.write(incomingMessage);
+    Wire.endTransmission();
+  }
+
 }
  
 void receiveI2C(int howMany) {
@@ -22,5 +25,4 @@ void receiveI2C(int howMany) {
   char c = Wire.read();
   Serial.print(c);
  }
- Serial.println();
 }
