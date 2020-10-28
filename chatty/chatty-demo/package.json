@@ -1,0 +1,22 @@
+{
+    "scripts": {
+        "start-dev": "NODE_ENV=development webpack-dev-server --mode=development --config webpack.js"
+    },
+    "dependencies": {
+        "firebase": "^8.0.0",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-router-dom": "^5.2.0",
+        "styled-components": "^5.2.0"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.53",
+        "@types/react-dom": "^16.9.8",
+        "html-webpack-plugin": "^4.5.0",
+        "ts-loader": "^8.0.7",
+        "typescript": "^4.0.5",
+        "webpack": "^4.17.1",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.11.0"
+    }
+}
