@@ -73,3 +73,6 @@ symbolCache.db
 *.png
 *.raw
 *.nef
+
+# Config
+.env
