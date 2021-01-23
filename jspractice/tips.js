@@ -14,3 +14,11 @@ x.reduce((accumulator, currentValue) => {
         = 0 -> no change
         > 0 -> b comes before a
 */
+
+// Set
+
+const y = new Set([1,2,3])
+y.has(2) // true
+y.delete(2)
+y.add(2)
+ 
