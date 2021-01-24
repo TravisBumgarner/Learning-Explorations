@@ -1,0 +1,25 @@
+function dump_props(obj) {
+    let result = ''
+    for (let key in obj) {
+        result += key + ' = ' + obj[key] + '\n';
+    }
+    return result;
+}
+
+const myObj = { a: 5, b: 6 }
+console.log(dump_props(myObj, 'myObj'))
+
+//////////
+
+const arr = [3, 5, 7];
+arr.foo = 'hello';
+
+// for (let i in arr) {
+//     console.log(i); // logs "0", "1", "2", "foo"
+// }
+
+// for (let i of arr) {
+//     console.log(i); // logs 3, 5, 7
+// }
+
+Object.entries(arr).forEach(([a, b]) => console.log(a, ' => ', b))
