@@ -3,6 +3,9 @@
         "start-dev": "NODE_ENV=development webpack-dev-server --mode=development --config webpack.js"
     },
     "dependencies": {
+        "@material-ui/core": "^4.11.4",
+        "@material-ui/lab": "*",
+        "material-table": "^1.69.3",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
         "styled-components": "^5.3.0"
