@@ -4,16 +4,17 @@ import ToggleButton from '@material-ui/lab/ToggleButton'
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup'
 
 const countAbsences = (weeklyAttendance) => {
-    return Object.values(weeklyAttendance).filter(date => date === 'absent').length
+    return Object.values(weeklyAttendance).filter((date) => date === 'absent')
+        .length
 }
 
 const statusSymbolLookup = {
-    'present': '✅' ,
-    'late': '⚠️',
-    'absent': '❌'
+    present: '✅',
+    late: '⚠️',
+    absent: '❌',
 }
 
-const DATA = [
+const DATA_FROM_SERVER = [
     {
         studentName: 'Andy',
         weeklyAttendance: {
@@ -40,6 +41,27 @@ const DATA = [
     },
 ]
 
+const NEW_DATA_FROM_SERVER = {
+    Andy: {
+        '07': 'present',
+        '08': 'absent',
+        '09': 'present',
+        '10': 'absent',
+        '11': 'absent',
+        '12': 'late',
+        '13': 'present',
+    },
+    Dwight: {
+        '07': 'late',
+        '08': 'present',
+        '09': 'present',
+        '10': 'absent',
+        '11': 'absent',
+        '12': 'late',
+        '13': 'present',
+    },
+}
+
 const Wrapper = styled.div``
 
 const Table = styled.table``
@@ -62,51 +84,98 @@ const HeaderCell = styled.th`
     border-bottom: 1px solid black;
 `
 
-const StatusSelector = ({status}) => {
-    const [alignment, setAlignment] = React.useState(status)
-
-    const handleAlignment = (event, newAlignment) => {
-        setAlignment(newAlignment)
-    }
-
+const StatusSelector = ({ status, handleStatusChange }) => {
     return (
         <ToggleButtonGroup
-            value={alignment}
+            value={status}
             exclusive
-            onChange={handleAlignment}
-            aria-label="text alignment"
+            onChange={(event, newStatus) => handleStatusChange(newStatus)}
         >
             <ToggleButton value="present">
-              {statusSymbolLookup['present']} Present
+                {statusSymbolLookup['present']} Present
             </ToggleButton>
             <ToggleButton value="absent">
-            {statusSymbolLookup['absent']}  Absent
+                {statusSymbolLookup['absent']} Absent
             </ToggleButton>
             <ToggleButton value="late">
-            {statusSymbolLookup['late']}  Late
+                {statusSymbolLookup['late']} Late
             </ToggleButton>
         </ToggleButtonGroup>
     )
 }
 
-const DayAttendance = ({day, status, selectedDate}) => {
+const DateAttendance = ({
+    date,
+    status,
+    selectedDate,
+    setHoveredDate,
+    hoveredDate,
+    setSelectedDate,
+}) => {
+    let backgroundColor = 'white'
+    if (date === hoveredDate) {
+        backgroundColor = 'yellow'
+    } else if (date === selectedDate) {
+        backgroundColor = 'red'
+    }
+
     return (
-        <div style={{backgroundColor: day === selectedDate ? 'red' : '', display: 'flex', flexDirection: 'column', padding: '10px'}}>
-            <div>{day}</div>
+        <div
+            onMouseEnter={() => setHoveredDate(date)}
+            onMouseLeave={() => setHoveredDate()}
+            onClick={() => setSelectedDate(date)}
+            style={{
+                backgroundColor,
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '10px',
+            }}
+        >
+            <div>{date}</div>
             <div>{statusSymbolLookup[status]}</div>
         </div>
     )
-    
 }
 
-const WeeklyAttendance = ({weeklyAttendance, selectedDate}) => {
-    return <div style={{display: 'flex'}}>
-        {Object.keys(weeklyAttendance).map(day => <DayAttendance selectedDate={selectedDate} key={day} day={day} status={weeklyAttendance[day]} /> )}
-    </div>
+const WeeklyAttendance = ({
+    weeklyAttendance,
+    selectedDate,
+    hoveredDate,
+    setHoveredDate,
+    setSelectedDate,
+}) => {
+    return (
+        <div style={{ display: 'flex' }}>
+            {Object.keys(weeklyAttendance).map((date) => (
+                <DateAttendance
+                    selectedDate={selectedDate}
+                    key={date}
+                    date={date}
+                    status={weeklyAttendance[date]}
+                    setHoveredDate={setHoveredDate}
+                    hoveredDate={hoveredDate}
+                    setSelectedDate={setSelectedDate}
+                />
+            ))}
+        </div>
+    )
 }
 
 const App = () => {
     const [selectedDate, setSelectedDate] = React.useState('07')
+    const [hoveredDate, setHoveredDate] = React.useState()
+    const [attendanceData, setAttendanceData] =
+        React.useState(NEW_DATA_FROM_SERVER)
+
+    const handleStatusChange = (studentName, date, status) => {
+        setAttendanceData((oldData) => ({
+            ...oldData,
+            [studentName]: {
+                ...oldData[studentName],
+                [date]: status,
+            },
+        }))
+    }
 
     return (
         <Wrapper>
@@ -114,24 +183,49 @@ const App = () => {
                 <Header>
                     <HeaderRow>
                         <HeaderCell>Student Name</HeaderCell>
-                        <HeaderCell>Status (Today)</HeaderCell>
+                        <HeaderCell>Status</HeaderCell>
                         <HeaderCell>Weekly Attendance</HeaderCell>
                         <HeaderCell>Absences</HeaderCell>
                     </HeaderRow>
                 </Header>
                 <Body>
-                    {
-                        DATA.map(({studentName, weeklyAttendance}) => {
-                            return (
+                    {Object.keys(attendanceData).map((studentName) => {
+                        return (
                             <BodyRow>
                                 <BodyCell>{studentName}</BodyCell>
-                                <BodyCell><StatusSelector status={weeklyAttendance[selectedDate]} /></BodyCell>
-                                <BodyCell><WeeklyAttendance weeklyAttendance={weeklyAttendance} selectedDate={selectedDate}/></BodyCell>
-                                <BodyCell>{countAbsences(weeklyAttendance)}</BodyCell>
+                                <BodyCell>
+                                    <StatusSelector
+                                        status={
+                                            attendanceData[studentName][
+                                                selectedDate
+                                            ]
+                                        }
+                                        handleStatusChange={(newStatus) =>
+                                            handleStatusChange(
+                                                studentName,
+                                                selectedDate,
+                                                newStatus
+                                            )
+                                        }
+                                    />
+                                </BodyCell>
+                                <BodyCell>
+                                    <WeeklyAttendance
+                                        weeklyAttendance={
+                                            attendanceData[studentName]
+                                        }
+                                        selectedDate={selectedDate}
+                                        hoveredDate={hoveredDate}
+                                        setHoveredDate={setHoveredDate}
+                                        setSelectedDate={setSelectedDate}
+                                    />
+                                </BodyCell>
+                                <BodyCell>
+                                    {countAbsences(attendanceData[studentName])}
+                                </BodyCell>
                             </BodyRow>
-                            )
-                        })
-                    
+                        )
+                    })}
                 </Body>
             </Table>
         </Wrapper>
