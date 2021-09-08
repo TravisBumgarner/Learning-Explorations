@@ -1,0 +1,15 @@
+{
+  "name": "3_json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lexicalAnalysis.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest-cli": "^27.1.0"
+  }
+}
