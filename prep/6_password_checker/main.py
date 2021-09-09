@@ -30,7 +30,7 @@ UPPER_ALPHABET_SET = set([char for char in string.ascii_uppercase])
 DIGITS_SET = set([char for char in string.digits])
 
 
-def validate_not_contains_repeating(password):
+def validate_is_non_repeating(password):
     counter = 1
     previous_char = ""
     for char in password:
@@ -60,25 +60,29 @@ def validate_minimum_and_maximum_length(password):
     ]
 
 
-def validate_password(password):
-    
-    has_upper, has_lower, has_digit = validate_upper_lower_and_digit(password)
-    meets_maximum, meets_minimum = validate_minimum_and_maximum_length(password)
-    return {
-        "meets_minimum": meets_minimum,
-        "meets_maximum": meets_maximum,
-        "contains_repeating": validate_not_contains_repeating(password),
-        "has_upper": has_upper,
-        "has_lower": has_lower,
-        "has_digit": has_digit
-    }
-
-
 def get_edit_distance(password):
     edit_distance = 0
 
-    print(validate_password(password).values())
-    while not all(validate_password(password).values()):
-        pass
+    while True:
+        has_upper, has_lower, has_digit = validate_upper_lower_and_digit(password)
+        meets_maximum, meets_minimum = validate_minimum_and_maximum_length(password)
+        is_non_repeating = validate_is_non_repeating(password)
+
+        if all([has_upper, has_lower, has_digit, meets_maximum, meets_minimum, is_non_repeating]):
+            return edit_distance
     
-    return edit_distance
+
+
+
+
+'''
+abcde -> abcdef
+aaa -> aaba -> aabba -> aabbac 
+
+If too short
+    - won't delete
+    - will add characters to breakup any repetitions
+If too long
+    - Won't add
+    - will remove characters to breakup any repetitions
+'''
