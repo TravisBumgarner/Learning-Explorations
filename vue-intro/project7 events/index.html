@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="example-1">
+        <button v-on:click="counter += 1">Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+    <hr>
+    <div id="example-2">
+        <button v-on:click="foo">Foo!</button>
+        <button v-on:click="foo()">But also foo?</button>
+    </div>
+    <hr>
+    <div id="example-3">
+        <button v-on:click="x => console.log(x)">Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+    <hr>
+    <div id="example-4">
+        <input v-on:keyup.arrow-down="this.alert('hi')">
+    </div>
+</body>
+<script>
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            counter: 0
+        }
+    })
+</script>
+
+<script>
+    var example1 = new Vue({
+        el: '#example-2',
+        methods: {
+            foo: function () { alert('foo') }
+        }
+    })
+</script>
+
+<script>
+    var example3 = new Vue({
+        el: '#example-3',
+    })
+</script>
+<script>
+    var example4 = new Vue({
+        el: '#example-4',
+    })
+</script>
+
+</html>
