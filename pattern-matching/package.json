@@ -1,0 +1,17 @@
+{
+  "name": "pattern-matching",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel main.js --presets @babel/preset-stage-1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-stage-1": "^7.8.3"
+  }
+}
