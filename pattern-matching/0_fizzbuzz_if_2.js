@@ -22,6 +22,13 @@ const fizzy_javascript_pattern_matching_stage0 = (n) => {
     }
 }
 
+loc = (42, -71)
+const where_am_i_javascript = (loc) => {
+    if (loc[0] > 0 && loc[1] > 0) console.log('North East')
+    // ...
+    else console.log("The equator or something")
+}
+
 
 fizzy(1)
 fizzy(3)
