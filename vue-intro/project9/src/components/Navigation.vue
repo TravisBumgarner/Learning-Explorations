@@ -1,5 +1,11 @@
 <template>
-  <div>Navigation</div>
+  <div>
+    <h2>Navigation</h2>
+    <ul>
+    <li><router-link to="/">Go to Home</router-link></li>
+    <li><router-link to="/about">Go to About</router-link></li>
+    </ul>  
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,4 +16,12 @@ export default class Header extends Vue {}
 </script>
 
 <style scoped>
+ul {
+  padding: 0;
+}
+
+li {
+    display: inline-block;
+    margin: 10px;
+}
 </style>

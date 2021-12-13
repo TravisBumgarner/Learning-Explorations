@@ -1,0 +1,7 @@
+- [x] Setup boilerplate
+- [x] Add first component
+- [x] Create some global styles
+- [x] Vue Router
+- [ ] Figure out page title
+- [x] Add prettier
+- [ ]
