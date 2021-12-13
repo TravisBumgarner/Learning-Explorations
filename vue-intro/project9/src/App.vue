@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <title>hi</title>
-    <Header />
-    <navigation />
+    <div v-bind:style="{display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid var(--border)'}">
+      <Header />
+      <Navigation />
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -31,7 +32,7 @@ export { router}
   components: {
     Header,
     Navigation,
-  },
+  }
 })
 export default class App extends Vue {}
 </script>

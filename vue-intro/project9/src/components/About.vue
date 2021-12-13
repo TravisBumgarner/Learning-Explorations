@@ -1,13 +1,21 @@
 <template>
-  <div>About!</div>
+  <div>
+    <SectionTitle :level="2">About Page</SectionTitle>
+    <SectionText>This text is coming soon.</SectionText>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+  import Vue from 'vue'
+  import Component from 'vue-class-component'
 
-@Component
-export default class About extends Vue {}
+  import SectionTitle from '../sharedComponents/SectionTitle.vue'
+  import SectionText from '../sharedComponents/SectionText.vue'
+  
+  @Component({
+    components: {
+      SectionTitle, SectionText
+    }
+  })
+  export default class Header extends Vue {}
 </script>
-
-<style scoped>
-</style>

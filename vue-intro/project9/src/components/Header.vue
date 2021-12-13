@@ -1,11 +1,13 @@
 <template>
-  <div>My Portfolio.</div>
+  <SectionTitle :level="1">Travis Bumgarner Photography</SectionTitle>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-@Component
+import SectionTitle from '../sharedComponents/SectionTitle.vue'
+
+@Component({components: {SectionTitle}})
 export default class Header extends Vue {}
 </script>
 

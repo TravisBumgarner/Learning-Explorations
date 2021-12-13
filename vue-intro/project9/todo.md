@@ -2,6 +2,7 @@
 - [x] Add first component
 - [x] Create some global styles
 - [x] Vue Router
-- [ ] Figure out page title
+- [x] Figure out page title
 - [x] Add prettier
-- [ ]
+- [ ] Add shared components
+- [ ] Learn about non class components
