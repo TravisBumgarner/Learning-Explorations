@@ -9,7 +9,6 @@ export default {
     styling: {
       type: String,
       validator: (value) => ["plain", "quote", "tagline"].includes(value),
-      default: "plain",
     },
   },
 };
