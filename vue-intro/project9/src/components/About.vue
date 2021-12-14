@@ -1,7 +1,7 @@
 <template>
   <div>
     <SectionTitle :level="2">About Page</SectionTitle>
-    <SectionText>This text is coming soon.</SectionText>
+    <SectionTextClass>This text is coming soon.</SectionTextClass>
   </div>
 </template>
 
@@ -10,11 +10,11 @@
   import Component from 'vue-class-component'
 
   import SectionTitle from '../sharedComponents/SectionTitle.vue'
-  import SectionText from '../sharedComponents/SectionText.vue'
+  import SectionTextClass from '../sharedComponents/SectionTextClass.vue'
   
   @Component({
     components: {
-      SectionTitle, SectionText
+      SectionTitle, SectionTextClass
     }
   })
   export default class Header extends Vue {}
