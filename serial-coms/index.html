@@ -8,34 +8,58 @@
   </head>
   <body>
     <button id="arduino-connect">Connect</button>
+    <button disabled id="arduino-ping">Ping</button>
+    <button disabled id="arduino-on">On</button>
+    <button disabled id="arduino-off">Off</button>
+    <p>Messages</p>
+    <ul id="messages"></ul>
+    <script src="./serial-handler.js"></script>
     <script>
+      let sh = new SerialHandler();
+
+      const appendMessage = (message) => {
+        const node = document.createElement("li");
+        node.innerText = message;
+
+        document.getElementById("messages").append(node);
+      };
+
       document
         .getElementById("arduino-connect")
         .addEventListener("click", async () => {
-          const port = await navigator.serial.requestPort();
-          await port.open({ baudRate: 9600 });
+          await sh.init();
 
-          let decoder = new TextDecoderStream();
-          inputDone = port.readable.pipeTo(decoder.writable);
-          inputStream = decoder.readable;
+          document.getElementById("arduino-connect").disabled = true;
+          document.getElementById("arduino-ping").disabled = false;
+          document.getElementById("arduino-on").disabled = false;
+          document.getElementById("arduino-off").disabled = false;
+        });
 
-          reader = inputStream.getReader();
+      document
+        .getElementById("arduino-ping")
+        .addEventListener("click", async () => {
+          await sh.write("ping\n");
+          const message = await sh.read();
 
-          let message = "";
+          appendMessage(message);
+        });
 
-          while (true) {
-            console.log("looop");
-            const { value, done } = await reader.read();
-            if (value) {
-              message += value + "\n";
-              console.log(message);
-            }
-            if (done) {
-              console.log("[readLoop] DONE", done, message);
-              reader.releaseLock();
-              break;
-            }
-          }
+      document
+        .getElementById("arduino-on")
+        .addEventListener("click", async () => {
+          await sh.write("on\n");
+          const message = await sh.read();
+
+          appendMessage(message);
+        });
+
+      document
+        .getElementById("arduino-off")
+        .addEventListener("click", async () => {
+          await sh.write("off\n");
+          const message = await sh.read();
+
+          appendMessage(message);
         });
     </script>
   </body>
