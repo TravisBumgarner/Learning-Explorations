@@ -1,6 +1,13 @@
 <template>
   <div id="app">
-    <div v-bind:style="{display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid var(--border)'}">
+    <div
+      v-bind:style="{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottom: '2px solid var(--border)',
+      }"
+    >
       <Header />
       <Navigation />
     </div>
@@ -11,28 +18,22 @@
 <script lang="ts">
 import "./global.css";
 import { Component, Vue } from "vue-property-decorator";
-import VueRouter from "vue-router";
 
-import { Header, Navigation, Home, About } from "./components/";
-
-Vue.use(VueRouter);
-
-const routes = [
-  { path: '/', component: Home },
-  { path: '/about', component: About }
-]
-
-const router = new VueRouter({
-  routes
-})
-
-export { router}
+import { Header, Navigation } from "./components/";
 
 @Component({
   components: {
     Header,
     Navigation,
-  }
+  },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  created() {
+    console.log(this.$store.state.count);
+  }
+  mounted() {
+    this.$store.commit("increment");
+    console.log(this.$store.state.count);
+  }
+}
 </script>
