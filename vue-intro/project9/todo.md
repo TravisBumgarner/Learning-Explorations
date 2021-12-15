@@ -4,5 +4,8 @@
 - [x] Vue Router
 - [x] Figure out page title
 - [x] Add prettier
-- [ ] Add shared components
-- [ ] Learn about non class components
+- [x] Add shared components
+- [x] Learn about non class components
+- [ ] Learn about State
+- [ ] Vuex
+- [ ] 

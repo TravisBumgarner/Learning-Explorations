@@ -1,5 +1,8 @@
 <template>
-  <p v-bind:class="styling"><slot></slot></p>
+  <p v-bind:class="styling" v-bind:style="{ color }">
+    <slot></slot>
+    <button v-on:click="toggleColor">Toggle Color</button>
+  </p>
 </template>
 
 <script lang="ts">
@@ -8,6 +11,11 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 @Component
 export default class SectionTextClass extends Vue {
   @Prop({ default: "plain" }) styling!: "plain" | "quote" | "tagline";
+  @Prop({ default: "white" }) color!: "white" | "green";
+
+  toggleColor() {
+    this.color === "white" ? (this.color = "green") : (this.color = "white");
+  }
 }
 </script>
 
