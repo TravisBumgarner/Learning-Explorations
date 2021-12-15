@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="arduino-connect">Connect</button>
+    <script>
+      document
+        .getElementById("arduino-connect")
+        .addEventListener("click", async () => {
+          const port = await navigator.serial.requestPort();
+          await port.open({ baudRate: 9600 });
+
+          let decoder = new TextDecoderStream();
+          inputDone = port.readable.pipeTo(decoder.writable);
+          inputStream = decoder.readable;
+
+          reader = inputStream.getReader();
+
+          let message = "";
+
+          while (true) {
+            console.log("looop");
+            const { value, done } = await reader.read();
+            if (value) {
+              message += value + "\n";
+              console.log(message);
+            }
+            if (done) {
+              console.log("[readLoop] DONE", done, message);
+              reader.releaseLock();
+              break;
+            }
+          }
+        });
+    </script>
+  </body>
+</html>
