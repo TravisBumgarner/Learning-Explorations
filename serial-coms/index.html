@@ -7,6 +7,30 @@
     <title>Document</title>
   </head>
   <body>
+    <p>Instructions</p>
+    <ul>
+      <ol>
+        Connect Arduino device.
+      </ol>
+      <ol>
+        Load arduino.c code from same folder as this index.html file onto the
+        Arduino. (You might need to adjust the LED pin for your device)
+      </ol>
+      <ol>
+        Click "Connect" button
+      </ol>
+      <ol>
+        Click "Ping" button to receive "Pong" back. (Might need to click a few
+        times.
+      </ol>
+      <ol>
+        Click "On" button to turn on LED
+      </ol>
+      <ol>
+        Click "Off" button to turn off LED
+      </ol>
+    </ul>
+
     <button id="arduino-connect">Connect</button>
     <button disabled id="arduino-ping">Ping</button>
     <button disabled id="arduino-on">On</button>
@@ -24,11 +48,17 @@
         document.getElementById("messages").append(node);
       };
 
+      const talk = async (request) => {
+        await sh.write(request);
+        const response = await sh.read();
+
+        appendMessage(response);
+      };
+
       document
         .getElementById("arduino-connect")
         .addEventListener("click", async () => {
           await sh.init();
-
           document.getElementById("arduino-connect").disabled = true;
           document.getElementById("arduino-ping").disabled = false;
           document.getElementById("arduino-on").disabled = false;
@@ -36,34 +66,16 @@
         });
 
       document
-        .getElementById("arduino-ping")
-        .addEventListener("click", async () => {
-          console.log("a");
-          await sh.write("ping");
-          console.log("b");
-          const message = await sh.read();
-          console.log("c");
-
-          appendMessage(message);
-        });
-
-      document
         .getElementById("arduino-on")
-        .addEventListener("click", async () => {
-          await sh.write("on");
-          const message = await sh.read();
-
-          appendMessage(message);
-        });
+        .addEventListener("click", async () => talk("on"));
 
       document
         .getElementById("arduino-off")
-        .addEventListener("click", async () => {
-          await sh.write("off");
-          const message = await sh.read();
+        .addEventListener("click", async () => talk("off"));
 
-          appendMessage(message);
-        });
+      document
+        .getElementById("arduino-ping")
+        .addEventListener("click", async () => talk("ping"));
     </script>
   </body>
 </html>
