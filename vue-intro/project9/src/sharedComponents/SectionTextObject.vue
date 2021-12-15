@@ -14,14 +14,19 @@ export default {
   props: {
     styling: {
       type: String,
-      validator: (value: string) =>
-        ["plain", "quote", "tagline"].includes(value),
+      validator: (value: string) => {
+        const isValid = ["plain", "quote", "tagline"].includes(value);
+        return isValid;
+      },
     },
   },
   data: function (): Data {
     return {
       color: "white",
     };
+  },
+  mounted: function () {
+    console.log(`${this.$options.name} has mounted`);
   },
   methods: {
     toggleColor() {

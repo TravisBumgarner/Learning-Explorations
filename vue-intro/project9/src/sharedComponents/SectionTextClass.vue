@@ -16,6 +16,10 @@ export default class SectionTextClass extends Vue {
   toggleColor() {
     this.color === "white" ? (this.color = "green") : (this.color = "white");
   }
+
+  mounted() {
+    console.log(`${this.$options.name} has mounted`);
+  }
 }
 </script>
 

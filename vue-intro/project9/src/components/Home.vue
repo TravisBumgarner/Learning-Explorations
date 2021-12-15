@@ -14,7 +14,7 @@
         <SectionTextObject styling="tagline">
           This text is an object.
         </SectionTextObject>
-        <SectionTextObject styling="default">
+        <SectionTextObject styling="plain">
           This text is an object.
         </SectionTextObject>
       </section>
@@ -25,7 +25,7 @@
         <SectionTextClass styling="tagline">
           This text is an class.
         </SectionTextClass>
-        <SectionTextClass styling="default">
+        <SectionTextClass styling="plain">
           This text is an class.
         </SectionTextClass>
       </section>
