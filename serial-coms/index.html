@@ -38,8 +38,11 @@
       document
         .getElementById("arduino-ping")
         .addEventListener("click", async () => {
-          await sh.write("ping\n");
+          console.log("a");
+          await sh.write("ping");
+          console.log("b");
           const message = await sh.read();
+          console.log("c");
 
           appendMessage(message);
         });
@@ -47,7 +50,7 @@
       document
         .getElementById("arduino-on")
         .addEventListener("click", async () => {
-          await sh.write("on\n");
+          await sh.write("on");
           const message = await sh.read();
 
           appendMessage(message);
@@ -56,7 +59,7 @@
       document
         .getElementById("arduino-off")
         .addEventListener("click", async () => {
-          await sh.write("off\n");
+          await sh.write("off");
           const message = await sh.read();
 
           appendMessage(message);
