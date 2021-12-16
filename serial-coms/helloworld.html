@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="led">Here is a digital LED.</div>
+    <script>
+      let color = "red";
+      window.setInterval(function () {
+        color = color === "red" ? "green" : "red";
+        document.getElementById("led").style.backgroundColor = color;
+      }, 1000);
+    </script>
+  </body>
+</html>
