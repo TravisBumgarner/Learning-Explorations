@@ -16,7 +16,7 @@ void loop() {
     if ( inByte != '\n' && (message_pos < MAX_MESSAGE_LENGTH - 1) ) {
       message[message_pos] = inByte;
       message_pos++;
-    } else {d
+    } else {
       String messageStr = String(message);
       messageStr.trim();
       if (messageStr == "ping") {
