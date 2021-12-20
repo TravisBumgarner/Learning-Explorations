@@ -1,5 +1,4 @@
 require('dotenv').config()
-console.log(process.env)
 // Load the AWS SDK for Node.js
 var AWS = require("aws-sdk");
 // Set the region
@@ -9,7 +8,7 @@ AWS.config.update({ region: process.env.AWS_REGION });
 var sqs = new AWS.SQS({ apiVersion: process.env.AWS_SQS_API_VERSION  });
 
 var params = {
-  QueueName: "SQS_QUEUE_NAME",
+  QueueName: process.env.AWS_SQS_QUEUE_URL,
 };
 
 sqs.getQueueUrl(params, function (err, data) {

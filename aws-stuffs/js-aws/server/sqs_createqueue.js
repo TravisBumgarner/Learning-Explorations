@@ -9,7 +9,7 @@ AWS.config.update({ region: process.env.AWS_REGION });
 var sqs = new AWS.SQS({ apiVersion: process.env.AWS_SQS_API_VERSION  });
 
 var params = {
-  QueueName: "SQS_QUEUE_NsdsdAME",
+  QueueName: process.env.AWS_SQS_QUEUE_NAME,
   Attributes: {
     DelaySeconds: "60",
     MessageRetentionPeriod: "86400",
