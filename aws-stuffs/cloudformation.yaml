@@ -25,7 +25,6 @@ Resources:
       SecurityGroups:
         - !Ref MySecurityGroup
       UserData:
-        Fn::Base64: !Join
-          - ""
-          - - "#!/bin/bash\n"
-            - "mkdir ~/helloworld"
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          mkdir /home/ubuntu/hello
