@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "nodemon server.js",
+    "start-dev": "nodemon ./index.js",
     "km:make": "knex migrate:make --knexfile ./src/knexfile.js --",
     "km:latest": "knex migrate:latest --knexfile ./src/knexfile.js"
   },
