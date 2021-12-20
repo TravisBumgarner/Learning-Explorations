@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "nodemon server.js"
+    "start-dev": "nodemon server.js",
+    "km:make": "knex migrate:make --knexfile ./src/knexfile.js --",
+    "km:latest": "knex migrate:latest --knexfile ./src/knexfile.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +14,8 @@
   "dependencies": {
     "aws-sdk": "^2.1046.0",
     "dotenv": "^10.0.0",
+    "knex": "^0.95.14",
+    "sqlite3": "^5.0.2",
     "sqs-consumer": "^5.6.0"
   },
   "devDependencies": {
