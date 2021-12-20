@@ -25,7 +25,7 @@ var params = {
       StringValue: "6"
     }
   },
-  MessageBody: "Information about current NY Times fiction bestseller for week of 12/11/2016.",
+  MessageBody: "Informatiasdasdasdon about current NY Times fiction bestseller for week of 12/11/2016.",
   // MessageDeduplicationId: "TheWhistler",  // Required for FIFO queues
   // MessageGroupId: "Group1",  // Required for FIFO queues
   QueueUrl: `https://sqs.${process.env.AWS_REGION}.amazonaws.com/820935989716/${process.env.AWS_SQS_QUEUE_NAME}`
