@@ -9,7 +9,13 @@ const insert = async ({ id, body, timestamp }) => {
     console.log(response)
 }
 
+const selectAll = async () => {
+    const response = await knex.select('*').from('messages')
+    console.log(response)
+    return response
+}
 
 module.exports = {
-    insert
+    insert,
+    selectAll
 }

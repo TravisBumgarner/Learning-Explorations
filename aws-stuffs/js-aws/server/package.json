@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "nodemon ./index.js",
+    "sd:server": "nodemon ./index.js",
+    "sd:consumer": "nodemon ./src/sqs/get.js",
     "km:make": "knex migrate:make --knexfile ./src/knexfile.js --",
     "km:latest": "knex migrate:latest --knexfile ./src/knexfile.js"
   },

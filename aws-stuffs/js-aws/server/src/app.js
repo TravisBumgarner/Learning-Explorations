@@ -1,9 +1,15 @@
 const express = require('express')
 const app = express()
-const port = 5001
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+const db = require('./db')
+
+app.get('/ping', (req, res) => {
+  res.send('pong!')
+})
+
+
+app.get('/', async (req, res) => {
+  return res.json(await db.selectAll())
 })
 
 module.exports = app
