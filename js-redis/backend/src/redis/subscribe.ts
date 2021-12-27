@@ -5,9 +5,8 @@ const subscribe = async (topic: string) => {
     await subscriber.connect();
 
     await subscriber.subscribe(topic, (message) => {
-        console.log(message); // 'message'
+        console.log(message);
     });
-
 }
 
 export default subscribe
