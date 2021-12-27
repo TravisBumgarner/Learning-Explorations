@@ -1,7 +1,14 @@
-import app from './src/app'
+let WSServer = require('ws').Server;
+import { createServer } from 'http'
+const server = createServer()
 
-const port = 5001
+let wsServer = new WSServer({ server })
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-  })
+wsServer.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    console.log(`received: ${message}`);
+    ws.send(JSON.stringify(message));
+  });
+});
+
+server.listen(8080, () => console.log(`http/ws server listening on ${8080}`));

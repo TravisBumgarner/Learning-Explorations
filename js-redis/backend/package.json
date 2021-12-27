@@ -15,10 +15,12 @@
     "knex": "^0.95.14",
     "redis": "^4.0.1",
     "sqlite3": "^5.0.2",
-    "ts-node": "^10.4.0"
+    "ts-node": "^10.4.0",
+    "ws": "^8.4.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/ws": "^8.2.2",
     "nodemon": "^2.0.15"
   }
 }
