@@ -1,7 +1,3 @@
-# learning
-
-A record of what I've been learning.
-
 # Archives Overview
 
 ### 2021 - 12
