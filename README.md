@@ -1,5 +1,6 @@
 # learning
-WIP: What I am currently learning
+
+A record of what I've been learning.
 
 # Archives Overview
 
