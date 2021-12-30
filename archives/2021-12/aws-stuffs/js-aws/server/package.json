@@ -1,0 +1,26 @@
+{
+  "name": "js-aws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sd:server": "nodemon ./index.js",
+    "sd:consumer": "nodemon ./src/sqs/get.js",
+    "km:make": "knex migrate:make --knexfile ./src/knexfile.js --",
+    "km:latest": "knex migrate:latest --knexfile ./src/knexfile.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1046.0",
+    "dotenv": "^10.0.0",
+    "knex": "^0.95.14",
+    "sqlite3": "^5.0.2",
+    "sqs-consumer": "^5.6.0",
+    "uuidv4": "^6.2.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

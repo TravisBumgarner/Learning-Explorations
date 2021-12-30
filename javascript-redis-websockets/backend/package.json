@@ -1,0 +1,26 @@
+{
+  "name": "js-redis-backend",
+  "author": "Travis Bumgarner",
+  "scripts": {
+    "sd:be": "nodemon ./index.ts",
+    "km:make": "knex migrate:make --knexfile ./src/knexfile.js --",
+    "km:latest": "knex migrate:latest --knexfile ./src/knexfile.js"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.2",
+    "knex": "^0.95.14",
+    "redis": "^4.0.1",
+    "sqlite3": "^5.0.2",
+    "ts-node": "^10.4.0",
+    "ws": "^8.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/ws": "^8.2.2",
+    "nodemon": "^2.0.15"
+  }
+}

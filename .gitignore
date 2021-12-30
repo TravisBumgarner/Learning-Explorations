@@ -76,3 +76,4 @@ symbolCache.db
 
 # Config
 .env
+*.pem
