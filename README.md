@@ -1,6 +1,3 @@
-# learning
-WIP: What I am currently learning
-
 # Archives Overview
 
 ### 2021 - 12

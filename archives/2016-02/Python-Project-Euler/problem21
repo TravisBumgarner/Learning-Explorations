@@ -1,0 +1,23 @@
+def divisors(n):
+    divisorsList= [1] #Accounts for case of 1*n, n isn't included though, as described in the problem description.
+    for i in range(2,int(n**0.5)+1):
+        if n%i == 0:
+            divisorsList.append(i)
+            if i != int(n/i):
+                divisorsList.append(int(n/i))
+    return sum(divisorsList)
+
+divisorsDict = {}
+for i in range(1,10001):
+    key = i
+    value = divisors(i)
+    divisorsDict[key] = value
+
+sumPairs = 0
+for each in divisorsDict:
+    key1 = each
+    value1 = divisorsDict[each]
+    if value1 <= 10000 and key1 < value1 and divisorsDict[value1] == key1: #key1 <value1 so that it factors out when key1 == value1 and repetitions of key1 > value1
+        print(str(key1) + " and " + str(value1)) #From previous line, for the last statement, given that key1 => value1, does value1 => key1?
+        sumPairs += key1 + value1
+print(sumPairs)
