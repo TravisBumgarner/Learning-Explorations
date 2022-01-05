@@ -40,3 +40,5 @@ const foo2: Foo2 = ({ a: { b: { c: { d } } } }) => {
         }
     }
 }
+
+export default add
