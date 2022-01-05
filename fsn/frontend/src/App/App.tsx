@@ -1,12 +1,67 @@
-import { EventObject } from 'xstate'
+import { useMachine } from '@xstate/react'
+import { createMachine, actions, EventObject } from 'xstate'
 import styled from 'styled-components'
 import * as React from 'react'
 
 import { Body, Title, Text } from 'sharedComponents'
 
-type EventId = "PLAY" | "STOP" | "FORWARD" | "REWIND"
-const POSSIBLE_EVENTS: EventId[] = ["PLAY", "STOP", "FORWARD", "REWIND"]
+type EventId = "COUNT" | "STOP" | "RESET"
 
+interface CounterContext {
+  counter: number;
+}
+
+interface CounterEvent extends EventObject {
+  type: EventId;
+}
+
+const countEffect = actions.assign<CounterContext, CounterEvent>(
+  context => {
+    return {
+      counter: context.counter + 1
+    }
+  }
+);
+
+const resetEffect = actions.assign<CounterContext, CounterEvent>(
+  context => {
+    return {
+      counter: 0
+    }
+  }
+);
+
+const counterMachine = createMachine({
+  id: 'counter',
+  initial: 'stop',
+  context: {
+    counter: 0,
+  },
+  states: {
+    stop: {
+      on: { COUNT: 'count' }
+    },
+    count: {
+      onEntry: ["countEffect"],
+      on: { COUNT: 'stop' },
+      after: {
+        500: [
+          {
+            target: "count",
+            cond: context => context.counter < 100
+          }
+        ]
+      }
+    }
+  },
+
+},
+  {
+    actions: {
+      countEffect,
+      resetEffect
+    }
+  });
 
 const Button = styled.button`
   border-radius: 0;
@@ -16,55 +71,28 @@ const Button = styled.button`
   padding: 5px;
   margin: 5px;
   width: 150px;
-
-  ${({ isActive }: { isActive: boolean }) => isActive
-    ? `
-        border-color: turquoise;
-        color: turquoise;
-      `
-    : `
-         cursor: pointer;
-    `}
 `
 
 let intervalID: null | NodeJS.Timeout
-
 const App = () => {
-  const [currentTime, setCurentTime] = React.useState<number>(0)
-  const [currentState, setCurentState] = React.useState<EventId>("STOP")
-  const [duration, setDuration] = React.useState<number>(360)
+  const [state, send] = useMachine(counterMachine);
 
-  const buttons = POSSIBLE_EVENTS.map(pe => <Button onClick={() => setCurentState(pe)} isActive={currentState === pe}>{pe}</Button>)
-
-  React.useEffect(() => {
-    switch (currentState) {
-      case "PLAY":
-        clearInterval(intervalID)
-        intervalID = setInterval(() => setCurentTime(prevTime => prevTime + 1), 1000)
-        break
-      case "REWIND":
-        clearInterval(intervalID)
-        intervalID = setInterval(() => setCurentTime(prevTime => prevTime - 5), 1000)
-        break
-      case "STOP":
-        clearInterval(intervalID)
-        break
-      case "FORWARD":
-        clearInterval(intervalID)
-        intervalID = setInterval(() => setCurentTime(prevTime => prevTime + 5), 1000)
-        break
-    }
-  }, [currentState])
+  console.log('state', state)
 
   return (
     <Body>
       <Title>Tape Player!</Title>
       <div>
-        {buttons}
+        <Button onClick={() => send('COUNT')}>
+          Toggle Counter
+        </Button>
+        <Button onClick={() => send('RESET')}>
+          Reset Counter
+        </Button>
       </div>
       <div>
-        <Text>Current Time: {currentTime}</Text>
-        <Text>Duration: {duration}</Text>
+        <Text>Current Time: {state.context.counter}</Text>
+        <Text>Current State: {state.value}</Text>
       </div>
     </Body>
   )
