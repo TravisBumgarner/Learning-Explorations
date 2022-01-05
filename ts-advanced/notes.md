@@ -1,0 +1,3 @@
+- Key of, type of, more advanced TypeScript basically. 
+	- https://www.typescriptlang.org/docs/handbook/2/mapped-types.html
+	- interface vs type
