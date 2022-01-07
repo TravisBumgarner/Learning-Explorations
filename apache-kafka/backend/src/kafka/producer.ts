@@ -12,7 +12,6 @@ const brokers = [process.env.BROKER || "error"]
 // this is the topic to which we want to write messages
 const topic = process.env.TOPIC || "error"
 
-console.log(topic)
 
 // initialize a new kafka client and initialize a producer from it
 const kafka = new Kafka({ clientId, brokers })
