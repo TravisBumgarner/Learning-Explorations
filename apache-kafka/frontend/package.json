@@ -1,7 +1,8 @@
 {
-  "name": "my-full-stack-app-frontend",  
-  "author": "Travis Bumgarner",  
+  "name": "my-full-stack-app-frontend",
+  "author": "Travis Bumgarner",
   "dependencies": {
+    "axios": "^0.24.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "styled-components": "^5.3.3"
@@ -18,7 +19,7 @@
     "webpack-dev-server": "^3.11.3"
   },
   "scripts": {
-        "sd:fe": "webpack serve --mode=development --config=webpack.js",
-        "bundle-ui": " rm -rf ./public; mkdir ./public; webpack --mode=production --config=webpack.js"
-      }
+    "sd:fe": "webpack serve --mode=development --config=webpack.js",
+    "bundle-ui": " rm -rf ./public; mkdir ./public; webpack --mode=production --config=webpack.js"
+  }
 }
