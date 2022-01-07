@@ -3,8 +3,8 @@
   "author": "Travis Bumgarner",
   "scripts": {
     "sd:be": "nodemon ./index.ts",
-    "km:make": "knex migrate:make --knexfile ./src/knexfile.js --",
-    "km:latest": "knex migrate:latest --knexfile ./src/knexfile.js"
+    "km:make": "knex migrate:make --knexfile ./src/db/knexfile.ts --",
+    "km:latest": "knex migrate:latest --knexfile ./src/db/knexfile.ts"
   },
   "keywords": [],
   "license": "ISC",
