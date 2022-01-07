@@ -1,9 +1,15 @@
-type ColorCounts = {
-    red: number
-    green: number
-    blue: number
+type Color = 'red' | 'green' | 'blue'
+
+type ColorCounts = Record<Color, number>
+
+type ButtonPress = {
+    id: string
+    color: Color
+    timestamp: Date
 }
 
 export {
-    ColorCounts
+    ColorCounts,
+    Color,
+    ButtonPress
 }

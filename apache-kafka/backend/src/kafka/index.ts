@@ -1,5 +1,7 @@
-import producer from './producer'
+import produce from './produce'
+import consume from './consume'
 
-export {
-    producer
+export default {
+    produce,
+    consume
 }

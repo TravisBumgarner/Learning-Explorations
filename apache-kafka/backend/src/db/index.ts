@@ -1,2 +1,3 @@
-import knex from './knexfile'
+import buttons from './buttons'
 
+export default { buttons }

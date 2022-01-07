@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-
+import { v4 as uuidv4 } from 'uuid'
 
 import { Body, Title } from 'sharedComponents'
-import { ColorCounts } from '../../../sharedTypes'
+import { ButtonPress, Color, ColorCounts } from '../../../sharedTypes'
 
 const Button = styled.button`
   ${({ color }) => `
@@ -25,11 +25,17 @@ const App = () => {
       .then(({ data }: { data: ColorCounts }) => setCounts(data))
   }, [])
 
-  const handleButtonClick = (color: keyof ColorCounts) => {
-    axios.post(`http://localhost:5001/button-press/${color}`)
+  const handleButtonClick = (color: Color) => {
+    const data: ButtonPress = {
+      color,
+      id: uuidv4(),
+      timestamp: new Date()
+    }
+    console.log(data)
+    axios.post(`http://localhost:5001/button-press/`, data)
   }
 
-  const Counts = Object.keys(counts).map((color: keyof ColorCounts) => <li>{color} - {counts[color]}</li>)
+  const Counts = Object.keys(counts).map((color: Color) => <li>{color} - {counts[color]}</li>)
   return (
     <Body>
       <div>
