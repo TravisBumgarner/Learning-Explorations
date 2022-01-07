@@ -25,15 +25,19 @@ const App = () => {
       .then(({ data }: { data: ColorCounts }) => setCounts(data))
   }, [])
 
+  const handleButtonClick = (color: keyof ColorCounts) => {
+    axios.post(`http://localhost:5001/button-press/${color}`)
+  }
+
   const Counts = Object.keys(counts).map((color: keyof ColorCounts) => <li>{color} - {counts[color]}</li>)
   return (
     <Body>
       <div>
         <Title>Click Buttons with Kafka</Title>
-        <p>Refresh to increase button count.</p>
-        <Button color="red">Red</Button>
-        <Button color="green">Green</Button>
-        <Button color="blue">Blue</Button>
+        <p>Refresh to get current button count.</p>
+        <Button onClick={() => handleButtonClick('red')} color="red">Red</Button>
+        <Button onClick={() => handleButtonClick('green')} color="green">Green</Button>
+        <Button onClick={() => handleButtonClick('blue')} color="blue">Blue</Button>
         <p>Click counts</p>
         <ul>
           {Counts}

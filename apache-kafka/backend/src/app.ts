@@ -12,11 +12,6 @@ app.get('/', (req: express.Request, res: express.Response) => {
   res.send('pong!')
 })
 
-app.get('/kafka/:message', async (req: express.Request, res: express.Response) => {
-  await producer(req.params.message)
-  return res.send('success~!')
-})
-
 app.get('/buttons', (req: express.Request, res: express.Response) => {
   const colorCounts: ColorCounts = {
     red: 1,
@@ -24,6 +19,11 @@ app.get('/buttons', (req: express.Request, res: express.Response) => {
     blue: 5
   }
   res.json(colorCounts)
+})
+
+app.post('/button-press/:color', async (req: express.Request, res: express.Response) => {
+  await producer(req.params.color)
+  return res.send('success!')
 })
 
 export default app
