@@ -1,0 +1,14 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "sd:be": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "@eventstore/db-client": "^2.1.1",
+    "nodemon": "^2.0.15",
+    "uuid": "^8.3.2"
+  }
+}
