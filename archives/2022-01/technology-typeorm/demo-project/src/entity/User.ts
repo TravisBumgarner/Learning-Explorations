@@ -15,8 +15,8 @@ export class User {
     @Column()
     age: number;
 
-    @Column({ nullable: true })
+    @Column({nullable: true})
     foo: number;
-
+    
 
 }

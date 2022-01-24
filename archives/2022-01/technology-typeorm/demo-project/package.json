@@ -15,6 +15,7 @@
    "scripts": {
       "start": "ts-node src/index.ts",
       "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-      "migrate:run": "npm run typeorm migration:run"
+      "migrate:run": "npm run typeorm migration:run",
+      "migrate:create": "npm run typeorm migration:create -n -- "
    }
 }

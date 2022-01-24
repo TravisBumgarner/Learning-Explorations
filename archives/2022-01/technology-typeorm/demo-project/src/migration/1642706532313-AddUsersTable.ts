@@ -18,5 +18,4 @@ export class AddUsersTable1642706532313 implements MigrationInterface {
             DROP TABLE users;
         `)
     }
-
 }
