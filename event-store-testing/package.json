@@ -6,11 +6,16 @@
   "scripts": {
     "eventstore": "docker-compose up",
     "write": "nodemon src/write.js",
-    "read": "nodemon src/write.js"
+    "read": "nodemon src/write.js",
+    "test": "jest"
   },
   "dependencies": {
     "@eventstore/db-client": "^2.1.1",
+    "jest": "^27.4.7",
     "nodemon": "^2.0.15",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0"
   }
 }
