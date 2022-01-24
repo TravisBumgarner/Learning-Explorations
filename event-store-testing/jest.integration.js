@@ -1,7 +1,6 @@
+const baseJestConfig = require('./jest.base')
+
 module.exports = {
-    preset: 'ts-jest',
-    transform: {
-        '^.+\\.(ts|tsx)?$': 'ts-jest',
-    },
-    testRegex: '.*\.integration\.spec\.ts'
+    ...baseJestConfig,
+    testMatch: ["**/*integration.spec.ts"]
 };

@@ -17,11 +17,13 @@ const testData = [
     }
 ]
 
-testData.forEach(async ({ events, expectedResult }) => {
-    for (let event of events) {
-        await write(event.sku, event.quantity)
-    }
-    const actualResult = await read()
+test('Projection properly created from data', async () => {
+    await testData.forEach(async ({ events, expectedResult }) => {
+        for (let event of events) {
+            await write(event.sku, event.quantity)
+        }
+        const actualResult = await read()
 
-    expect(actualResult).toEqual(expectedResult)
+        expect(actualResult).toEqual(expectedResult)
+    })
 })

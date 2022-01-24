@@ -11,8 +11,8 @@ const write = async (sku: string, quantity: number) => {
             sku
         },
     });
-    console.log('new event with data', event.data)
-    await client.appendToStream("inventory-stream", event);
+    // console.log('new event with data', event.data) // Why does this line fail in integration testing?
+    return await client.appendToStream("inventory-stream", event);
 }
 
 export default write
