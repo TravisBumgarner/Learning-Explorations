@@ -7,7 +7,8 @@
     "eventstore-dev": "docker-compose --env-file .env.dev up",
     "eventstore-testing-up": "docker-compose --env-file .env.testing up -d eventstore.db",
     "eventstore-testing-down": "docker-compose stop eventstore.db",
-    "test": "jest",
+    "test-integration": "jest --config=jest.integration.js",
+    "test-unit": "jest --config=jest.unit.js",
     "write": "ts-node-dev src/write.ts",
     "read": "ts-node-dev src/read.ts"
   },

@@ -1,13 +1,7 @@
-import { jsonEvent, JSONEventType } from '@eventstore/db-client';
+import { jsonEvent } from '@eventstore/db-client';
 import { client } from './client'
 
-type InventoryEvent = JSONEventType<
-    "InventoryEvent",
-    {
-        quantity: number
-        sku: string
-    }
->;
+import { InventoryEvent } from './types';
 
 const write = async (sku: string, quantity: number) => {
     const event = jsonEvent<InventoryEvent>({
