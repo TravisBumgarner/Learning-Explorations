@@ -4,15 +4,19 @@
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "eventstore": "docker-compose up",
-    "write": "nodemon src/write.js",
-    "read": "nodemon src/write.js",
-    "test": "jest"
+    "eventstore-dev": "docker-compose --env-file .env.dev up",
+    "eventstore-testing-up": "docker-compose --env-file .env.testing up -d eventstore.db",
+    "eventstore-testing-down": "docker-compose stop eventstore.db",
+    "test": "jest",
+    "write": "ts-node-dev src/write.ts",
+    "read": "ts-node-dev src/read.ts"
   },
   "dependencies": {
     "@eventstore/db-client": "^2.1.1",
     "jest": "^27.4.7",
-    "nodemon": "^2.0.15",
+    "ts-jest": "^27.1.3",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

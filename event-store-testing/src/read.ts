@@ -1,14 +1,19 @@
-import { BACKWARDS, END } from '@eventstore/db-client';
-import { client } from './database'
+import { FORWARDS, START } from '@eventstore/db-client';
+import { client } from './client'
 
-setInterval(async () => {
-    const events = await client.readStream("my-demo-stream", {
-        direction: BACKWARDS,
-        fromRevision: END,
-        maxCount: 1,
+const read = async () => {
+    const events = await client.readStream("inventory-stream", {
+        direction: FORWARDS,
+        fromRevision: START,
     });
 
     for await (const resolvedEvent of events) {
         console.log(resolvedEvent.event?.data);
     }
-}, 1000)
+}
+
+if (require.main === module) {
+    read()
+}
+
+export default read

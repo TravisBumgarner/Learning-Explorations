@@ -1,23 +1,24 @@
 import { jsonEvent, JSONEventType } from '@eventstore/db-client';
-import { client } from './database'
+import { client } from './client'
 
-let i = 0
-
-type TestEvent = JSONEventType<
-    "TestEvent",
+type InventoryEvent = JSONEventType<
+    "InventoryEvent",
     {
-        importantData: string;
+        quantity: number
+        sku: string
     }
 >;
 
-setInterval(async () => {
-    const event = jsonEvent < TestEvent > ({
-        type: "TestEvent",
+const write = async (sku: string, quantity: number) => {
+    const event = jsonEvent<InventoryEvent>({
+        type: "InventoryEvent",
         data: {
-            importantData: `Event #: ${i}`,
+            quantity,
+            sku
         },
     });
-    i += 1
-    console.log('new event with id', event.data.importantData)
-    await client.appendToStream("my-demo-stream", event);
-}, 1000)
+    console.log('new event with data', event.data)
+    await client.appendToStream("inventory-stream", event);
+}
+
+export default write
