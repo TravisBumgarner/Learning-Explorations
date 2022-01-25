@@ -14,9 +14,8 @@ services:
       - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=${EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP}
       - EVENTSTORE_MEM_DB=${EVENTSTORE_MEM_DB}
     ports:
-      - "${EVENTSTORE_EXT_TCP_PORT}:${EVENTSTORE_EXT_TCP_PORT}"
-      - "${EVENTSTORE_HTTP_PORT}:${EVENTSTORE_HTTP_PORT}"
-
+      - "1113:1113"
+      - "2113:2113"
     volumes:
       - type: volume
         source: eventstore-volume-data
