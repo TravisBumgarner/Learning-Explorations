@@ -9,18 +9,15 @@ const userCodec = t.type({
 })
 type UserCodec = t.TypeOf<typeof userCodec>
 
-type DecodeResponseParams = {
-    codec: t.TypeC<any>,
+type DecodeResponseParams<T> = {
+    codec: T,
     rawResponse: any,
     onError: (e: Array<t.ValidationError>) => (void | undefined),
-    onSuccess: (parsedResponse: t.TypeC<any>) => (void | undefined)
+    onSuccess: (parsedResponse: T) => (void | undefined)
 }
 
-const decodeResponse = (params: DecodeResponseParams) => {
-    const onError = params.onError
-    const onSuccess = params.onSuccess
-
-    return pipe(params.codec.decode(params.rawResponse), fold(onError, onSuccess))
+const decodeResponse = (params: DecodeResponseParams<t.TypeC<any>>) => {
+    return pipe(params.codec.decode(params.rawResponse), fold(params.onError, params.onSuccess))
 }
 
 const fetchFakeData = (index: number) => {
@@ -40,7 +37,7 @@ const fetchFakeData = (index: number) => {
         }
     ]
 
-    return fakeUserAPIResponses[index] // Change this to try error state of data
+    return fakeUserAPIResponses[index]
 }
 
 const insertIntoFakeDB = (user: UserCodec) => {
@@ -48,12 +45,12 @@ const insertIntoFakeDB = (user: UserCodec) => {
 }
 
 const main = () => {
-    const fakeResponse = fetchFakeData(0)
+    const fakeResponse = fetchFakeData(0) // Change this to try error state of data
     decodeResponse({
         codec: userCodec,
         rawResponse: fakeResponse,
         onError: (e) => console.log('boo error'),
-        onSuccess: (data) => { insertIntoFakeDB(data) }
+        onSuccess: (data) => insertIntoFakeDB(data as unknown as UserCodec) // This be bad
     })
 }
 
