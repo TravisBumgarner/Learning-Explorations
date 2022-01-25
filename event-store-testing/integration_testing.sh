@@ -20,5 +20,5 @@ function wait_eventstore_db() {
 
 docker-compose --env-file .env.testing up -d
 wait_eventstore_db
-npm run test-integration
+./node_modules/jest/bin/jest.js --config=jest.integration.js
 docker-compose stop eventstore.db
