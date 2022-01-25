@@ -23,30 +23,37 @@ const decodeResponse = (params: DecodeResponseParams) => {
     return pipe(params.codec.decode(params.rawResponse), fold(onError, onSuccess))
 }
 
-const fakeUserAPIResponses = [
-    {
-        name: 'bob',
-        userId: 123
-    },
-    {
-        userId: 456
-    },
-    {
-        name: 'steve',
-    },
-    {
-        asasdad: 'asddqwdqw'
-    }
-]
+const fetchFakeData = (index: number) => {
+    const fakeUserAPIResponses = [
+        {
+            name: 'bob',
+            userId: 123
+        },
+        {
+            userId: 456
+        },
+        {
+            name: 'steve',
+        },
+        {
+            asasdad: 'asddqwdqw'
+        }
+    ]
+
+    return fakeUserAPIResponses[index] // Change this to try error state of data
+}
+
+const insertIntoFakeDB = (user: UserCodec) => {
+    console.log('inserting into DB', JSON.stringify(user))
+}
 
 const main = () => {
-    fakeUserAPIResponses.forEach(rawResponse => {
-        decodeResponse({
-            codec: userCodec,
-            rawResponse: rawResponse,
-            onError: (e) => console.log('boo error'),
-            onSuccess: (data) => { console.log('woo data' + JSON.stringify(data)) }
-        })
+    const fakeResponse = fetchFakeData(0)
+    decodeResponse({
+        codec: userCodec,
+        rawResponse: fakeResponse,
+        onError: (e) => console.log('boo error'),
+        onSuccess: (data) => { insertIntoFakeDB(data) }
     })
 }
 
