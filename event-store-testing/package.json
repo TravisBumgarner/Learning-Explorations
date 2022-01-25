@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "eventstore-dev": "docker-compose --env-file .env.dev up",
+    "eventstore-testing": "docker-compose --env-file .env.testing up -d",
     "test-integration-jest": "jest --config=jest.integration.js",
     "test-integration": "./integration_testing.sh",
     "test-unit": "jest --config=jest.unit.js",
