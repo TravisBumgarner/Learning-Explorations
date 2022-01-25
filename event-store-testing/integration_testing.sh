@@ -16,6 +16,8 @@ function wait_eventstore_db() {
         sleep 1
     done
 }
+
+
 docker-compose --env-file .env.testing up -d
 wait_eventstore_db
 npm run test-integration
