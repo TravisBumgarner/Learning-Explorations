@@ -21,7 +21,7 @@ const SAY_HELLO = gql`
 
 const App = () => {
   const { loading, error, data } = useQuery(SAY_HELLO);
-
+  console.log(data)
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
