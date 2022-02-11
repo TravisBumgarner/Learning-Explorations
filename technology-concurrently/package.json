@@ -1,0 +1,17 @@
+{
+  "name": "technology-concurrently",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-main1": "node main1.js",
+    "start-main2": "node main2.js",
+    "together": "concurrently \"npm run start-main1\" \"npm run start-main2\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
