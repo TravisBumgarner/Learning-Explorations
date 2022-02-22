@@ -1,0 +1,14 @@
+{
+  "name": "main1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "node ./main.js",
+    "test": "echo main1 test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
