@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  frontend:
+    image: node:16
+    volumes: 
+      - ./frontend:/app/frontend
+    ports:
+      - 3000:3000
+    working_dir: /app/frontend
+    command: ["npm", "run", "sd:fe"]
+  backend:
+    image: node:16
+    volumes: 
+      - ./backend:/app/backend
+    ports:
+      - 5001:5001
+    working_dir: /app/backend
+    command: ["npm", "run", "sd:be"]
+  some-other-backend:
+    image: node:16
+    volumes: 
+      - ./some-other-backend:/app/some-other-backend
+    ports:
+      - 5002:5002
+    working_dir: /app/some-other-backend
+    command: ["npm", "run", "sd:be"]
+
+    

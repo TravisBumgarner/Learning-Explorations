@@ -2,6 +2,7 @@
   "name": "frontend-frontend",
   "author": "Travis Bumgarner",
   "dependencies": {
+    "axios": "^0.26.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "styled-components": "^5.3.3"

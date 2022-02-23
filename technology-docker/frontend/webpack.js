@@ -28,9 +28,14 @@ module.exports = {
   },
   devServer: {
     compress: true,
-    port: process.env.PORT,
+    port: 3000,
     hot: true,
     historyApiFallback: true,
+    host: '0.0.0.0',
+    watchOptions: {
+      aggregateTimeout: 500, // delay before reloading
+      poll: 1000 // enable polling since fsevents are not supported in docker
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
