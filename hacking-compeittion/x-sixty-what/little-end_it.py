@@ -7,7 +7,11 @@ output = []
 
 for i in range(0,len(pointer), 2):
     output.insert(0, pointer[i:i+2])
-    function_pointer = "\\x" + "\\x".join(output)
+    function_pointer = "\\\\x" + "\\\\x".join(output)
 print(padding + function_pointer)
 
-```
+
+"""
+Question?
+Does x64 use / and x32 use //?? -> what does this mean
+"""
