@@ -25,3 +25,9 @@ $ technology-ink2 --help
     $ technology-ink2 --name=Jane
     Hello, Jane
 ```
+
+
+# Caveats
+
+- Textual UIs are confusing if you've never played with them before
+- It's react, but it's not, things get a bit weird. 

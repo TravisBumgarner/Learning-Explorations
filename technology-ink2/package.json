@@ -6,9 +6,6 @@
 	"engines": {
 		"node": ">=10"
 	},
-	"scripts": {
-		"test": "xo && ava"
-	},
 	"files": [
 		"cli.js",
 		"ui.js"
