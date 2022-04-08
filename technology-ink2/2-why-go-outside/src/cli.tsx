@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, Text } from 'ink';
+import { render, Text, useInput } from 'ink';
 import axios from 'axios';
 require('dotenv').config()
 
@@ -67,9 +67,12 @@ const Weather = ({ currentWeather }: WeatherProps) => {
     )
 }
 
-const Demo = ({ language }: TypeScriptDemoProps) => {
+const WeatherPage = () => {
     const [isLoading, setIsLoading] = React.useState<boolean>(true)
     const [currentWeather, setCurrentWeather] = React.useState<string>(null)
+    useInput((input, key) => {
+        console.log(input)
+    });
 
     React.useEffect(() => {
         getWeather('home').then(r => {
@@ -77,13 +80,19 @@ const Demo = ({ language }: TypeScriptDemoProps) => {
             setTimeout(() => setIsLoading(false), 1000) // Just to add dramatic timing for <Loading /> animation to shine!
         })
     })
-    
+
+    if (isLoading) return <Loading />
+
+    return <Weather currentWeather={currentWeather} />
+}
+
+const App = () => {
     return (
         <>
             <Header />
-            {isLoading ? <Loading /> : <Weather currentWeather={currentWeather} />}
+            <WeatherPage />
         </>
     )
 }
 
-render(<Demo language="TypeScript" />);
+render(<App />);
