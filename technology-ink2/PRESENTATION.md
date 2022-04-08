@@ -11,3 +11,9 @@ npx create-ink-app --typescript
 
 Basic Project structure
 take a look at the output'd CLI
+
+
+# Caveats
+
+Be mindful of what you're typing in - don't forget about newlines, etc.
+Styling is a bit weird coming from react

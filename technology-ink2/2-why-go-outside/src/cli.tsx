@@ -20,7 +20,7 @@ const getWeather = async (city) => {
         const currentWeather = (apiResponse.data.weather.map(({ description }) => description).join(', '))
         response = `Outside it's ${currentWeather}. Stay inside!`
     } else {
-        response = "Why would you need weather elsewhere?"
+        response = `Why would you need the weather in ${city}?`
     }
     return response
 }
@@ -67,15 +67,15 @@ const Weather = ({ currentWeather }: WeatherProps) => {
     )
 }
 
-const WeatherPage = () => {
+type WeatherPageProps = {
+    location: string
+}
+const WeatherPage = ({ location }: WeatherPageProps) => {
     const [isLoading, setIsLoading] = React.useState<boolean>(true)
     const [currentWeather, setCurrentWeather] = React.useState<string>(null)
-    useInput((input, key) => {
-        console.log(input)
-    });
 
     React.useEffect(() => {
-        getWeather('home').then(r => {
+        getWeather(location).then(r => {
             setCurrentWeather(r)
             setTimeout(() => setIsLoading(false), 1000) // Just to add dramatic timing for <Loading /> animation to shine!
         })
@@ -87,10 +87,27 @@ const WeatherPage = () => {
 }
 
 const App = () => {
+    const [awaitingDestination, setAwaitingDestination] = React.useState<boolean>(true)
+    const [location, setLocation] = React.useState<string>('')
+
+    useInput((input, key) => {
+        if (key.return) {
+            setAwaitingDestination(false)
+        } else if (key.backspace || key.delete) {
+            setLocation(location.slice(0, location.length - 1))
+        } else if (input) {
+            setLocation(location + input)
+        }
+    });
+
     return (
         <>
             <Header />
-            <WeatherPage />
+            {awaitingDestination
+                ? <Text>Where to: {location}</Text>
+                : <WeatherPage location={location} />
+
+            }
         </>
     )
 }
