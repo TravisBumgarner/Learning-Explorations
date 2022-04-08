@@ -52,24 +52,38 @@ const Loading = () => {
     return <Text color={color}>Fetching weather, please hold{'.'.repeat(dots)}</Text>
 }
 
+const Header = () => {
+    return <Text backgroundColor="green">Travis's Weather Serivce</Text>
+}
+
+type WeatherProps = {
+    currentWeather: string
+}
+const Weather = ({ currentWeather }: WeatherProps) => {
+    return (
+        <Text>
+            {currentWeather}
+        </Text>
+    )
+}
+
 const Demo = ({ language }: TypeScriptDemoProps) => {
     const [isLoading, setIsLoading] = React.useState<boolean>(true)
-    const [weather, setWeather] = React.useState<string>(null)
+    const [currentWeather, setCurrentWeather] = React.useState<string>(null)
 
     React.useEffect(() => {
         getWeather('home').then(r => {
-            setWeather(r)
+            setCurrentWeather(r)
             setTimeout(() => setIsLoading(false), 1000) // Just to add dramatic timing for <Loading /> animation to shine!
         })
     })
-
-    if (isLoading) {
-        return <Loading />
-    }
-
-    return <Text>
-        {weather}
-    </Text>
+    
+    return (
+        <>
+            <Header />
+            {isLoading ? <Loading /> : <Weather currentWeather={currentWeather} />}
+        </>
+    )
 }
 
 render(<Demo language="TypeScript" />);
