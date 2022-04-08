@@ -22,3 +22,24 @@ Inputs are a little weird, might be a better way
 
 Be mindful of what you're typing in - don't forget about newlines, etc.
 Styling is a bit weird coming from react
+
+# Installing in the Terminal
+
+Add the following to your package JSON
+
+```
+  "bin": {
+    "weather-please": "./dist/cli.js"
+  },
+```
+
+### Installing/Running Locally
+
+`npm i -g`
+`weather-please`
+
+### Installing/Running with npmjs.com
+
+`npm send-it`
+`npm i -g travis-weather-app`
+`weather-please`

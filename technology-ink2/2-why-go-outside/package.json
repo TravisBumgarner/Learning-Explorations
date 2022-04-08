@@ -3,8 +3,7 @@
   "scripts": {
     "compile": "tsc && chmod +x dist/cli.js",
     "cli": "node dist/cli",
-    "sendit-local": "npm run compile && npm run cli",
-    "sendit-moon": "npm run compile && npm publish"
+    "send-it": "npm run compile && npm publish"
   },
   "bin": {
     "weather-please": "./dist/cli.js"
