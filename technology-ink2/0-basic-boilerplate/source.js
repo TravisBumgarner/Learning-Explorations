@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, Text } from 'ink';
 
-const Demo = () => <Text>Hello World</Text>;
+const Demo = ({ language }) => <Text>Hello {language} World</Text>;
 
-render(<Demo />);
+render(<Demo language="JavaScript" />);
