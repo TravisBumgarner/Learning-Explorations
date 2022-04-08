@@ -78,3 +78,6 @@ symbolCache.db
 .env*
 !.env.*.sample
 *.pem
+
+# Compiled
+dist/
