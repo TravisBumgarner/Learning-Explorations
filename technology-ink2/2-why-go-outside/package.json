@@ -1,16 +1,22 @@
 {
-  "name": "demo-0",
+  "name": "travis-weather-app",
   "scripts": {
     "compile": "tsc && chmod +x dist/cli.js",
     "cli": "node dist/cli",
-    "sendit": "npm run compile && npm run cli"
+    "sendit-local": "npm run compile && npm run cli",
+    "sendit-moon": "npm run compile && npm publish"
   },
+  "bin": {
+    "weather-please": "./dist/cli.js"
+  },
+  "version": "1.0.4",
   "dependencies": {
     "@types/react": "^18.0.0",
     "axios": "^0.26.1",
     "dotenv": "^16.0.0",
     "ink": "^3.2.0",
     "react": "^17.0.2",
+    "travis-weather-app": "^1.0.2",
     "typescript": "^4.6.3"
   },
   "devDependencies": {

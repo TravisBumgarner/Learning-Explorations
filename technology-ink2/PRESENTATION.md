@@ -7,11 +7,16 @@ npx create-ink-app
 npx create-ink-app --typescript
 
 
-# Demo 1
+# Demo 0
 
 Basic Project structure
 take a look at the output'd CLI
 
+# Demo 1
+
+# Demo 2
+
+Inputs are a little weird, might be a better way
 
 # Caveats
 
