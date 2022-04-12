@@ -3,7 +3,7 @@
 		"module": "commonjs",
 		"jsx": "react",
 		"esModuleInterop": true,
-		"outDir": "dist"
+		"outDir": "dist",
 	},
 	"include": ["src"]
 }
