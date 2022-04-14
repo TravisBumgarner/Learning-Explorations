@@ -2,7 +2,7 @@
 %author: Travis Bumgarner
 %date: 2022-04-14
 
--> Build & Deploy CLI Apps with React via Ink <-
+Build & Deploy CLI Apps with React via Ink
 
 --------------------------------------------------
 
@@ -16,11 +16,13 @@
 
 `npx create-ink-app --typescript`
 
+(https://github.com/vadimdemedes/ink)
+
 -------------------------------------------------
 
 Demo 1: Boilerplate
 
-(https://github.com/TravisBumgarner/learning/tree/master/technology-ink2)
+(https://github.com/TravisBumgarner/learning/tree/master/technology-ink)
 
 -------------------------------------------------
 
@@ -35,10 +37,6 @@ Demo 2, Part 1: The App Code
 -------------------------------------------------
 
 Demo 2, Part 2: The Deploy Code
-
-`npm run deploy`
-`npm i -g travis-weather-app`
-`weather-please`
 
 -------------------------------------------------
 
@@ -55,3 +53,8 @@ Demo 2, Part 3: The Deploy, Install, and Usage
 -------------------------------------------------
 
 - Things are a bit lower level
+
+-------------------------------------------------
+
+Questions?
+
