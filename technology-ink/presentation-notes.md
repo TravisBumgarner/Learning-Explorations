@@ -15,7 +15,7 @@ npm run start
 
 Ok but that's boring. 
 
-# Proof of Concept
+# Proof of Concept Deo
 
 - Weather app that tells you what the weather is like in your home
 
@@ -30,5 +30,8 @@ Show
 
 # Deploy
 
-- Package.json
-- #1 in cli.tsx
+- Package.json - name, version, bin, 
+
+`npm run compile && npm publish`
+`npm i -g your-app-name` -> travis-weather-app
+`the-command-to-run-in-the-cli`
