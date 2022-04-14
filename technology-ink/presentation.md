@@ -19,11 +19,13 @@
 -------------------------------------------------
 
 Demo 1: Boilerplate
+
 (https://github.com/TravisBumgarner/learning/tree/master/technology-ink2)
 
 -------------------------------------------------
 
 Demo 2: Proof of Concept
+
 (https://github.com/TravisBumgarner/proof-of-concepts/tree/master/why-go-outside)
 
 -------------------------------------------------
