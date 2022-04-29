@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "baseUrl": "./src",
+        "paths": {
+            "*": [
+                "types/*"
+            ],
+        },
+        "module": "commonjs",
+        "noImplicitAny": false, //Turn to true and figure out what's going on in types.ts
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "outDir": "build/",
+    },
+    "exclude": [
+        "node_modules"
+    ]
+  }
