@@ -12,7 +12,7 @@ BigInt.prototype["toJSON"] = function () {
     return this.toString();
 };
 
-const allStreamsHandler = async () => {
+const getOffsetForStream = async(stream: string): Promise<bigint | null> => {
     const postgresConnection = await createConnection(ormconfig)
 
     const result = await postgresConnection
@@ -23,11 +23,18 @@ const allStreamsHandler = async () => {
         .andWhere('projection_offset.stream = :stream', {stream: 'all'})
         .getRawOne<{ offset: bigint }>()
 
-    const options: SubscribeToAllOptions = result && result.offset
+    return result && result.offset
+        ? result.offset
+        : null
+}
+
+const allStreamsHandler = async () => {
+    const offset = await getOffsetForStream('all')
+    const options: SubscribeToAllOptions = offset
         ? {
             fromPosition: {
-                commit: result.offset,
-                prepare: result.offset
+                commit: offset,
+                prepare: offset
             }
         }
         : {
@@ -52,18 +59,10 @@ const allStreamsHandler = async () => {
 allStreamsHandler()
 
 const streamHandler = async (stream: string) => {
-    const postgresConnection = await createConnection(ormconfig)
-
-    const result = await postgresConnection
-        .getRepository(entity.ProjectionOffset)
-        .createQueryBuilder('projection_offset')
-        .select("MAX(projection_offset.offset)", 'offset')
-        .groupBy('stream')
-        .andWhere('projection_offset.stream = :stream', { stream })
-        .getRawOne<{ offset: bigint }>()
+    const offset = await getOffsetForStream('all')
     
-    const options: SubscribeToStreamOptions = result && result.offset
-        ? { fromRevision: result.offset }
+    const options: SubscribeToStreamOptions = offset
+        ? { fromRevision: offset }
         : { fromRevision: 'start' }
 
     console.log(`Starting stream ${stream} at with options ${JSON.stringify(options)}`)
