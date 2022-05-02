@@ -12,7 +12,7 @@ BigInt.prototype["toJSON"] = function () {
     return this.toString();
 };
 
-const getOffsetForStream = async(stream: string): Promise<bigint | null> => {
+const getOffsetForStream = async (stream: string): Promise<bigint | null> => {
     const postgresConnection = await createConnection(ormconfig)
 
     const result = await postgresConnection
@@ -20,7 +20,7 @@ const getOffsetForStream = async(stream: string): Promise<bigint | null> => {
         .createQueryBuilder('projection_offset')
         .select("MAX(projection_offset.offset)", 'offset')
         .groupBy('stream')
-        .andWhere('projection_offset.stream = :stream', {stream: 'all'})
+        .andWhere('projection_offset.stream = :stream', { stream })
         .getRawOne<{ offset: bigint }>()
 
     return result && result.offset
@@ -45,6 +45,7 @@ const allStreamsHandler = async () => {
 
     connectHandlerToAllStreamEvents(options, event => {
         if (event.commitPosition) {
+            console.log(`Stream: all ---  Offset: ${event.commitPosition} --- importantData: ${event.event?.data['importantData']}`)
             const projectionRepository = getRepository(entity.ProjectionOffset)
 
             const projectionOffset = new entity.ProjectionOffset
@@ -59,8 +60,8 @@ const allStreamsHandler = async () => {
 allStreamsHandler()
 
 const streamHandler = async (stream: string) => {
-    const offset = await getOffsetForStream('all')
-    
+    const offset = await getOffsetForStream(stream)
+
     const options: SubscribeToStreamOptions = offset
         ? { fromRevision: offset }
         : { fromRevision: 'start' }
@@ -69,7 +70,8 @@ const streamHandler = async (stream: string) => {
 
     connectHandlerToStream(stream, options, event => {
         // Could also be event.link
-        if(event.event){
+        if (event.event) {
+            console.log(`Stream: ${stream} --- Offset: ${event.commitPosition} --- importantData: ${event.event?.data['importantData']}`)
             const projectionRepository = getRepository(entity.ProjectionOffset)
             const projectionOffset = new entity.ProjectionOffset
             projectionOffset.offset = event.event.revision

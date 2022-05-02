@@ -25,7 +25,7 @@ app.get('/write', async(req: express.Request, res: express.Response) => {
     });
     await eventstoreClient.appendToStream("my-demo-stream", event);
 
-    res.send('write success!')
+    res.send(`write success! ${event.data.importantData}`)
   })
 
 export default app
