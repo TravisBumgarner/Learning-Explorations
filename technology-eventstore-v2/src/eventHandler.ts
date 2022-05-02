@@ -1,48 +1,82 @@
 import { createConnection, getRepository } from 'typeorm'
-import { SubscribeToAllOptions} from "@eventstore/db-client"
+import { SubscribeToAllOptions, SubscribeToStreamOptions } from "@eventstore/db-client"
 
-import { connectHandlerToStreamEvents } from './eventstore'
+import {
+    connectHandlerToStream,
+    connectHandlerToAllStreamEvents
+} from './eventstore'
 import ormconfig from './db/ormconfig'
 import entity from './db'
-import { ReadPosition } from '@eventstore/db-client'
 
 BigInt.prototype["toJSON"] = function () {
     return this.toString();
 };
 
-const eventHandler = async () => {
+const allStreamsHandler = async () => {
     const postgresConnection = await createConnection(ormconfig)
 
     const result = await postgresConnection
         .getRepository(entity.ProjectionOffset)
-        .createQueryBuilder('ProjectionOffset')
-        .select('MAX(commit_position)', 'commitPosition')
-        .getRawOne<{commitPosition: bigint}>()
+        .createQueryBuilder('projection_offset')
+        .select("MAX(projection_offset.offset)", 'offset')
+        .groupBy('stream')
+        .andWhere('projection_offset.stream = :stream', {stream: 'all'})
+        .getRawOne<{ offset: bigint }>()
 
-
-    const options: SubscribeToAllOptions = result && result.commitPosition
+    const options: SubscribeToAllOptions = result && result.offset
         ? {
             fromPosition: {
-                commit: result.commitPosition,
-                prepare: result.commitPosition
+                commit: result.offset,
+                prepare: result.offset
             }
         }
         : {
             fromPosition: 'start'
         }
-console.log(options)
 
-connectHandlerToStreamEvents(options, event => {
-    if (event.commitPosition) {
-        const projectionRepository = getRepository(entity.ProjectionOffset)
+    console.log(`Starting stream all at with options ${JSON.stringify(options)}`)
 
-        const projectionOffset = new entity.ProjectionOffset
-        projectionOffset.commit_position = event.commitPosition
-        projectionRepository.save(projectionOffset)
-    } else {
-        console.log('Event does not have commitPosition')
-    }
+    connectHandlerToAllStreamEvents(options, event => {
+        if (event.commitPosition) {
+            const projectionRepository = getRepository(entity.ProjectionOffset)
 
-})
+            const projectionOffset = new entity.ProjectionOffset
+            projectionOffset.offset = event.commitPosition
+            projectionOffset.stream = "all"
+            projectionRepository.save(projectionOffset)
+        } else {
+            console.log(`Event does not have offset for stream all`)
+        }
+    })
 }
-eventHandler()
+allStreamsHandler()
+
+const streamHandler = async (stream: string) => {
+    const postgresConnection = await createConnection(ormconfig)
+
+    const result = await postgresConnection
+        .getRepository(entity.ProjectionOffset)
+        .createQueryBuilder('projection_offset')
+        .select("MAX(projection_offset.offset)", 'offset')
+        .groupBy('stream')
+        .andWhere('projection_offset.stream = :stream', { stream })
+        .getRawOne<{ offset: bigint }>()
+    
+    const options: SubscribeToStreamOptions = result && result.offset
+        ? { fromRevision: result.offset }
+        : { fromRevision: 'start' }
+
+    console.log(`Starting stream ${stream} at with options ${JSON.stringify(options)}`)
+
+    connectHandlerToStream(stream, options, event => {
+        // Could also be event.link
+        if(event.event){
+            const projectionRepository = getRepository(entity.ProjectionOffset)
+            const projectionOffset = new entity.ProjectionOffset
+            projectionOffset.offset = event.event.revision
+            projectionOffset.stream = stream
+            projectionRepository.save(projectionOffset)
+        }
+    })
+}
+streamHandler('my-demo-stream')
