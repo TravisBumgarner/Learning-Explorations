@@ -1,0 +1,24 @@
+{
+  "name": "frontend-frontend",
+  "author": "Travis Bumgarner",
+  "dependencies": {
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "styled-components": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/styled-components": "^5.1.18",
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^3.11.3"
+  },
+  "scripts": {
+    "sd:fe": "webpack serve --mode=development --config=webpack.js",
+    "bundle-ui": " rm -rf ./public; mkdir ./public; webpack --mode=production --config=webpack.js"
+  }
+}
