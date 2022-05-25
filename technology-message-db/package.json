@@ -1,0 +1,15 @@
+{
+  "name": "technology-message-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@eventide/message-db": "^1.2.6"
+  }
+}
