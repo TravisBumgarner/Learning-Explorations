@@ -76,7 +76,7 @@ symbolCache.db
 
 # Config
 .env*
-!.env.*.sample
+!.env.sample
 *.pem
 
 # Compiled
