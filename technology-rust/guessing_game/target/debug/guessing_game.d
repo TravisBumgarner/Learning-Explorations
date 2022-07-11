@@ -1,1 +1,0 @@
-/Users/travisbumgarner/Programming/personal/learning/technology-rust/guessing_game/target/debug/guessing_game: /Users/travisbumgarner/Programming/personal/learning/technology-rust/guessing_game/src/main.rs
