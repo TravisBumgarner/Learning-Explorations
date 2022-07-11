@@ -1,1 +1,0 @@
-https://github.com/smartcontractkit/full-blockchain-solidity-course-py
