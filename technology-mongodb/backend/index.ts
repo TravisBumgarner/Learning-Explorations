@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 import app from './src/app'
 
 const port = 5001
