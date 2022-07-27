@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-chrome": "testcafe chrome index.js"
+    "test-chrome": "testcafe chrome index.ts",
+    "test-safari": "testcafe safari index.ts",
+    "test": "npm run test-chrome && npm run test-safari"
   },
   "keywords": [],
   "author": "",
