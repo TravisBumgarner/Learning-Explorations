@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-chrome": "testcafe chrome index.ts",
-    "test-safari": "testcafe safari index.ts",
+    "test-chrome": "testcafe chrome",
+    "test-safari": "testcafe safari",
     "test": "npm run test-chrome && npm run test-safari"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "testcafe": "^1.20.0"
+    "testcafe-react-selectors": "^5.0.2"
   }
 }

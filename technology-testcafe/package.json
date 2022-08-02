@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "testcafe-react-selectors": "^5.0.2"
+  }
+}
