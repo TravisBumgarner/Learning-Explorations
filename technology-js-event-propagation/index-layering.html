@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+        }
+
+        #div-top {
+            background-color: red;
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #div-bottom {
+            background-color: green;
+            z-index: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #div-wrapper {
+            background-color: yellow;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body id="body">
+        <div id="div-wrapper">
+            <div id="div-top">top</div>
+            <div id="div-bottom">bottom</div>
+        </div>
+        <button onclick="simulateClick('div-top')">Simulate Top Click</button>
+        <button onclick="simulateClick('div-bottom')">Simulate Bottom Click</button>
+</body>
+<script>
+    const simulateClick = (elementId) => {
+        console.log(`Simulating click on ${elementId}`)
+        document.getElementById(elementId).click()
+    }
+
+    document.getElementById('div-top').addEventListener('click', () => console.log('div-top clicked'))
+    document.getElementById('div-bottom').addEventListener('click', () => console.log('div-bottom clicked'))
+
+    const lookup = {
+        1: "Capturing",
+        2: "Targeting",
+        3: "Bubbling"
+    }
+    
+    const SHOULD_CAPTURE = true
+    const SHOULD_BUBBLE = true 
+
+    const displayEventPhase = (element, event) => {
+        console.log(`${element} - ${lookup[event.eventPhase]}`)
+    }
+
+    ;[
+        'div-bottom',
+        'div-top',
+        'div-wrapper',
+    ].forEach(element => {
+        if(SHOULD_CAPTURE) {
+            document
+                .getElementById(element)
+                .addEventListener('click', (event) => displayEventPhase(element, event), true)
+        }
+        if(SHOULD_BUBBLE) {
+            document
+                .getElementById(element)
+                .addEventListener('click', (event) => displayEventPhase(element, event), false)
+        }
+    })
+
+</script>
+
+</html>
+
