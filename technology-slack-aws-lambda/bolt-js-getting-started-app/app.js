@@ -44,6 +44,12 @@ app.message('hello', async ({ message, say }) => {
   });
 });
 
+app.command('/watercooler', async ({ ack, respond }) => {
+  ack()
+
+  await respond("hi");
+});
+
 // Listens for an action from a button click
 app.action('button_click', async ({ body, ack, say }) => {
   await ack();
