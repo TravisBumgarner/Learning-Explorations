@@ -16,7 +16,7 @@ const bucketObject = new aws.s3.BucketObject("index.html", {
     acl: "public-read",
     contentType: "text/html",
     bucket: bucket,
-    source: new pulumi.asset.FileAsset("index.html")
+    source: new pulumi.asset.FileAsset("src/index.html")
 });
 
 export const bucketEndpoint = pulumi.interpolate`http://${bucket.websiteEndpoint}`
