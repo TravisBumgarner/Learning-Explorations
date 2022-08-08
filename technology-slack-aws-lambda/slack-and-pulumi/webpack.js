@@ -1,12 +1,17 @@
 const path = require('path')
+require('dotenv').config()
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const env = process.env.NODE_ENV
+
+if(!['local', 'production'].includes(env)) throw new Error("Invalid NODE_ENV")
 
 module.exports = {
   entry: './src/index.tsx',
   output: {
     filename: 'app.bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -27,7 +32,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  devtool: 'source-map',
+  devtool: env === 'production' ? false : 'source-map' ,
   devServer: {
     compress: true,
     port: 3000,

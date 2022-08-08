@@ -1,3 +1,4 @@
 name: slack-and-pulumi
 runtime: nodejs
 description: A minimal AWS TypeScript Pulumi program
+main: deploy.ts
