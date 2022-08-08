@@ -1,0 +1,8 @@
+config:
+  pulumipus-boba-tea-shop:backendPort: "3000"
+  pulumipus-boba-tea-shop:database: cart
+  pulumipus-boba-tea-shop:frontendPort: "3001"
+  pulumipus-boba-tea-shop:mongoHost: mongodb://mongo:27017
+  pulumipus-boba-tea-shop:mongoPort: "27017"
+  pulumipus-boba-tea-shop:nodeEnvironment: development
+  pulumipus-boba-tea-shop:protocol: http://

@@ -1,0 +1,3 @@
+name: pulumipus-boba-tea-shop
+runtime: nodejs
+description: A minimal TypeScript Pulumi program
