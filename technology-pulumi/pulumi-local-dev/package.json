@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "start:local": "rm -r .aws-sam & nodemon && sam local start-api"
+    },
+    "license": "UNLICENSED",
+    "dependencies": {
+        "nodemon": "^2.0.19",
+        "typescript": "^4.7.4"
+    }
+}
