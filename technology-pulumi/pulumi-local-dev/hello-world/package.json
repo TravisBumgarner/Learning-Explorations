@@ -10,8 +10,7 @@
     "axios": ">=0.21.1"
   },
   "scripts": {
-    "test": "mocha tests/unit/",
-    "run-locally": "sam local start-api"
+    "test": "mocha tests/unit/"
   },
   "devDependencies": {
     "chai": "^4.2.0",

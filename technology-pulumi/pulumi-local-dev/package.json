@@ -1,9 +1,10 @@
 {
     "scripts": {
-        "start:local": "rm -r .aws-sam & nodemon && sam local start-api"
+        "start-local": "rm -r .aws-sam & nodemon && sam local start-api",
+        "invoke-with-event": "sam local invoke HelloWorldFunction --event events/event.json"
     },
     "license": "UNLICENSED",
-    "dependencies": {
+    "devDependencies": {
         "nodemon": "^2.0.19",
         "typescript": "^4.7.4"
     }
