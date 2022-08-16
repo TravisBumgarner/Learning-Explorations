@@ -1,0 +1,1 @@
+https://www.toptal.com/aws/typescript-jest-aws-sam-tutorial
