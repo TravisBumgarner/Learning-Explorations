@@ -1,5 +1,5 @@
 {
-    "name": "watercooler-123",
+    "name": "technology-lambdas-and-apigateway",
     "main": "index.ts",
     "devDependencies": {
         "@types/node": "^14"

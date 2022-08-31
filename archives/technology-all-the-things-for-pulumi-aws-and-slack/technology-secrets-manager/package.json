@@ -1,5 +1,5 @@
 {
-    "name": "watercooler-123",
+    "name": "secrets-manager",
     "main": "index.ts",
     "devDependencies": {
         "@types/node": "^14"
