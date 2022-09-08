@@ -1,0 +1,12 @@
+{
+  "name": "technology-uploading-large-files-with-js-and-node",
+  "version": "1.0.0",
+  "description": "Chunk up file on frontend and send to backend",
+  "main": "index.js",
+  "scripts": {
+    "sd": "open frontend/index.html && cd backend && npm run sd:be"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
