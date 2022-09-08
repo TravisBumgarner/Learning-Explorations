@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+</head>
+
+<body>
+    <input type="file" id="fileInput">
+    <button id="uploadBtn">upload3</button>
+</body>
+<script>
+    // Address of the interface
+    axios.defaults.baseURL = 'http://localhost:3000'
+    // Selected file
+    var file = null
+    // Select the file
+    document.getElementById('fileInput').onchange = function ({ target: { files } }) {
+        file = files[0]
+    }
+    // To upload
+    document.getElementById('uploadBtn').onclick = function () {
+        if (!file) return;
+        // Create a slice
+
+        let size = 1024 * 50; //50KB Section size
+        let fileChunks = [];
+        let index = 0 //Section num
+        for (let cur = 0; cur < file.size; cur += size) {
+            fileChunks.push({
+                hash: index++,
+                chunk: file.slice(cur, cur + size)
+            })
+        }
+        // Control concurrency and breakpoint continuation
+        const uploadFileChunks = async function (list) {
+            if (list.length === 0) {
+                //All tasks complete, merge slices
+                await axios({
+                    method: 'get',
+                    url: '/merge',
+                    params: {
+                        filename: file.name
+                    }
+                });
+                console.log('Upload to complete')
+                return
+            }
+            let pool = []//Concurrent pool
+            let max = 3 //Maximum concurrency
+            let finish = 0//Quantity completed
+            let failList = []//A list of failures
+            for (let i = 0; i < list.length; i++) {
+                let item = list[i]
+                let formData = new FormData()
+                formData.append('filename', file.name)
+                formData.append('hash', item.hash)
+                formData.append('chunk', item.chunk)
+                // Upload section
+                let task = axios({
+                    method: 'post',
+                    url: '/upload',
+                    data: formData
+                })
+                task.then((data) => {
+                    //Remove the Promise task from the concurrency pool when the request ends
+                    let index = pool.findIndex(t => t === task)
+                    pool.splice(index)
+                }).catch(() => {
+                    failList.push(item)
+                }).finally(() => {
+                    finish++
+                    //All requests are requested complete
+                    if (finish === list.length) {
+                        uploadFileChunks(failList)
+                    }
+                })
+                pool.push(task)
+                if (pool.length === max) {
+                    //Each time the concurrent pool finishes running a task, another task is plugged in
+                    await Promise.race(pool)
+                }
+            }
+        }
+        uploadFileChunks(fileChunks)
+
+    }
+</script>
+
+</html>
