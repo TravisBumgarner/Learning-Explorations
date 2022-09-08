@@ -13,7 +13,12 @@ const app = express()
 
 app.use(cors({ origin: '*' }));
 
-app.use(express.static(path.join(__dirname, './dist')))
+app.use(express.static(path.join(__dirname, './static')))
+
+app.get('/images', (req, res) => {
+    const files = fs.readdirSync(STATIC_FILES)
+    res.json({images: files})
+})
 
 app.post('/upload', (req, res) => {
     const form = new multiparty.Form();

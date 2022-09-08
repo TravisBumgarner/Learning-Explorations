@@ -12,10 +12,29 @@
 <body>
     <input type="file" id="fileInput">
     <button id="uploadBtn">Upload</button>
+    <p>Current Images</p>
+    <ul id="list"></ul>
 </body>
 <script>
     // Address of the interface
     axios.defaults.baseURL = 'http://localhost:5001'
+
+    axios({
+        method: "GET",
+        url: "/images"
+    }).then(r => {
+        const list = document.getElementById('list')
+        r.data.images.forEach(filename => {
+            const listItem = document.createElement('li')
+            const anchorTag = document.createElement('a')
+            anchorTag.href = `http://localhost:5001/files/${filename}`
+            anchorTag.innerText = filename
+            anchorTag.target="_blank"
+            listItem.appendChild(anchorTag)
+            list.appendChild(listItem)
+        })
+    })
+
     // Selected file
     var file = null
     // Select the file
