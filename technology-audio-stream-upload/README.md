@@ -1,0 +1,1 @@
+This app can take a POST request in Postman with URL localhost:5001/fileupload and the body of a binary image and save it to the backend. 
