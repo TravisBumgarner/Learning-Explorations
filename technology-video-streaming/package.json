@@ -1,0 +1,12 @@
+{
+  "name": "technology-video-streaming",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sd": "cd backend && npm run sd:be && cd .. && open index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -10,11 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "knex": "^0.95.14",
-    "sqlite3": "^5.0.2",
     "ts-node": "^10.4.0",
-    "express": "^4.17.2",
-    "redis": "^4.0.1"
+    "express": "^4.17.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

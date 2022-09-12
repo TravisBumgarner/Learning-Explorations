@@ -1,0 +1,9 @@
+{
+  "name": "technology-screen-recording",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "sd": "cd backend && yarn run sd:be && cd ../frontend && yarn run sd:fe"
+  }
+}
