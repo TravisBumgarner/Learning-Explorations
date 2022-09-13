@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import Webcam from 'react-webcam'
 import { v4 as uuidv4 } from 'uuid'
+import { useReactMediaRecorder } from "react-media-recorder";
+
 
 import { context } from './Context'
 
@@ -44,6 +46,14 @@ const YoutubeEmbed = () => (
 const Workspace = () => {
     const {dispatch} = React.useContext(context)
 
+    const handleStop = (bloblUrl: string, blob: Blob) => {
+      dispatch({type:"ADD_VIDEO", payload: {src: bloblUrl, filename: `${uuidv4()}.webm`}})
+    }
+
+    const {status, startRecording, stopRecording} = useReactMediaRecorder({video: true, audio: true, screen: true, onStop: handleStop})
+
+
+
     const [selectedDeviceIds, setSelectedDeviceIds] = React.useState<string[]>([]);
     const [devices, setDevices] = React.useState<Device[]>([]);
 
@@ -62,22 +72,22 @@ const Workspace = () => {
         [handleDevices]
       );
 
-    const record = async () => {
-        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
-        const data: Blob[] = []
-        const mediaRecorder = new MediaRecorder(stream)
-        mediaRecorder.ondataavailable = (event) => {
-            data.push(event.data)
-        }
-        mediaRecorder.start()
-        mediaRecorder.onstop = (event) => {
-            const url = URL.createObjectURL(new Blob(data, {
-                type: data[0].type
-            }))
-            console.log(url)
-            dispatch({type:"ADD_VIDEO", payload: {src: url, filename: `${uuidv4()}.webm`}})
-        }
-    }
+    // const record = async () => {
+    //     const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
+    //     const data: Blob[] = []
+    //     const mediaRecorder = new MediaRecorder(stream)
+    //     mediaRecorder.ondataavailable = (event) => {
+    //         data.push(event.data)
+    //     }
+    //     mediaRecorder.start()
+    //     mediaRecorder.onstop = (event) => {
+    //         const url = URL.createObjectURL(new Blob(data, {
+    //             type: data[0].type
+    //         }))
+    //         console.log(url)
+    //         dispatch({type:"ADD_VIDEO", payload: {src: url, filename: `${uuidv4()}.webm`}})
+    //     }
+    // }
 
     return (
         <div>
@@ -86,7 +96,8 @@ const Workspace = () => {
                 <label>Select Webcams to Add</label>
                 {devices.map(device => <button onClick={() => setSelectedDeviceIds(prev => ([...prev, device.deviceId]))} key={device.deviceId}>{device.label}</button>)}
             </div>
-            <button onClick={record}>Record</button>
+            <button onClick={startRecording}>Record</button>
+            <button onClick={stopRecording}>Stop Recording</button>
             <FakeWork>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus gravida, lectus non consequat feugiat, ligula eros sodales urna, ut interdum metus arcu vel risus. Phasellus ut magna sem. Proin varius libero vitae mattis auctor. Sed accumsan pharetra consectetur. Nullam lobortis risus vel ex tristique laoreet. Curabitur vel pellentesque dolor, in euismod neque. Vestibulum consequat a turpis ut dapibus. Suspendisse justo orci, tincidunt vel augue non, feugiat interdum diam. Mauris interdum, mauris ultrices luctus tristique, ante ante porta est, at hendrerit metus nunc eget dolor. Pellentesque in metus vitae arcu pharetra rhoncus in eu enim. Cras eget mattis eros.</p>
                 <p>Phasellus at sapien sed mi placerat condimentum. Suspendisse odio augue, tincidunt vel faucibus sed, feugiat vel magna. Integer a libero molestie, sagittis nisl vel, efficitur turpis. Vestibulum maximus pellentesque ultrices. Donec ut pretium quam. Vestibulum vel tellus at nisl tristique commodo quis ac tortor. Morbi tristique faucibus eros viverra viverra. Ut tincidunt urna eu sem auctor, a varius nunc sagittis. Ut consequat viverra nisl, in laoreet urna imperdiet at.</p>

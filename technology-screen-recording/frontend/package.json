@@ -4,6 +4,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-media-recorder": "^1.6.6",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-webcam": "^7.0.1",
