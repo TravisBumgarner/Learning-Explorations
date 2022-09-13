@@ -9,7 +9,7 @@ import config from './config'
 const ONE_MEGABYTE = 1024 * 1024
 const FIVE_MEGABYTES = 5 * ONE_MEGABYTE
 
-const uploadStreamToS3 = async (Key: string, Body: any) => {
+const uploadStreamToS3 = async (Key: string, Body: any) => { // for some reason the types of fs.ReadStream and Body don't match up. Will need to figure out.
   try {
     const upload = new Upload({
       client: new S3Client({
@@ -22,7 +22,7 @@ const uploadStreamToS3 = async (Key: string, Body: any) => {
       params: {
         Bucket: config.S3.Bucket,
         Key,
-        Body
+        Body,
       },
       queueSize: 1, // optional concurrency configuration
       partSize: FIVE_MEGABYTES, // optional size of each part, in bytes, at least 5MB
