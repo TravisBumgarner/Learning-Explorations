@@ -9,7 +9,11 @@ function copy(filePath: string) {
     const fileCopyPath = filePath.split('.')[0] + '-copy.' + filePath.split('.')[1]
     const outputStream = fs.createWriteStream(fileCopyPath)
 
-    inputStream.pipe(outputStream)
+    // inputStream.pipe(outputStream)
+    // Above or Below works. 
+    inputStream.on('data', async (chunk) => {
+        outputStream.write(chunk);
+    });
     
     outputStream.on('finish', () => {
         console.log(`You have successfully created a ${filePath} copy. The new file name is ${fileCopyPath}.`);
