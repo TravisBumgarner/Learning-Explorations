@@ -41,12 +41,12 @@ const uploadStreamToS3 = async (Key: string, Body: any) => {
 
 const main = async () => {
   let counter = 0;
-  const filename = 'lorem-ipsum.txt'
+  const filename = 'video.mov'
   const filepath = path.join(__dirname, filename)
   const readableStream = fs.createReadStream(
     filepath,
     {
-      encoding: 'utf-8',
+      // encoding: 'utf-8',
       highWaterMark: FIVE_MEGABYTES // Controls the Chunk Size. 
     }
   );
