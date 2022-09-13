@@ -22,7 +22,7 @@ type Device = {
 }
 
 const FakeWork = styled.div`
-    width: 500px;
+    width: 800px;
     height: 500px;
     overflow: scroll;
 `

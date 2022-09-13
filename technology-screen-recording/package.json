@@ -4,6 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "sd": "cd backend && yarn run sd:be && cd ../frontend && yarn run sd:fe"
+    "sd:be": "cd backend && yarn run sd:be",
+    "sd:fe": "cd frontend && yarn run sd:fe",
+    "sd": "concurrently -n be,fe \"yarn run sd:be\" \"yarn run sd:fe\""
+  },
+  "dependencies": {
+    "concurrently": "^7.4.0"
   }
 }
