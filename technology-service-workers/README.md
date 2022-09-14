@@ -1,0 +1,1 @@
+npx lite-server .
