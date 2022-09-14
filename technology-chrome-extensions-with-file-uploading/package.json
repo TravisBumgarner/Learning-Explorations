@@ -1,0 +1,14 @@
+{
+  "name": "technology-chrome-extensions-with-file-uploading",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "sd:fe": "cd frontend && yarn run sd:fe",
+    "sd:be": "cd backend && yarn run sd:be",
+    "sd": "concurrently -n fe,be \"yarn run sd:fe\" \"yarn run sd:be\""
+  },
+  "dependencies": {
+    "concurrently": "^7.4.0"
+  }
+}

@@ -1,0 +1,34 @@
+{
+    "name": "TB Demo",
+    "version": "0.1.0",
+    "description": "Demo",
+    "permissions": ["storage", "tabs"],
+    "host_permissions": ["http://localhost:3000/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["http://localhost:3000/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [
+        ],
+        "matches": ["http://localhost:3000/*"]
+      }
+    ],
+    "action": {
+      "default_icon": {
+        "16": "/assets/16x16.png",
+        "48": "/assets/48x48.png",
+        "128": "/assets/128x128.png"
+      },
+      "default_title": "TB Demo",
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 3
+}
+
