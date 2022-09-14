@@ -1,10 +1,20 @@
 import * as React from 'react'
 
 import { Body, Title } from 'sharedComponents'
-import {useLocalStorage} from './customHooks'
+import {useLocalStorage, useMediaRecorder} from './customHooks'
 
 const App = () => {
   const [name, setName] = useLocalStorage('name', '')
+
+  const onstop = () => {
+    console.log('recording stopped')
+  }
+
+  const ondataavailable = () => {
+    console.log('data received')
+  }
+
+  const {startRecording, stopRecording } = useMediaRecorder({onstop, ondataavailable})
   return (
     <Body>
       <Title>Hello {name}!</Title>

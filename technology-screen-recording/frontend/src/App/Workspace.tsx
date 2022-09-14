@@ -72,22 +72,22 @@ const Workspace = () => {
         [handleDevices]
       );
 
-    // const record = async () => {
-    //     const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
-    //     const data: Blob[] = []
-    //     const mediaRecorder = new MediaRecorder(stream)
-    //     mediaRecorder.ondataavailable = (event) => {
-    //         data.push(event.data)
-    //     }
-    //     mediaRecorder.start()
-    //     mediaRecorder.onstop = (event) => {
-    //         const url = URL.createObjectURL(new Blob(data, {
-    //             type: data[0].type
-    //         }))
-    //         console.log(url)
-    //         dispatch({type:"ADD_VIDEO", payload: {src: url, filename: `${uuidv4()}.webm`}})
-    //     }
-    // }
+    const record = async () => {
+        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
+        const data: Blob[] = []
+        const mediaRecorder = new MediaRecorder(stream)
+        mediaRecorder.ondataavailable = (event) => {
+            data.push(event.data)
+        }
+        mediaRecorder.start()
+        mediaRecorder.onstop = (event) => {
+            const url = URL.createObjectURL(new Blob(data, {
+                type: data[0].type
+            }))
+            console.log(url)
+            dispatch({type:"ADD_VIDEO", payload: {src: url, filename: `${uuidv4()}.webm`}})
+        }
+    }
 
     return (
         <div>
