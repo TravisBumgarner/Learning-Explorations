@@ -9,13 +9,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeinfo, tab) => {
   // }
 });
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  console.log('asdasd')
-  sendResponse("ayy");
-});
-
-chrome.runtime.onMessage.addListener (
-    function (request, sender, sendResponse) {
-        console.log("Reached Background.js");
-    }
+chrome.runtime.onMessage.addListener(
+  (request, sender, sendResponse) => {
+    console.log("Reached Background.js");
+    console.log(request)
+    sendResponse("message sent from backend")
+  }
 );

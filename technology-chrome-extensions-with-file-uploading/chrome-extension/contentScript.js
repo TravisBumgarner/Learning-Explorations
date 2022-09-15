@@ -27,12 +27,12 @@ function docReady(fn) {
 }    
 
 docReady(() => {
-    chrome.runtime.sendMessage({ Message: "hey" }, function (response) {
-        console.log('response')
+    chrome.runtime.sendMessage({ Message: "message sent from contentScript" }, (response) => {
+        console.log('response', response)
     })
 })
 
 // accept messages from background
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    alert("Contents Of Text File = " + request.fileData);
+    console.log('request', request)
 });
