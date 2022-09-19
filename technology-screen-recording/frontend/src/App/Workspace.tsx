@@ -75,7 +75,7 @@ const Workspace = () => {
     const record = async () => {
         const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
         const data: Blob[] = []
-        const mediaRecorder = new MediaRecorder(stream)
+        const mediaRecorder = new MediaRecorder(stream, {})
         mediaRecorder.ondataavailable = (event) => {
             data.push(event.data)
         }

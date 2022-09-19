@@ -19,6 +19,9 @@ const App = () => {
     <Body>
       <Title>Hello {name}!</Title>
       <input value={name} onChange={e => setName(e.target.value)}/>
+      <button onClick={startRecording}>Start Recording</button>
+      <button onClick={stopRecording}>Stop Recording</button>
+      
     </Body>
   )
 }

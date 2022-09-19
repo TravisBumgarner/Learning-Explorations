@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const getSavedValue = (key: string, initialValue: any) => {
     const savedValue = JSON.parse(localStorage.getItem(key))
@@ -27,29 +27,35 @@ type UseMediaRecorderProps = {
     ondataavailable: (e: Event) => void
 }
 
+const useMediaRecorder = ({onstop, ondataavailable}: UseMediaRecorderProps) => {
+    const mediaStream = useRef(null)
+    const mediaRecorder = useRef(null)
 
-
-const useMediaRecorder = async ({onstop, ondataavailable}: UseMediaRecorderProps) => {
     const getMediaStream = async () => {
-        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
-        return stream
+        mediaStream.current = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
     }
 
-    const data: Blob[] = []
+    // const data: Blob[] = []
 
-    const stream = getMediaStream()
-    const mediaRecorder = new MediaRecorder(stream)
-    
-    mediaRecorder.ondataavailable = ondataavailable
-    
-    mediaRecorder.onstop = onstop
+    const startRecording = async () => {
+        if(!mediaStream.current) {
+            await getMediaStream()
+        }
 
-    const startRecording = () => {
-        mediaRecorder.start()
+        mediaRecorder.current = new MediaRecorder(
+            mediaStream.current,
+            {}
+        )
+        
+        mediaRecorder.current.ondataavailable = ondataavailable
+    
+        mediaRecorder.current.onstop = onstop
+
+        mediaRecorder.current.start()
     }
 
     const stopRecording = () => {
-        mediaRecorder.stop()
+        mediaRecorder.current.stop()
     }
 
     return {startRecording, stopRecording}
