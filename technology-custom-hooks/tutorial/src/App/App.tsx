@@ -1,12 +1,11 @@
 import * as React from 'react'
+import {useReactMediaRecorder} from 'react-media-recorder'
 
 import { Body, Title } from 'sharedComponents'
-import {useLocalStorage, useMediaRecorder} from './customHooks'
 
 const App = () => {
-  const [name, setName] = useLocalStorage('name', '')
 
-  const onstop = () => {
+  const onStop = () => {
     console.log('recording stopped')
   }
 
@@ -14,14 +13,12 @@ const App = () => {
     console.log('data received')
   }
 
-  const {startRecording, stopRecording } = useMediaRecorder({onstop, ondataavailable})
+  const {startRecording, stopRecording } = useReactMediaRecorder({onStop})
   return (
     <Body>
-      <Title>Hello {name}!</Title>
-      <input value={name} onChange={e => setName(e.target.value)}/>
       <button onClick={startRecording}>Start Recording</button>
       <button onClick={stopRecording}>Stop Recording</button>
-      
+
     </Body>
   )
 }

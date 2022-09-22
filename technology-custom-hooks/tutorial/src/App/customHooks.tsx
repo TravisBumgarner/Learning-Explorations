@@ -28,13 +28,13 @@ type UseMediaRecorderProps = {
 }
 
 const useMediaRecorder = ({onstop, ondataavailable}: UseMediaRecorderProps) => {
-    const mediaStream = useRef(null)
-    const mediaRecorder = useRef(null)
+    const mediaStream = useRef<MediaStream>(null)
+    const mediaRecorder = useRef<MediaRecorder>(null)
 
+    const mediaStreamConstraints: MediaStreamConstraints = {preferCurrentTab: true}
     const getMediaStream = async () => {
-        mediaStream.current = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
+        mediaStream.current = await navigator.mediaDevices.getDisplayMedia(mediaStreamConstraints)
     }
-
     // const data: Blob[] = []
 
     const startRecording = async () => {
