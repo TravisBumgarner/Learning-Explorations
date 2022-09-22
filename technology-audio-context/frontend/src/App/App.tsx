@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 
 import { Body, Title } from 'sharedComponents'
 
@@ -18,10 +18,49 @@ const YoutubeEmbed = () => (
 
 const App = () => {
   const audioContext = useRef<AudioContext>(new AudioContext())
+  const mediaStream = useRef<MediaStream | null>(null)
+  const mediaRecorder = useRef<MediaRecorder | null>(null)
+
+  const getMediaStream = useCallback(async () => {
+    const displayStream = await window.navigator.mediaDevices.getDisplayMedia({ audio: true, video: true });
+    const userStream = await window.navigator.mediaDevices.getUserMedia({ audio: true });
+
+    mediaStream.current = new MediaStream([...displayStream.getTracks(), ...userStream.getTracks()]);
+  }, [])
+
+  const startRecording = useCallback(async () => {
+    await getMediaStream()
+
+    const data: Blob[] = []
+    mediaRecorder.current = new MediaRecorder(mediaStream.current)
+    
+    mediaRecorder.current.ondataavailable = (event) => {
+        data.push(event.data)
+    }
+    mediaRecorder.current.start()
+    mediaRecorder.current.onstop = (event) => {
+        const url = URL.createObjectURL(new Blob(data, {
+            type: data[0].type
+        }))
+        console.log(url)
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'test.webm');
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode!.removeChild(link);
+    }
+  }, [])
+
+  const stopRecording = useCallback(() => {
+    mediaRecorder.current.stop()
+  }, [])
+  
 
   return (
     <Body>
       <Title>Hello World!</Title>
+      <button onClick={startRecording}>Record</button><button onClick={stopRecording}>Stop Recording</button>
       <p>Vivamus lobortis elit vitae quam luctus vestibulum. Fusce vel nulla purus. Praesent aliquam, augue quis malesuada cursus, arcu turpis scelerisque purus, id sagittis diam urna sed odio. Donec eleifend erat vitae porttitor pulvinar. Nulla vel fermentum nunc. Aenean facilisis odio sit amet dolor venenatis hendrerit. Mauris purus massa, malesuada sed mi a, aliquam ullamcorper justo. Sed ac nulla dui.</p>
       <YoutubeEmbed />
     </Body>
