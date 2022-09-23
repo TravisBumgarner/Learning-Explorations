@@ -17,18 +17,34 @@ const YoutubeEmbed = () => (
 );
 
 const App = () => {
-  const audioContext = useRef<AudioContext>(new AudioContext())
+  const audioContext = useRef<AudioContext>(null)
   const mediaStream = useRef<MediaStream | null>(null)
   const mediaRecorder = useRef<MediaRecorder | null>(null)
 
+  const getAudioContext = useCallback(async () => {
+    audioContext.current = new AudioContext()
+  }, [])
+  
   const getMediaStream = useCallback(async () => {
-    const displayStream = await window.navigator.mediaDevices.getDisplayMedia({ audio: true, video: true });
-    const userStream = await window.navigator.mediaDevices.getUserMedia({ audio: true });
+    const displayStreamAudioTracks = await window.navigator.mediaDevices.getDisplayMedia({ audio: true, video: true });
+    const userStreamAudioTracks = await window.navigator.mediaDevices.getUserMedia({ audio: true });
 
-    mediaStream.current = new MediaStream([...displayStream.getTracks(), ...userStream.getTracks()]);
+    console.log('display', displayStreamAudioTracks.getAudioTracks())
+    console.log('user', userStreamAudioTracks.getAudioTracks())
+
+    const displayAudio = audioContext.current.createMediaStreamSource(displayStreamAudioTracks);
+    const userAudio = audioContext.current.createMediaStreamSource(userStreamAudioTracks);
+
+    const mergedAudioStreams = audioContext.current.createMediaStreamDestination()
+    displayAudio.connect(mergedAudioStreams)
+    userAudio.connect(mergedAudioStreams)
+    mergedAudioStreams.stream.getAudioTracks().forEach((track) => console.log(track))
+    mediaStream.current = new MediaStream(mergedAudioStreams.stream);
   }, [])
 
   const startRecording = useCallback(async () => {
+    await getAudioContext()
+
     await getMediaStream()
 
     const data: Blob[] = []
