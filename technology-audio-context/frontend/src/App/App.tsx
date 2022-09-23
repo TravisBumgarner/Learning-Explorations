@@ -26,20 +26,17 @@ const App = () => {
   }, [])
   
   const getMediaStream = useCallback(async () => {
-    const displayStreamAudioTracks = await window.navigator.mediaDevices.getDisplayMedia({ audio: true, video: true });
-    const userStreamAudioTracks = await window.navigator.mediaDevices.getUserMedia({ audio: true });
+    const displayStream = await window.navigator.mediaDevices.getDisplayMedia({ audio: true, video: true });
+    const userStream = await window.navigator.mediaDevices.getUserMedia({ audio: true });
 
-    console.log('display', displayStreamAudioTracks.getAudioTracks())
-    console.log('user', userStreamAudioTracks.getAudioTracks())
+    const displayAudio = audioContext.current.createMediaStreamSource(displayStream);
+    const userAudio = audioContext.current.createMediaStreamSource(userStream);
 
-    const displayAudio = audioContext.current.createMediaStreamSource(displayStreamAudioTracks);
-    const userAudio = audioContext.current.createMediaStreamSource(userStreamAudioTracks);
+    const mergedAudioStream = audioContext.current.createMediaStreamDestination()
+    displayAudio.connect(mergedAudioStream)
+    userAudio.connect(mergedAudioStream)
 
-    const mergedAudioStreams = audioContext.current.createMediaStreamDestination()
-    displayAudio.connect(mergedAudioStreams)
-    userAudio.connect(mergedAudioStreams)
-    mergedAudioStreams.stream.getAudioTracks().forEach((track) => console.log(track))
-    mediaStream.current = new MediaStream(mergedAudioStreams.stream);
+    mediaStream.current = new MediaStream([...mergedAudioStream.stream.getAudioTracks(), ...displayStream.getVideoTracks()]);
   }, [])
 
   const startRecording = useCallback(async () => {
