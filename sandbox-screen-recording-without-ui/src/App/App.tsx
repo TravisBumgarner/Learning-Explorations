@@ -17,31 +17,22 @@ const YoutubeEmbed = () => (
 );
 
 const App = () => {
-  const audioContext = useRef<AudioContext>(null)
   const mediaStream = useRef<MediaStream | null>(null)
   const mediaRecorder = useRef<MediaRecorder | null>(null)
-
-  const getAudioContext = useCallback(async () => {
-    audioContext.current = new AudioContext()
-  }, [])
   
   const getMediaStream = useCallback(async () => {
     const displayStream = await window.navigator.mediaDevices.getDisplayMedia({ audio: true, video: true });
-    const userStream = await window.navigator.mediaDevices.getUserMedia({ audio: true });
 
-    const displayAudio = audioContext.current.createMediaStreamSource(displayStream);
-    const userAudio = audioContext.current.createMediaStreamSource(userStream);
+    displayStream.getVideoTracks().forEach(track => {
+      console.log('capabilities', track.getCapabilities())
+      console.log('constraints', track.getConstraints())
+      console.log('settings', track.getSettings())
+    })
 
-    const mergedAudioStream = audioContext.current.createMediaStreamDestination()
-    displayAudio.connect(mergedAudioStream)
-    userAudio.connect(mergedAudioStream)
-
-    mediaStream.current = new MediaStream([...mergedAudioStream.stream.getAudioTracks(), ...displayStream.getVideoTracks()]);
+    mediaStream.current = displayStream
   }, [])
 
   const startRecording = useCallback(async () => {
-    await getAudioContext()
-
     await getMediaStream()
 
     const data: Blob[] = []
@@ -74,7 +65,6 @@ const App = () => {
     <Body>
       <Title>Hello World!</Title>
       <button onClick={startRecording}>Record</button><button onClick={stopRecording}>Stop Recording</button>
-      <p>Vivamus lobortis elit vitae quam luctus vestibulum. Fusce vel nulla purus. Praesent aliquam, augue quis malesuada cursus, arcu turpis scelerisque purus, id sagittis diam urna sed odio. Donec eleifend erat vitae porttitor pulvinar. Nulla vel fermentum nunc. Aenean facilisis odio sit amet dolor venenatis hendrerit. Mauris purus massa, malesuada sed mi a, aliquam ullamcorper justo. Sed ac nulla dui.</p>
       <YoutubeEmbed />
     </Body>
   )
