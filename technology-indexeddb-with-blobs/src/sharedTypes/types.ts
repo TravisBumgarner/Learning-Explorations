@@ -1,6 +1,6 @@
 type TImage = {
     id: string
-    path: string
+    file: Blob
     name: string
     uploadedToS3: boolean
 }

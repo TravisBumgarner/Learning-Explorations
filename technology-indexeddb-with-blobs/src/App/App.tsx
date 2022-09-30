@@ -5,6 +5,11 @@ import { v4 as uuidv4 } from 'uuid'
 import { Body, Title } from 'sharedComponents'
 import database from 'database'
 
+const Image = ({blob}: {blob: Blob}) => {
+  const urlSrc = URL.createObjectURL(blob)
+  return <img src={urlSrc}/>
+}
+
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [selectedFileName, setSelectedFileName] = useState<string>('');
@@ -13,10 +18,10 @@ const App = () => {
 
   const handleSubmission = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
+    
     database.images.add({
       id: uuidv4(),
-      path: 'foo/bar/buzz',
+      file: selectedFile,
       name: selectedFileName,
       uploadedToS3: false
     }).then(() => {
@@ -37,7 +42,7 @@ const App = () => {
       <div>
         <Title>Uploads</Title>
         <ul>
-          {images ? images.map(({ id, name }) => <li key={id}>{name}</li>) : <li>Loading</li>}
+          {images ? images.map(({ id, name, file }) => <li><Image blob={file}/></li>) : "loading"}
         </ul>
 
       </div>
