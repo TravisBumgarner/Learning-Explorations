@@ -3,12 +3,12 @@ import Dexie, { Table } from 'dexie'
 import { TImage } from 'sharedTypes'
 
 class MySubClassedDexie extends Dexie {
-    images!: Table<TImage>
+    videos!: Table<TImage>
 
     constructor() {
         super('todo-today')
         this.version(1).stores({
-            images: '[id]',
+            videos: '[id]',
         })
     }
 }

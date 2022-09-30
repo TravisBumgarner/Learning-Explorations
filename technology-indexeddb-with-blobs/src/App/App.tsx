@@ -2,27 +2,30 @@ import React, { FormEvent, useState } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { v4 as uuidv4 } from 'uuid'
 
+import useMediaRecorder, { StatusMessages } from './useMediaRecorder'
 import { Body, Title } from 'sharedComponents'
 import database from 'database'
 
-const Image = ({blob}: {blob: Blob}) => {
+const Video = ({ blob }: { blob: Blob }) => {
   const urlSrc = URL.createObjectURL(blob)
-  return <img src={urlSrc}/>
+  return <video src={urlSrc} />
 }
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [selectedFileName, setSelectedFileName] = useState<string>('');
 
-  const images = useLiveQuery(() => database.images.toArray())
+  const onStart = () => { }
+  const onError = () => { }
 
-  const handleSubmission = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    
-    database.images.add({
+  const videos = useLiveQuery(() => database.videos.toArray())
+
+  const onStop = (blob: Blob) => {
+
+    database.videos.add({
       id: uuidv4(),
-      file: selectedFile,
-      name: selectedFileName,
+      file: blob,
+      name: "New Video" + Math.random(),
       uploadedToS3: false
     }).then(() => {
       setSelectedFile(null)
@@ -30,21 +33,21 @@ const App = () => {
     })
   };
 
+  const { startRecording, stopRecording, status } = useMediaRecorder({ onStart, onStop, onError })
+
   return (
     <>
-      <form onSubmit={handleSubmission}>
-        <Title>Hello World!</Title>
-        <input type="file" name="file" onChange={(event) => setSelectedFile(event.target.files[0])} />
-        <input type="text" value={selectedFileName} name="fileName" onChange={(event) => setSelectedFileName(event.target.value)} />
-        <button type="submit">Submit</button>
-
-      </form>
+      <div>
+        <Title>Record a Video</Title>
+        <button disabled={status !== StatusMessages.Idle} onClick={startRecording}>Start Recording</button>
+        <button disabled={status !== StatusMessages.Recording} onClick={stopRecording}>Stop Recording</button>
+        <p>Status - {status}</p>
+      </div>
       <div>
         <Title>Uploads</Title>
         <ul>
-          {images ? images.map(({ id, name, file }) => <li><Image blob={file}/></li>) : "loading"}
+          {videos ? videos.map(({ id, name, file }) => <li><Video blob={file} /></li>) : "loading"}
         </ul>
-
       </div>
     </>
   )
