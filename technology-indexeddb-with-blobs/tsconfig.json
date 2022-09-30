@@ -3,7 +3,7 @@
       "outDir": "./dist/",
       "noImplicitAny": true, 
       "module": "es6",
-      "target": "es5",
+      "target": "es6",
       "jsx": "react",
       "allowJs": true,
       "moduleResolution": "node",
@@ -15,7 +15,8 @@
         "sharedComponents": ["src/sharedComponents"],
         "sharedTypes": ["src/sharedTypes/types.ts"],
         "theme": ["src/theme.js"],
-        "utilities": ["src/utilities"]
+        "utilities": ["src/utilities"],
+        "database": ["src/database.ts"]
       }
     }
   }

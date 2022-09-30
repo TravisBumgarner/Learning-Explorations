@@ -24,6 +24,7 @@ module.exports = {
       sharedTypes: path.resolve(__dirname, 'src/sharedTypes/index.ts'),
       theme: path.resolve(__dirname, 'src/theme.tsx'),
       utilities: path.resolve(__dirname, 'src/utilities/'),
+      database: path.resolve(__dirname, 'src/database.ts'),
     },
   },
   devtool: 'source-map',
