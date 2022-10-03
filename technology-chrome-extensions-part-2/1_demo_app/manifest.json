@@ -8,9 +8,7 @@
         "default_popup": "popup.html"
     },
     "permissions": [
-        "storage",
-        "alarms",
-        "notifications"
+        "tabCapture"
     ],
     "background": {
         "service_worker": "background.js"

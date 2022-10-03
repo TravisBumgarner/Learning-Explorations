@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@types/chrome": "^0.0.197"
+    "@types/chrome": "^0.0.197",
+    "dexie": "^3.2.2",
+    "uuid": "^9.0.0"
   },
   "scripts": {
     "start": "rm -rf dist/ && webpack --watch --progress --config webpack.config.js"
@@ -10,6 +12,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/uuid": "^8.3.4",
     "copy-webpack-plugin": "^11.0.0",
     "ts-loader": "^9.4.1",
     "typescript": "^4.8.4",
