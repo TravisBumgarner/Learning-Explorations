@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Timer Extension",
+    "version": "1.0.0",
+    "description": "Hello World",
+    "action": {
+        "default_title": "Click Me",
+        "default_popup": "popup.html"
+    },
+    "options_page": "options.html",
+    "permissions": [
+        "storage",
+        "alarms",
+        "notifications"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+}
