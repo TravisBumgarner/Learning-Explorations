@@ -3,6 +3,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { Action } from './types'
 
+var mediaRecorder = '';
+var width = 1920;
+var height = 1080;
+var fps = 60;
+
 type TRecording = {
     id: string
     file: Blob
@@ -92,3 +97,59 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
     sendResponse();
 });
+
+
+
+function getTab() {
+    chrome.tabs.query(null, function (tab) {
+        chrome.tabCapture.capture({
+            video: true,
+            audio: true,
+            videoConstraints: {
+                mandatory: {
+                    chromeMediaSource: 'tab',
+                    minWidth: width,
+                    minHeight: height,
+                    maxWidth: width,
+                    maxHeight: height,
+                    maxFrameRate: fps
+                },
+            },
+        }, function (stream) {
+            // Combine tab and microphone audio
+            const output = new MediaStream();
+
+            // Set up media recorder & inject content
+            newRecording(output)
+
+            // Hide the downloads shelf
+            chrome.downloads.setShelfEnabled(false);
+
+            // This will write the stream to the filesystem asynchronously
+            const { readable, writable } = new TransformStream({
+                transform: (chunk, ctrl) => chunk.arrayBuffer().then(b => ctrl.enqueue(new Uint8Array(b)))
+            })
+            const writer = writable.getWriter()
+            readable.pipeTo(streamSaver.createWriteStream('screenity.webm'));
+
+            // Record tab stream
+            var recordedBlobs = [];
+            mediaRecorder.ondataavailable = event => {
+                if (event.data && event.data.size > 0) {
+                    writer.write(event.data);
+                    recordedBlobs.push(event.data);
+                }
+            };
+
+            // When the recording is stopped
+            mediaRecorder.onstop = () => {
+                endRecording(stream, writer, recordedBlobs);
+            }
+
+            // Stop recording if stream is ended when tab is closed
+            stream.getVideoTracks()[0].onended = function () {
+                mediaRecorder.stop();
+            }
+        });
+    });
+}
