@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Timer Extension",
+    "name": "Record",
     "version": "1.0.0",
     "description": "Hello World",
     "action": {
@@ -12,5 +12,10 @@
     ],
     "background": {
         "service_worker": "background.js"
+    },
+    "externally_connectable": {
+        "matches": [
+            "http://localhost:3000/*"
+        ]
     }
 }

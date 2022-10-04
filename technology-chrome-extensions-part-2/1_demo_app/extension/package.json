@@ -7,7 +7,7 @@
   "scripts": {
     "start": "rm -rf dist/ && webpack --watch --progress --config webpack.config.js"
   },
-  "name": "1_demo_app",
+  "name": "extension",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

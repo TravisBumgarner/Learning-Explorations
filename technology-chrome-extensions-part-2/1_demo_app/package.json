@@ -1,0 +1,17 @@
+{
+  "name": "1_demo_app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.4.0"
+  },
+  "private": true,
+  "workspaces": [
+    "extension",
+    "frontend"
+  ],
+  "scripts": {
+    "start": "concurrently -n frontend,extension \"yarn workspace frontend sd:fe\" \"yarn workspace extension start \""
+  }
+}
