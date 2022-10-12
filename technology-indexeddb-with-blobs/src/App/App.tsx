@@ -21,11 +21,11 @@ const App = () => {
   const videos = useLiveQuery(() => database.videos.toArray())
 
   const onStop = (blob: Blob) => {
-
+    const id = uuidv4()
     database.videos.add({
-      id: uuidv4(),
+      id,
       file: blob,
-      name: "New Video" + Math.random(),
+      name: `video-${id}.webm`,
       uploadedToS3: false
     }).then(() => {
       setSelectedFile(null)
@@ -46,7 +46,12 @@ const App = () => {
       <div>
         <Title>Uploads</Title>
         <ul>
-          {videos ? videos.map(({ id, name, file }) => <li><Video blob={file} /></li>) : "loading"}
+          {videos ? videos.map(({ id, name, file }) => {
+            const url = URL.createObjectURL(file)
+            return (
+              <li><a download={name} href={url}>Download - {name}</a></li>
+            )
+          }) : "loading"}
         </ul>
       </div>
     </>

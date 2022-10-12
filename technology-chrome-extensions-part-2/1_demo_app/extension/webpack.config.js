@@ -19,21 +19,19 @@ module.exports = {
     },
     resolve: {
         extensions: ['.ts', '.js'],
+        fallback: {
+            "fs": false,
+            "tls": false,
+            "net": false,
+            "path": false,
+            "zlib": false,
+            "http": false,
+            "https": false,
+            "stream": false,
+            "crypto": false,
+        }
     },
-    plugins: [
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: "src/*.html",
-                    to: "[name][ext]",
-                    "toType": "template"
-                },
-                {
-                    from: "manifest.json",
-                }
-            ]
-        }),
-    ],
+
     output: {
         filename: '[name].js',
         path: path.resolve('dist'),
