@@ -80,6 +80,8 @@ const useMediaRecorder = ({ onStop, onStart, onError }: ReactMediaRecorderHookPr
       if (audioContext.current) {
         const displayAudio = audioContext.current.createMediaStreamSource(displayStream);
         const userAudio = audioContext.current.createMediaStreamSource(userStream);
+  
+        const track = userStream.getAudioTracks()[0]
 
         const mergedAudioStream = audioContext.current.createMediaStreamDestination();
         displayAudio.connect(mergedAudioStream);
