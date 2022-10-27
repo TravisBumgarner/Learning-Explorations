@@ -29,7 +29,7 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     compress: true,
-    port: 3000,
+    port: 3001,
     hot: true,
     historyApiFallback: true,
   },

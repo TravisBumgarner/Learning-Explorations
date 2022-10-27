@@ -1,10 +1,20 @@
-import React, { useRef, useCallback, useState, useEffect } from 'react'
+import React, { useRef, useCallback, useState, useEffect, Key } from 'react'
 import styled from 'styled-components'
 
-type Analysers = {
-  microphoneAnalyser: AnalyserNode
-  displayAnalyser: AnalyserNode
-  outputAnalyser: AnalyserNode
+const listify = (obj: Object) => <ul>{Object.entries(obj)
+  .filter(([key]) => !(['groupId', 'deviceId'].includes(key)))
+  .map(([key, value]) => <li>{key} - {`${value}`}</li>)}</ul>
+
+enum Keys {
+  microphone = 'microphone',
+  display = 'display',
+  output = 'output',
+}
+
+type AudioStreamDetails = {
+  analysers: Record<Keys, AnalyserNode>
+  settings: Record<Key, MediaTrackSettings>
+  capabilities: Record<Key, MediaTrackCapabilities>
 }
 
 const DebugOverlayWrapper = styled.div`
@@ -20,8 +30,9 @@ const DebugOverlayWrapper = styled.div`
   }
 `
 
-const DebugOverlay = ({ microphoneAnalyser, displayAnalyser, outputAnalyser }: Analysers) => {
+const DebugOverlay = ({ analysers, settings, capabilities }: AudioStreamDetails) => {
   const [counter, setCounter] = React.useState<number>(0)
+  console.log(capabilities)
 
   const microphoneRef = useRef<HTMLCanvasElement>(null)
   const displayRef = useRef<HTMLCanvasElement>(null)
@@ -54,9 +65,9 @@ const DebugOverlay = ({ microphoneAnalyser, displayAnalyser, outputAnalyser }: A
       return
     }
 
-    const microphoneBufferLength = microphoneAnalyser.frequencyBinCount
+    const microphoneBufferLength = analysers.microphone.frequencyBinCount
     const microphoneDataArray = new Uint8Array(microphoneBufferLength)
-    microphoneAnalyser.getByteFrequencyData(microphoneDataArray)
+    analysers.microphone.getByteFrequencyData(microphoneDataArray)
 
     const microphoneWidth = microphoneCanvas.width
     const microphoneHeight = microphoneCanvas.height
@@ -73,9 +84,9 @@ const DebugOverlay = ({ microphoneAnalyser, displayAnalyser, outputAnalyser }: A
     })
 
 
-    const displayBufferLength = displayAnalyser.frequencyBinCount
+    const displayBufferLength = analysers.display.frequencyBinCount
     const displayDataArray = new Uint8Array(displayBufferLength)
-    displayAnalyser.getByteFrequencyData(displayDataArray)
+    analysers.display.getByteFrequencyData(displayDataArray)
 
     const displayWidth = displayCanvas.width
     const displayHeight = displayCanvas.height
@@ -92,9 +103,9 @@ const DebugOverlay = ({ microphoneAnalyser, displayAnalyser, outputAnalyser }: A
     })
 
 
-    const outputBufferLength = outputAnalyser.frequencyBinCount
+    const outputBufferLength = analysers.output.frequencyBinCount
     const outputDataArray = new Uint8Array(outputBufferLength)
-    outputAnalyser.getByteFrequencyData(outputDataArray)
+    analysers.output.getByteFrequencyData(outputDataArray)
 
     const outputWidth = outputCanvas.width
     const outputHeight = outputCanvas.height
@@ -116,14 +127,23 @@ const DebugOverlay = ({ microphoneAnalyser, displayAnalyser, outputAnalyser }: A
       <div>
         <h1>Microphone</h1>
         <canvas ref={microphoneRef} />
+        <div>
+          {listify(settings.microphone)}
+        </div>
       </div>
       <div>
         <h1>Display</h1>
         <canvas ref={displayRef} />
+        <div>
+          {listify(settings.display)}
+        </div>
       </div>
       <div>
         <h1>Output</h1>
         <canvas ref={outputRef} />
+        <div>
+          {listify(settings.output)}
+        </div>
       </div>
     </DebugOverlayWrapper>
   )
@@ -133,7 +153,7 @@ const DebugOverlay = ({ microphoneAnalyser, displayAnalyser, outputAnalyser }: A
 const App = () => {
   const audioContext = useRef<AudioContext | null>()
   const mediaStream = useRef<MediaStream | null>()
-  const [analyserNodes, setAnalysisNodes] = useState<Analysers | null>(null)
+  const [audioStreamDetails, setAudioStreamDetails] = useState<AudioStreamDetails | null>(null)
   const gainNode = useRef<GainNode | null>()
   const [isMuted, setIsMuted] = useState<boolean>(false)
 
@@ -144,12 +164,12 @@ const App = () => {
   }, [isMuted])
 
   const mergeAudioStreams = useCallback(
-    async (userStream: MediaStream, microphoneStream: MediaStream) => {
+    async (userStream: MediaStream, displayStream: MediaStream) => {
       audioContext.current = new AudioContext();
 
       const mergedAudioStreamDestinationNode = audioContext.current.createMediaStreamDestination();
 
-      const displayAudio = audioContext.current.createMediaStreamSource(microphoneStream);
+      const displayAudio = audioContext.current.createMediaStreamSource(displayStream);
       const displayAnalyser = new AnalyserNode(audioContext.current, { fftSize: 256 })
       displayAudio
         .connect(displayAnalyser)
@@ -171,11 +191,20 @@ const App = () => {
       toMonitor
         .connect(outputAnalyser)
 
-      setAnalysisNodes({
-        'microphoneAnalyser': microphoneAnalyser,
-        "displayAnalyser": displayAnalyser,
-        "outputAnalyser": outputAnalyser
-      })
+      setAudioStreamDetails(prev => ({
+        ...prev,
+        analysers: { microphone: microphoneAnalyser, display: displayAnalyser, output: outputAnalyser },
+        settings: {
+          microphone: userStream.getAudioTracks()[0].getSettings(),
+          display: displayStream.getAudioTracks()[0].getSettings(),
+          output: mergedAudioStream.getAudioTracks()[0].getSettings()
+        },
+        capabilities: {
+          microphone: userStream.getAudioTracks()[0].getCapabilities(),
+          display: displayStream.getAudioTracks()[0].getCapabilities(),
+          output: mergedAudioStream.getAudioTracks()[0].getCapabilities()
+        }
+      }))
 
       return mergedAudioStream
     },
@@ -184,27 +213,42 @@ const App = () => {
 
   const getMediaStream = useCallback(async () => {
     const userStream = await window.navigator.mediaDevices.getUserMedia({ audio: true });
-    const microphoneStream = await window.navigator.mediaDevices.getDisplayMedia({ audio: true, video: true });
+    const displayStream = await window.navigator.mediaDevices.getDisplayMedia({ audio: true, video: true });
 
-    const audioStream = await mergeAudioStreams(userStream, microphoneStream);
+    const audioStream = await mergeAudioStreams(userStream, displayStream);
 
-    mediaStream.current = new MediaStream([...audioStream.getAudioTracks(), ...microphoneStream.getVideoTracks()]);
+    mediaStream.current = new MediaStream([...audioStream.getAudioTracks(), ...displayStream.getVideoTracks()]);
   }, [mergeAudioStreams]);
 
   const startRecording = useCallback(async () => {
     if (!mediaStream.current) await getMediaStream();
   }, [getMediaStream]);
 
+  const [debugMode, setDebugMode] = useState<boolean>(false)
+
+  useEffect(() => {
+    const updateDebugMode = (event: KeyboardEvent) => {
+      if (event.code === "AltLeft") {
+        setDebugMode(prev => !prev)
+      }
+    }
+
+    window.addEventListener('keydown', updateDebugMode)
+    return () => window.removeEventListener('keydown', updateDebugMode)
+  }, [])
+
   return (
     <div>
+      <button>{debugMode ? "go go" : "gogoo and debug"}</button>
       <button onClick={startRecording}>Record</button>
       <button onClick={() => setIsMuted(prev => !prev)}>Mute</button>
       <iframe width="420" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY">
       </iframe>
-      {analyserNodes && <DebugOverlay
-        displayAnalyser={analyserNodes.displayAnalyser}
-        microphoneAnalyser={analyserNodes.microphoneAnalyser}
-        outputAnalyser={analyserNodes.outputAnalyser}
+      {audioStreamDetails && <DebugOverlay
+        analysers={audioStreamDetails.analysers}
+        settings={audioStreamDetails.settings}
+        capabilities={audioStreamDetails.capabilities}
+
       />}
     </div>
   )
