@@ -12,16 +12,16 @@ function App() {
     setMessage('Loading ffmpeg-core.js');
     await ffmpeg.load();
     setMessage('Start transcoding');
-    ffmpeg.FS('writeFile', 'test.avi', await fetchFile('/flame.avi'));
-    await ffmpeg.run('-i', 'test.avi', 'test.mp4');
+    ffmpeg.FS('writeFile', 'demo2.webm', await fetchFile('/demo2.webm'));
+    await ffmpeg.run('-i', 'demo2.webm', 'output.mp4');
     setMessage('Complete transcoding');
-    const data = ffmpeg.FS('readFile', 'test.mp4');
+    const data = ffmpeg.FS('readFile', 'output.mp4');
     setVideoSrc(URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' })));
   };
   return (
     <div className="App">
-      <p/>
-      <video src={videoSrc} controls></video><br/>
+      <p />
+      <video src={videoSrc} controls></video><br />
       <button onClick={doTranscode}>Start</button>
       <p>{message}</p>
     </div>
