@@ -4,6 +4,9 @@ import Webcam from 'react-webcam'
 import { v4 as uuidv4 } from 'uuid'
 import { useReactMediaRecorder } from "react-media-recorder";
 import { Prompt } from 'react-router-dom'
+import * as ebml from 'ts-ebml';
+
+const decoder = new ebml.Decoder();
 
 import { context } from './Context'
 
@@ -47,8 +50,14 @@ const Workspace = () => {
   const { dispatch } = React.useContext(context)
   const [isRecording, setDisableNavigationAway] = React.useState<boolean>(false)
 
-  const handleStop = (bloblUrl: string, blob: Blob) => {
-    dispatch({ type: "ADD_VIDEO", payload: { src: bloblUrl, filename: `${uuidv4()}.webm` } })
+  const handleStop = async (bloblUrl: string, blob: Blob) => {
+    const ab = await blob.arrayBuffer()
+    // const ebmlElms = decoder.decode(buf);
+    const result = decoder.decode(ab)
+    result.
+    console.log(ebmlElms);
+
+    // dispatch({ type: "ADD_VIDEO", payload: { src: bloblUrl, filename: `${uuidv4()}.webm` } })
   }
 
   const { status, startRecording, stopRecording } = useReactMediaRecorder({ video: true, audio: true, screen: true, onStop: handleStop })

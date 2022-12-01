@@ -16,4 +16,3 @@ flowchart LR
     conditional -->|False | false[False]
 ```
 
-

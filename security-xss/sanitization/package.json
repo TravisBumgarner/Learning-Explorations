@@ -2,6 +2,7 @@
   "name": "frontend-frontend",
   "author": "Travis Bumgarner",
   "dependencies": {
+    "@mattkrick/sanitize-svg": "^0.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.3"

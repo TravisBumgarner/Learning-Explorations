@@ -1,0 +1,15 @@
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+    <script type="text/javascript">
+        alert('posting your cookies', document.cookie);
+            navigator.geolocation.getCurrentPosition(alert)
+            const downloadLink = document.createElement('a');
+            downloadLink.href = '';
+            downloadLink.download = name;
+            downloadLink.target = '_blank';
+            body = document.getElementsByTagName('svg')[0];
+            body.append(downloadLink);
+            downloadLink.click();
+            body.removeChild(downloadLink);
+    </script>
+</svg>
