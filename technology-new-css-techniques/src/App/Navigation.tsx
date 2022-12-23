@@ -12,7 +12,7 @@ const Navigation = () => {
     return (
         <Wrapper>
             <Link to="/sandbox">Sandbox</Link>
-            <Link to="/designs">Designs</Link>
+            <Link to="/1">1</Link>
         </Wrapper>
     )
 }
