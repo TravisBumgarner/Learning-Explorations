@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { Metadata } from 'sharedComponents'
+
 const BananaWrapper = styled.div`
   animation-name: rotate;
   
@@ -35,9 +37,15 @@ const BananaWrapper = styled.div`
 
 const Designs = () => {
   return (
-    <BananaWrapper>
-      <p>🍌</p>
-    </BananaWrapper>
+    <div>
+
+      <BananaWrapper>
+        <p>🍌</p>
+      </BananaWrapper>
+      <Metadata>
+        Created 12/20/2022
+      </Metadata>
+    </div >
   )
 }
 

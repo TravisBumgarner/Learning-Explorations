@@ -15,7 +15,19 @@ const Body = styled.div`
     justify-content: center;
 `
 
+const Metadata = styled.div`
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 1rem;
+    font-size: 1rem;
+`
+
 export {
     Title,
-    Body
+    Body,
+    Metadata
 }
