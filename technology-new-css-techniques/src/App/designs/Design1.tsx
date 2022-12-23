@@ -35,7 +35,7 @@ const BananaWrapper = styled.div`
   }
 `
 
-const Designs = () => {
+const Design1 = () => {
   return (
     <div>
 
@@ -49,4 +49,4 @@ const Designs = () => {
   )
 }
 
-export default Designs
+export default Design1

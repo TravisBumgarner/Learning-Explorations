@@ -1,14 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useMemo, useContext } from 'react'
 import { Routes, Route } from 'react-router'
 
 import Sandbox from './Sandbox'
-import Design1 from './Design1'
+import designs from './designs'
 
 const Router = () => {
+    const items = Object.keys(designs).length
+
     return (
         <Routes>
             <Route path="/sandbox" element={<Sandbox />} />
-            <Route path="/1" element={<Design1 />} />
+            {Object.keys(designs).map((key: keyof typeof designs) => <Route key={key} path={`/${key.toLowerCase()}`} element={designs[key]()} />)}
         </Routes>
     )
 }

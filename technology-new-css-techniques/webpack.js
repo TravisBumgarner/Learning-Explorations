@@ -26,7 +26,7 @@ module.exports = {
       utilities: path.resolve(__dirname, 'src/utilities/'),
     },
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   devServer: {
     compress: true,
     port: 3000,
