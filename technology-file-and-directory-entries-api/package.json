@@ -1,0 +1,9 @@
+{
+  "name": "technology-file-and-directory-entries-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.17"
+  }
+}
