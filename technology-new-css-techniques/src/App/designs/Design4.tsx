@@ -23,12 +23,14 @@ const BananaWrapper = styled.div<{ disabled: boolean }>`
   font-size: 40px;
 `
 
-const Bin = ({ dragEnter, drop, index, indexWhenDropped }: any) => {
+type BinProps = {
+  dragEnterCallback: (event: React.DragEvent<HTMLDivElement>, index: number) => void
+  dropCallback: () => void
+  index: number
+  indexWhenDropped: number
+}
+const Bin = ({ dragEnterCallback, dropCallback, index, indexWhenDropped }: BinProps) => {
   const [bananaCount, setBananaCount] = useState(0)
-  const onDragEnter = (e: any) => {
-    dragEnter(e, index)
-    console.log("ondragenter called", index)
-  }
 
   useEffect(() => {
     if (indexWhenDropped === index) {
@@ -37,11 +39,19 @@ const Bin = ({ dragEnter, drop, index, indexWhenDropped }: any) => {
   }, [indexWhenDropped])
 
   return (
-    <BinWrapper onDragEnter={onDragEnter}>{bananaCount} Bananas</BinWrapper>
+    <BinWrapper onDragEnter={(event) => {
+      dragEnterCallback(event, index)
+    }}>{bananaCount} Bananas</BinWrapper>
   )
 }
 
-const Banana = ({ drop, dragStart, dragEnter, index, dragItemIndexDropped }: any) => {
+type BananaProps = {
+  dropCallback: () => void
+  dragStartCallback: (e: React.DragEvent<HTMLDivElement>, index: number) => void
+  index: number
+  dragItemIndexDropped: number
+}
+const Banana = ({ dropCallback, dragStartCallback, index, dragItemIndexDropped }: BananaProps) => {
   const [hasBeenDropped, setHasBeenDropped] = useState(false)
 
   useEffect(() => {
@@ -50,63 +60,96 @@ const Banana = ({ drop, dragStart, dragEnter, index, dragItemIndexDropped }: any
     }
   }, [dragItemIndexDropped])
 
-  const onDragEnd = (e: any) => {
-    console.log('on drag end')
-    drop()
+  const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+    dropCallback()
   }
 
   return (
     <BananaWrapper
       disabled={hasBeenDropped}
-      onDragStart={(e: any) => dragStart(e, index)}
+      onDragStart={(event) => dragStartCallback(event, index)}
       draggable={!hasBeenDropped}
-      onDragEnter={(e) => dragEnter(e, index)}
       onDragEnd={onDragEnd}
     >🍌</BananaWrapper>
   )
 }
 
 const Design4 = () => {
-  const [count, setCount] = useState(3)
+  const [binCount, setBinCount] = useState(3)
+  const [bananaCount, setBananaCount] = useState(3)
+
   const [dragOverItemIndexDropped, setDragOverItemIndexDropped] = useState(null)
   const [dragItemIndexDropped, setDragItemIndexDropped] = useState(null)
 
-  const dragItem = useRef<HTMLElement>();
-  const dragOverItem = useRef<HTMLElement>();
+  const activeBananaIndex = useRef<number>();
+  const activeBinIndex = useRef<number>();
 
-  const dragStart = (e: any, position: any) => {
+  const resetActiveItems = () => {
     setDragOverItemIndexDropped(null)
     setDragItemIndexDropped(null)
-    dragItem.current = position;
-    console.log('dragStart', e.target.innerHTML);
+  }
+
+  const dragStartCallback = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    resetActiveItems()
+    activeBananaIndex.current = index;
   };
 
-  const dragEnter = (e: any, position: any) => {
-    dragOverItem.current = position;
-    console.log('dragEnter', e.target.innerHTML);
+  const dragEnterCallback = (e: any, index: number) => {
+    activeBinIndex.current = index;
   };
 
-  const drop = (e: any) => {
-    setDragOverItemIndexDropped(dragOverItem.current)
-    setDragItemIndexDropped(dragItem.current)
-    dragItem.current = null;
-    dragOverItem.current = null;
+  const dropCallback = () => {
+    setDragOverItemIndexDropped(activeBinIndex.current)
+    setDragItemIndexDropped(activeBananaIndex.current)
+
+    activeBananaIndex.current = null;
+    activeBinIndex.current = null;
   };
+
+  const bins = useMemo(() => {
+    const output = []
+    for (let i = 0; i < binCount; i++) {
+      output.push(<Bin
+        dropCallback={dropCallback}
+        indexWhenDropped={dragOverItemIndexDropped}
+        dragEnterCallback={dragEnterCallback}
+        key={i}
+        index={i} />)
+    }
+    return output
+  }, [binCount, dragOverItemIndexDropped, dragEnterCallback, dropCallback])
+
+  const bananas = useMemo(() => {
+    const output = []
+    for (let i = 0; i < bananaCount; i++) {
+      output.push(
+        <Banana
+          dropCallback={dropCallback}
+          dragItemIndexDropped={dragItemIndexDropped}
+          dragStartCallback={dragStartCallback}
+          key={i}
+          index={i}
+        />)
+    }
+    return output
+  }, [bananaCount, dragItemIndexDropped, dragEnterCallback, dragStartCallback])
+
 
   return (
     <div>
       <Wrapper>
-        <Bin drop={drop} indexWhenDropped={dragOverItemIndexDropped} dragEnter={dragEnter} index={0} />
-        <Bin drop={drop} indexWhenDropped={dragOverItemIndexDropped} dragEnter={dragEnter} index={1} />
-        <Bin drop={drop} indexWhenDropped={dragOverItemIndexDropped} dragEnter={dragEnter} index={2} />
+        {bins}
       </Wrapper>
 
       <Wrapper>
-        <Banana drop={drop} dragItemIndexDropped={dragItemIndexDropped} dragEnter={dragEnter} dragStart={dragStart} index={0} />
-        <Banana drop={drop} dragItemIndexDropped={dragItemIndexDropped} dragEnter={dragEnter} dragStart={dragStart} index={1} />
+        {bananas}
       </Wrapper>
 
       <Metadata>
+        <button onClick={() => setBananaCount(prev => prev - 1)}>-🍌</button>
+        <button onClick={() => setBananaCount(prev => prev + 1)}>+🍌</button>
+        <button onClick={() => setBinCount(prev => prev + 1)}>-🗑</button>
+        <button onClick={() => setBinCount(prev => prev + 1)}>+🗑</button>
         Created 12/23/2022
       </Metadata>
     </div >
