@@ -4,6 +4,7 @@ import Design3 from "./Design3";
 import Design4 from "./Design4";
 import Design5 from "./Design5";
 import Design6 from "./Design6";
+import Design7 from "./Design7";
 
 export default {
     Design1,
@@ -11,5 +12,6 @@ export default {
     Design3,
     Design4,
     Design5,
-    Design6
+    Design6,
+    Design7
 }
