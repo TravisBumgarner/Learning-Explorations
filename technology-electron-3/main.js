@@ -23,7 +23,7 @@ app.whenReady().then(() => {
         height: 500,
         x: 0,
         y: 0,
-        file: path.join(__dirname, '../frontend/index.html'),
-        preload: path.join(__dirname, '../frontend/preload.js')
+        file: path.join(__dirname, 'frontend/index.html'),
+        preload: path.join(__dirname, 'frontend/preload.js')
     })
 })
