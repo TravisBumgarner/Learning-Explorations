@@ -14,11 +14,15 @@
     "jsx": "react-jsx",
     "paths": {
       "*": [
-        "node_modules/*"
+        "node_modules/*",
+        "src/types/*"
       ]
     }
   },
   "include": [
     "src/**/*"
+  ],
+  "types": [
+    "src/index.d.ts"
   ]
 }
