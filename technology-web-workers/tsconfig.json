@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es2020",
+    "target": "es2020",
+    "jsx": "react-jsx",
+    "lib": [
+      "DOM"
+    ],
+    "allowJs": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "paths": {
+      "*": [
+        "src/types/*"
+      ],
+      "sharedComponents": [
+        "src/sharedComponents"
+      ],
+      "sharedTypes": [
+        "src/sharedTypes/index.ts"
+      ],
+      "theme": [
+        "src/theme.ts"
+      ],
+      "utilities": [
+        "src/utilities.ts"
+      ],
+      "context": [
+        "src/Context.tsx"
+      ]
+    }
+  }
+}
