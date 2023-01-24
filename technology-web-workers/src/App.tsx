@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react"
+import { useCallback, useEffect, useMemo, useRef } from "react"
 import { db } from "./db"
 
 const App = () => {
@@ -12,6 +12,17 @@ const App = () => {
     counter.current++
     console.log('added')
   }, [])
+
+  const counterWorker: Worker = useMemo(
+    () => new Worker(new URL("./background/counter.ts", import.meta.url)),
+    []
+  );
+
+  useEffect(() => {
+    if (window.Worker) {
+      counterWorker.postMessage('hello');
+    }
+  }, [counterWorker]);
 
   return (
     <div>
