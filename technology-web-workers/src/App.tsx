@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef } from "react"
-import { db } from "./db"
+import { db, Entry } from "./db"
 
 const App = () => {
   const counter = useRef(0)
   const handleSubmit = useCallback(async () => {
-    await db.entries.add({
+    const entry: Entry = {
       id: Math.random(),
       counter: counter.current,
-      data: 'some data'
-    })
+      data: 'some data',
+      status: 'unuploaded'
+    }
+    await db.entries.add(entry)
     counter.current++
     console.log('added')
   }, [])
@@ -20,7 +22,8 @@ const App = () => {
 
   useEffect(() => {
     if (window.Worker) {
-      counterWorker.postMessage('hello');
+      counterWorker.postMessage('init');
+      return () => counterWorker.postMessage('cleanup');
     }
   }, [counterWorker]);
 

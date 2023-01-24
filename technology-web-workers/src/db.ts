@@ -5,6 +5,7 @@ export interface Entry {
     id: number;
     counter: number;
     data: string;
+    status: 'uploaded' | 'unuploaded',
 }
 
 export class MySubClassedDexie extends Dexie {
@@ -18,4 +19,4 @@ export class MySubClassedDexie extends Dexie {
     }
 }
 
-export const db = new MySubClassedDexie(); ``
+export const db = new MySubClassedDexie(); 
