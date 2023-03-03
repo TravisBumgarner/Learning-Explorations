@@ -8,7 +8,7 @@ interface Part {
 
 const FILE_CHUNK_SIZE = 10_000_000
 
-async function uploadParts(file: Buffer, urls: Record<number, string>) {
+async function uploadParts(blob: Blob, urls: Record<number, string>) {
   const axios = Axios.create()
   delete axios.defaults.headers.put['Content-Type']
 
@@ -19,10 +19,10 @@ async function uploadParts(file: Buffer, urls: Record<number, string>) {
     const index = parseInt(indexStr)
     const start = index * FILE_CHUNK_SIZE
     const end = (index + 1) * FILE_CHUNK_SIZE
-    const blob = index < keys.length
-      ? file.slice(start, end)
-      : file.slice(start)
-
+    const part = index < keys.length
+      ? blob.slice(start, end)
+      : blob.slice(start)
+    console.log(urls)
     promises.push(axios.put(urls[index], blob))
   }
 
@@ -42,13 +42,18 @@ const fiveMBofData = (char: string) => {
 }
 
 const fakeDataFetch = () => {
-  return 'abcdefg'
+  return 'ab'
 }
 
 const App = () => {
   const upload = useCallback(async () => {
-    const result = await Axios.post('http://localhost:5001/presignedurl', { parts: 10 })
-    console.log(result)
+    const parts = [
+      fiveMBofData('a'),
+      fiveMBofData('b')
+    ]
+    const { data: { urls } } = await Axios.post('http://localhost:5001/presignedurl', { parts: parts.length })
+    const blob = new Blob(parts)
+    uploadParts(blob, urls as unknown as Record<number, string>)
   }, [])
 
   return (

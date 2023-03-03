@@ -69,7 +69,7 @@ app.post('/presignedurl', async (req: express.Request, res: express.Response) =>
   if (!uploadId) throw new Error('no upload id')
   const urls = await generatePresignedUrlsParts(s3, uploadId, parseInt(req.body.parts, 10))
   console.log(urls)
-  res.json(urls)
+  res.json({ urls })
 })
 
 
