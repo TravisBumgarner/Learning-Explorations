@@ -1,11 +1,10 @@
 require('dotenv').config()
 import express from 'express';
-import AWS, { S3 } from 'aws-sdk'
+import AWS from 'aws-sdk' // Note for some reason, need to change .zshrc/ aws_profile params to `demos` which is what is stored in ~/.aws/credentials
 import cuid from 'cuid'
-import bodyParser from 'body-parser';
 import cors from 'cors'
 
-const s3 = new S3()
+var s3 = new AWS.S3({ signatureVersion: 'v4' });
 
 const app = express()
 app.use(express.json());
@@ -18,14 +17,14 @@ app.use((req, res, next) => {
 })
 app.use(cors({ origin: ['localhost:3000',] }))
 
-const OBJECT_NAME = 'OBJECT_NAME'
+const OBJECT_NAME = 'test-upload'
 const BUCKET_NAME = 'multipart-streaming'
+
 
 async function initiateMultipartUpload() {
   const s3 = new AWS.S3({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
-    // sessionToken: `session-${cuid()}`
   })
 
   const params = {
@@ -63,13 +62,40 @@ async function generatePresignedUrlsParts(s3: AWS.S3, uploadId: string, parts: n
   }, {} as Record<number, string>)
 }
 
-app.post('/presignedurl', async (req: express.Request, res: express.Response) => {
-  console.log('req', req.body)
+interface Part {
+  ETag: string
+  PartNumber: number
+}
+
+async function completeMultiUpload(uploadId: string, parts: Part[]) {
+  const s3 = new AWS.S3({
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    // sessionToken: `session-${cuid()}`
+  })
+
+  const params = {
+    Bucket: BUCKET_NAME,
+    Key: OBJECT_NAME,
+    UploadId: uploadId,
+    MultipartUpload: { Parts: parts }
+  }
+
+  await s3.completeMultipartUpload(params).promise()
+}
+
+app.post('/generatepresignedurl', async (req: express.Request, res: express.Response) => {
   const uploadId = await initiateMultipartUpload()
   if (!uploadId) throw new Error('no upload id')
   const urls = await generatePresignedUrlsParts(s3, uploadId, parseInt(req.body.parts, 10))
-  console.log(urls)
-  res.json({ urls })
+  res.json({ urls, uploadId })
+})
+
+app.post('/mergeparts', async (req: express.Request, res: express.Response) => {
+  const parts = req.body.uploadedParts
+  const uploadId = req.body.uploadId
+  console.log('received', parts, uploadId)
+  completeMultiUpload(uploadId, parts)
 })
 
 
