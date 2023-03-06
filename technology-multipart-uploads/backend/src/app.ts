@@ -17,11 +17,10 @@ app.use((req, res, next) => {
 })
 app.use(cors({ origin: ['localhost:3000',] }))
 
-const OBJECT_NAME = 'test-upload'
 const BUCKET_NAME = 'multipart-streaming'
 
 
-async function initiateMultipartUpload() {
+async function initiateMultipartUpload(s3Key: string) {
   const s3 = new AWS.S3({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
@@ -29,7 +28,7 @@ async function initiateMultipartUpload() {
 
   const params = {
     Bucket: BUCKET_NAME,
-    Key: OBJECT_NAME
+    Key: s3Key
   }
 
   const res = await s3.createMultipartUpload(params).promise()
@@ -37,29 +36,17 @@ async function initiateMultipartUpload() {
   return res.UploadId
 }
 
-async function generatePresignedUrlsParts(s3: AWS.S3, uploadId: string, parts: number) {
+async function generatePresignedUrlsPart({ s3, uploadId, s3Key, index }: { s3: AWS.S3, uploadId: string, s3Key: string, index: number }) {
   const baseParams = {
     Bucket: BUCKET_NAME,
-    Key: OBJECT_NAME,
+    Key: s3Key,
     UploadId: uploadId
   }
 
-  const promises = []
-
-  for (let index = 0; index < parts; index++) {
-    promises.push(
-      s3.getSignedUrlPromise('uploadPart', {
-        ...baseParams,
-        PartNumber: index + 1
-      }))
-  }
-
-  const res = await Promise.all(promises)
-
-  return res.reduce((map, part, index) => {
-    map[index] = part
-    return map
-  }, {} as Record<number, string>)
+  return await s3.getSignedUrlPromise('uploadPart', {
+    ...baseParams,
+    PartNumber: index + 1 // Parts start at 1.
+  })
 }
 
 interface Part {
@@ -67,7 +54,7 @@ interface Part {
   PartNumber: number
 }
 
-async function completeMultiUpload(uploadId: string, parts: Part[]) {
+async function completeMultiUpload({ uploadId, uploadedParts, s3Key }: { uploadId: string, uploadedParts: Part[], s3Key: string }) {
   const s3 = new AWS.S3({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
@@ -75,25 +62,30 @@ async function completeMultiUpload(uploadId: string, parts: Part[]) {
 
   const params = {
     Bucket: BUCKET_NAME,
-    Key: OBJECT_NAME,
+    Key: s3Key,
     UploadId: uploadId,
-    MultipartUpload: { Parts: parts }
+    MultipartUpload: { Parts: uploadedParts }
   }
 
   await s3.completeMultipartUpload(params).promise()
 }
 
-app.post('/generatepresignedurl', async (req: express.Request, res: express.Response) => {
-  const uploadId = await initiateMultipartUpload()
-  if (!uploadId) throw new Error('no upload id')
-  const urls = await generatePresignedUrlsParts(s3, uploadId, parseInt(req.body.parts, 10))
-  res.json({ urls, uploadId })
+app.post('/initiate_multipart_upload', async (req: express.Request, res: express.Response) => {
+  const uploadId = await initiateMultipartUpload(req.body.s3Key)
+  res.json({ uploadId })
 })
 
-app.post('/mergeparts', async (req: express.Request, res: express.Response) => {
-  const parts = req.body.uploadedParts
-  const uploadId = req.body.uploadId
-  completeMultiUpload(uploadId, parts)
+app.post('/generate_presigned_url', async (req: express.Request, res: express.Response) => {
+  console.log(req.body)
+  const { s3Key, uploadId, index } = req.body
+  const url = await generatePresignedUrlsPart({ s3Key, uploadId, index, s3 })
+  res.json({ url })
+})
+
+app.post('/merge_parts', async (req: express.Request, res: express.Response) => {
+  const { uploadId, uploadedParts, s3Key } = req.body
+  console.log(uploadId, uploadedParts, s3Key)
+  completeMultiUpload({ uploadId, uploadedParts, s3Key })
 })
 
 
