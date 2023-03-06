@@ -71,7 +71,6 @@ async function completeMultiUpload(uploadId: string, parts: Part[]) {
   const s3 = new AWS.S3({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
-    // sessionToken: `session-${cuid()}`
   })
 
   const params = {
@@ -94,7 +93,6 @@ app.post('/generatepresignedurl', async (req: express.Request, res: express.Resp
 app.post('/mergeparts', async (req: express.Request, res: express.Response) => {
   const parts = req.body.uploadedParts
   const uploadId = req.body.uploadId
-  console.log('received', parts, uploadId)
   completeMultiUpload(uploadId, parts)
 })
 

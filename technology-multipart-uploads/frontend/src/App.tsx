@@ -6,7 +6,6 @@ interface Part {
   PartNumber: number
 }
 
-// const FILE_CHUNK_SIZE = 10_000_000
 
 async function uploadParts(blobs: Blob[], urls: Record<number, string>) {
   const axios = Axios.create()
@@ -17,22 +16,13 @@ async function uploadParts(blobs: Blob[], urls: Record<number, string>) {
 
   for (const indexStr of keys) {
     const index = parseInt(indexStr)
-    // const start = index * FILE_CHUNK_SIZE
-    // const end = (index + 1) * FILE_CHUNK_SIZE
-    // const part = index < keys.length
-    //   ? blob.slice(start, end)
-    //   : blob.slice(start)
-    // console.log(urls)
-    // promises.push(axios.put(urls[index], blob))
     promises.push(axios.put(urls[index], blobs[index]))
   }
 
   const resParts = await Promise.all(promises)
   return resParts.map((part, index) => {
-    console.log(part)
-    console.log(part.headers)
     return {
-      ETag: (part as any).headers.etag,
+      ETag: (part as any).headers.etag, // needs to be exposed by CORS in S3.
       PartNumber: index + 1
     }
   })
@@ -49,10 +39,9 @@ const App = () => {
   const upload = useCallback(async () => {
     const parts = [
       fiveMBofData('a'),
-      // fiveMBofData('b')
+      fiveMBofData('b')
     ]
     const { data: { urls, uploadId } } = await Axios.post('http://localhost:5001/generatepresignedurl', { parts: parts.length })
-    console.log('upload id', uploadId)
     const uploadedParts = await uploadParts(parts, urls as unknown as Record<number, string>)
 
     console.log(uploadedParts, uploadId)
