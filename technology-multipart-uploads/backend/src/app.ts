@@ -76,7 +76,6 @@ app.post('/initiate_multipart_upload', async (req: express.Request, res: express
 })
 
 app.post('/generate_presigned_url', async (req: express.Request, res: express.Response) => {
-  console.log(req.body)
   const { s3Key, uploadId, index } = req.body
   const url = await generatePresignedUrlsPart({ s3Key, uploadId, index, s3 })
   res.json({ url })
