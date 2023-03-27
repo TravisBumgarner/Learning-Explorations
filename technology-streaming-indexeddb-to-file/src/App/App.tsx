@@ -1,67 +1,55 @@
 import React from 'react'
-import {db} from '../db'
-import {useLiveQuery} from 'dexie-react-hooks'
+import { db } from '../db'
+import { useLiveQuery } from 'dexie-react-hooks'
 
 function AddFriendForm() {
-  const [name, setName] = React.useState("");
-  const [age, setAge] = React.useState(5);
-  const [status, setStatus] = React.useState("");
+  const [index, setIndex] = React.useState(0);
+  const [blobStr, setBlobStr] = React.useState('');
+  const [id, setId] = React.useState(Math.random());
 
-  async function addFriend() {
-    try {
+  async function addEntry() {
+    await db.entries.add({
+      id,
+      blob: new Blob([blobStr]),
+      index
+    });
 
-      // Add the new friend!
-      const id = await db.friends.add({
-        name,
-        age
-      });
+    setIndex(prev => prev + 1)
+    setBlobStr('')
 
-      setStatus(`Friend ${name} successfully added. Got id ${id}`);
-      setName("");
-      setAge(5);
-    } catch (error) {
-      setStatus(`Failed to add ${name}: ${error}`);
-    }
   }
 
   return <>
     <p>
-      {status}
+      {index}
     </p>
-    Name:
+    BlobStr:
     <input
       type="text"
-      value={name}
-      onChange={ev => setName(ev.target.value)}
+      value={blobStr}
+      onChange={ev => setBlobStr(ev.target.value)}
     />
-    Age:
-    <input
-      type="number"
-      value={age}
-      onChange={ev => setAge(Number(ev.target.value))}
-    />
-    
-    <button onClick={addFriend}>
+    <button onClick={addEntry}>
       Add
     </button>
   </>
 }
 
-function FriendList() {
-  const friends = useLiveQuery(
-    () => db.friends.toArray()
+function EntriesList() {
+  const entries = useLiveQuery(
+    () => db.entries.toArray()
   );
 
   return <ul>
-    {friends?.map(friend => <li key={friend.id}>
-      {friend.name}, {friend.age}
+    {entries?.map(entry => <li key={`${entry.id}_${entry.index}`}>
+      {entry.id}, {entry.index}, Size: {entry.blob.size}
     </li>)}
   </ul>;
 }
 
 const App = () => (<div>
   <AddFriendForm />
-  <FriendList />
+  <EntriesList />
 </div>)
 
 export default App
