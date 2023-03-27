@@ -20,7 +20,7 @@
     "webpack-dev-server": "^3.11.3"
   },
   "scripts": {
-    "sd:fe": "webpack serve --mode=development --config=webpack.js",
-    "bundle-ui": " rm -rf ./public; mkdir ./public; webpack --mode=production --config=webpack.js"
+    "start": "webpack serve --mode=development --config=webpack.js",
+    "bundle": " rm -rf ./public; mkdir ./public; webpack --mode=production --config=webpack.js"
   }
 }
