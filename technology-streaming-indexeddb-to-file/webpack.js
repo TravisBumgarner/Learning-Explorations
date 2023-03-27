@@ -13,7 +13,7 @@ module.exports = {
             test: /\.tsx?$/,
             use: 'ts-loader',
             exclude: /node_modules/,
-        }, ],
+        },],
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
@@ -33,7 +33,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/static/index.template.ejs',
-            favicon: './src/static/favicon.png',
             inject: 'body',
         }),
     ],

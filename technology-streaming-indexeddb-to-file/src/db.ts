@@ -7,10 +7,10 @@ export interface Friend {
   age: number;
 }
 
-export class MySubClassedDexie extends new Dexie {
+export class MySubClassedDexie extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
-  friends!: Table<Friend>; 
+  friends!: Table<Friend>;
 
   constructor() {
     super('myDatabase');
