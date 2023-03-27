@@ -2,14 +2,33 @@ import React from 'react'
 import { db } from '../db'
 import { useLiveQuery } from 'dexie-react-hooks'
 
+const getNewFileHandle = async () => {
+  const handle = await (window as any).showSaveFilePicker({
+    suggestedName: "foo.txt",
+    types: [
+      {
+        description: "Text Files",
+        accept: {
+          "text/plain": [".txt"],
+        },
+      },
+    ],
+  });
+  console.log(handle)
+  return handle;
+};
+
 const DownloadById = ({ id }: { id: number }) => {
   const handleClick = async () => {
     console.log(await db.entries.where({ id }).toArray())
+    getNewFileHandle()
   }
   return <div>
     <button onClick={handleClick}>Download</button>
   </div>
 }
+
+
 
 function EntriesList() {
   const entries = useLiveQuery(
@@ -40,7 +59,6 @@ function AddFriendForm() {
 
     setIndex(prev => prev + 1)
     setBlobStr('')
-
   }
 
   return <>

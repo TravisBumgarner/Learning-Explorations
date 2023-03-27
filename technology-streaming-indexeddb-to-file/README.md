@@ -1,0 +1,1 @@
+Failed exploration. New APIs don't seem to work in Chrome.
