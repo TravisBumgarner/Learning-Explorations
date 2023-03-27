@@ -2,6 +2,30 @@ import React from 'react'
 import { db } from '../db'
 import { useLiveQuery } from 'dexie-react-hooks'
 
+const DownloadById = ({ id }: { id: number }) => {
+  const handleClick = async () => {
+    console.log(await db.entries.where({ id }).toArray())
+  }
+  return <div>
+    <button onClick={handleClick}>Download</button>
+  </div>
+}
+
+function EntriesList() {
+  const entries = useLiveQuery(
+    () => db.entries.toArray()
+  );
+
+  return <ul>
+    {entries?.map(entry => <li key={`${entry.id}_${entry.index}`}>
+      {entry.id}, {entry.index}, Size: {entry.blob.size}
+      <DownloadById id={entry.id} />
+    </li>)}
+  </ul>;
+}
+
+
+
 function AddFriendForm() {
   const [index, setIndex] = React.useState(0);
   const [blobStr, setBlobStr] = React.useState('');
@@ -33,18 +57,6 @@ function AddFriendForm() {
       Add
     </button>
   </>
-}
-
-function EntriesList() {
-  const entries = useLiveQuery(
-    () => db.entries.toArray()
-  );
-
-  return <ul>
-    {entries?.map(entry => <li key={`${entry.id}_${entry.index}`}>
-      {entry.id}, {entry.index}, Size: {entry.blob.size}
-    </li>)}
-  </ul>;
 }
 
 const App = () => (<div>

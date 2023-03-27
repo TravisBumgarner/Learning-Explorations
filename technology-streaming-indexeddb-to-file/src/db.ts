@@ -2,7 +2,7 @@
 import Dexie, { Table } from 'dexie';
 
 export interface Entry {
-  id?: number;
+  id: number;
   index: number;
   blob: Blob;
 }
