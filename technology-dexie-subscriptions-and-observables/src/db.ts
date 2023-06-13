@@ -1,18 +1,27 @@
 import Dexie, { Table } from 'dexie';
 
-export interface MyTable {
+export interface Parent {
 	id: string;
 	index: number;
 	message: string;
 }
 
+export interface Child {
+	id: string;
+	index: number;
+	message: string;
+	parentId: string;
+}
+
 export class Database extends Dexie {
-	myTable!: Table<MyTable>;
+	parent!: Table<Parent>;
+	child!: Table<Child>;
 
 	constructor(name = 'IndexedDB') {
 		super(name);
-		this.version(1).stores({
-			myTable: '[id+index]',
+		this.version(2).stores({
+			parent: '[id+index], index',
+			child: '[id+index], parentId',
 		});
 	}
 }
