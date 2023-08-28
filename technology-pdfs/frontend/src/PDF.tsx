@@ -3,11 +3,11 @@ import {Document, Page, pdfjs } from 'react-pdf';
 import styled from 'styled-components'
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
-const DESIRED_HEIGHT = 500
+const PAGE_HEIGHT = 500
 
 const PDF = () => {
   const [numPages, setNumPages] = useState<number>();
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [scrollTop, setScrollTop] = useState(0);
 
   // const [actualSize, setActualSize] = useState<{width: number, height: number}>({width: 0, height: 0})
   const [width, setWidth] = useState<number>(0)
@@ -19,23 +19,49 @@ const PDF = () => {
     setNumPages(pdf.numPages);
   }
 
+  const onPageClick = (event: any) => {
+      var bounds = event.target.getBoundingClientRect();
+      var x = event.clientX - bounds.left;
+      var y = event.clientY - bounds.top;
+      console.log('Relative to box', x,y)
+
+      // Don't add X, just add Y
+      const xPos = x
+      const yPos = y + scrollTop
+      console.log('relative to document',  xPos, yPos)
+
+      const pageClicked = Math.floor(yPos / PAGE_HEIGHT) + 1 // Yay for 1-indexing
+      const positionOnPage = yPos % PAGE_HEIGHT
+
+      console.log('Page Clicked', pageClicked, 'position on page', positionOnPage)
+  }
+
   const onPageLoadSuccess = async (page: any) => {
     console.log(page.height, page.width)
     // setActualSize({width: page.width, height: page.height})
     setWidth(page.width)
   }
 
+  const handleOnScroll = (event: any) => {
+    setScrollTop(event.currentTarget.scrollTop);
+  };
+
   return (
     <Wrapper>
-      <PDFWrapper>
+      <div>
+        <p>Details</p>
+        <ul>
+          <li>scrollTop: {scrollTop}</li>
+        </ul>
+      </div>
+      <PDFWrapper onScroll={handleOnScroll}>
       <Document file="http://localhost:8080/static/2page.pdf" onLoadSuccess={onDocumentLoadSuccess}>
-        <Page onLoadSuccess={onPageLoadSuccess} height={DESIRED_HEIGHT} pageNumber={pageNumber} renderTextLayer={false} renderAnnotationLayer={false} />
+        {
+          Array.from(new Array(numPages), (el, index) => (
+            <Page onClick={onPageClick} onLoadSuccess={onPageLoadSuccess} height={PAGE_HEIGHT} pageNumber={index + 1} renderTextLayer={false} renderAnnotationLayer={false} />
+          ))
+        }
       </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
-      <button onClick={() => setPageNumber(pageNumber - 1)}>Prev</button>
-      <button onClick={() => setPageNumber(pageNumber + 1)}>Next</button>
       </PDFWrapper>
     </Wrapper>
   );
@@ -46,11 +72,13 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `
 
 const PDFWrapper = styled.div`
   border: 2px solid black;
-  height: ${DESIRED_HEIGHT}px;
+  height: ${PAGE_HEIGHT}px;
+  overflow: scroll;
 `
 
 
