@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 import styled from 'styled-components'
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
@@ -20,20 +20,20 @@ const PDF = () => {
   }
 
   const onPageClick = (event: any) => {
-      var bounds = event.target.getBoundingClientRect();
-      var x = event.clientX - bounds.left;
-      var y = event.clientY - bounds.top;
-      console.log('Relative to box', x,y)
+    var bounds = event.target.getBoundingClientRect();
+    var x = event.clientX - bounds.left;
+    var y = event.clientY - bounds.top;
+    console.log('Relative to box', x, y)
 
-      // Don't add X, just add Y
-      const xPos = x
-      const yPos = y + scrollTop
-      console.log('relative to document',  xPos, yPos)
+    // Don't add X, just add Y
+    const xPos = x
+    const yPos = y + scrollTop
+    console.log('relative to document', xPos, yPos)
 
-      const pageClicked = Math.floor(yPos / PAGE_HEIGHT) + 1 // Yay for 1-indexing
-      const positionOnPage = yPos % PAGE_HEIGHT
+    const pageClicked = Math.floor(yPos / PAGE_HEIGHT) + 1 // Yay for 1-indexing
+    const positionOnPage = yPos % PAGE_HEIGHT
 
-      console.log('Page Clicked', pageClicked, 'position on page', positionOnPage)
+    console.log('Page Clicked', pageClicked, 'position on page', positionOnPage)
   }
 
   const onPageLoadSuccess = async (page: any) => {
@@ -55,13 +55,13 @@ const PDF = () => {
         </ul>
       </div>
       <PDFWrapper onScroll={handleOnScroll}>
-      <Document file="http://localhost:8080/static/2page.pdf" onLoadSuccess={onDocumentLoadSuccess}>
-        {
-          Array.from(new Array(numPages), (el, index) => (
-            <Page onClick={onPageClick} onLoadSuccess={onPageLoadSuccess} height={PAGE_HEIGHT} pageNumber={index + 1} renderTextLayer={false} renderAnnotationLayer={false} />
-          ))
-        }
-      </Document>
+        <Document file="http://localhost:8080/static/2page.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+          {
+            Array.from(new Array(numPages), (el, index) => (
+              <Page onClick={onPageClick} onLoadSuccess={onPageLoadSuccess} height={PAGE_HEIGHT} pageNumber={index + 1} renderTextLayer={false} renderAnnotationLayer={false} />
+            ))
+          }
+        </Document>
       </PDFWrapper>
     </Wrapper>
   );
