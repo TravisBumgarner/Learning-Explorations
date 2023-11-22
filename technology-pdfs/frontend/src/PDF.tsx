@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import styled from 'styled-components'
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
-const PAGE_HEIGHT = 500
+
+const PAGE_HEIGHT = 1000
 
 const PDF = () => {
   const [numPages, setNumPages] = useState<number>();
@@ -55,10 +57,23 @@ const PDF = () => {
         </ul>
       </div>
       <PDFWrapper onScroll={handleOnScroll}>
-        <Document file="http://localhost:8080/static/2page.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+        <Document file="http://localhost:8080/static/edited.pdf" onLoadSuccess={onDocumentLoadSuccess}>
           {
             Array.from(new Array(numPages), (el, index) => (
-              <Page onClick={onPageClick} onLoadSuccess={onPageLoadSuccess} height={PAGE_HEIGHT} pageNumber={index + 1} renderTextLayer={false} renderAnnotationLayer={false} />
+              <Page
+              onClick={onPageClick}
+              onLoadSuccess={onPageLoadSuccess}
+              height={PAGE_HEIGHT}
+              pageNumber={index + 1}
+              renderTextLayer={true}
+              renderAnnotationLayer={true} 
+              customTextRenderer={(params) => {
+                if(params.itemIndex === 7 && params.pageNumber === 1){
+                  console.log(params)
+                }
+                return `<span id="pdf-page-${params.pageNumber}-itemIndex${params.itemIndex}">${params.str}</spam>`
+              }}
+              />
             ))
           }
         </Document>
@@ -66,6 +81,18 @@ const PDF = () => {
     </Wrapper>
   );
 }
+
+type HighlightStart = {
+  id: string,
+  startOffset: number,
+}
+
+type HighlightEnd = {
+  id: string,
+  endOffset: number
+}
+
+
 
 const Wrapper = styled.div`
   height: 100vh;
