@@ -8,6 +8,7 @@
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
+    "deploy-gcp": "gcloud config set project silly-side-projects && gcloud builds submit --tag gcr.io/silly-side-projects/docusaurus-demo && gcloud run deploy docusaurus-demo --image gcr.io/silly-side-projects/docusaurus-demo --platform managed --region us-east1",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
