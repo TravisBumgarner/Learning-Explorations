@@ -78,6 +78,9 @@ const PDF = () => {
 
   useEffect(() => {
     const handleSelectionChange = () => {
+      const NODE_TYPE_TEXT = 3;
+      const NODE_TYPE_HTML_ELEMENT = 1;
+
       const s = window.getSelection();
       if (s) {
         const selection = getSelection();
@@ -103,35 +106,73 @@ const PDF = () => {
         }
 
         var fragment = range.cloneContents();
-        const textSelection = fragment.querySelectorAll('span[data-page-number][data-item-index]');
-        console.log('textSelection', textSelection)
+        console.log('fragment', fragment)
+        console.log('fragmtypey', fragment.hasChildNodes())
+        console.log()
         
-        if(textSelection.length < 2){
-          console.log("too few textSelectionItems")
-          setHighlight(null)
-          return
-        }
 
-        const start = {
-          pageNumber: parseInt(textSelection[0].getAttribute('data-page-number') || '-1'),
-          itemIndex: parseInt(textSelection[0].getAttribute('data-item-index') || '-1'),
-          startOffset: range.startOffset,
-        }
 
-        const end = {
-          pageNumber: parseInt(textSelection[textSelection.length - 1].getAttribute('data-page-number') || '-1'),
-          itemIndex: parseInt(textSelection[textSelection.length - 1].getAttribute('data-item-index') || '-1'),
-          endOffset: range.endOffset,
-        }
+        if (fragment.childNodes[0].nodeType === NODE_TYPE_HTML_ELEMENT){
+          const textSelection = fragment.querySelectorAll('span[data-page-number][data-item-index]');
+          console.log('textSelection', textSelection)
+          
+          if(textSelection.length < 2){
+            console.log("too few textSelectionItems")
+            setHighlight(null)
+            return
+          }
+  
+          const start = {
+            pageNumber: parseInt(textSelection[0].getAttribute('data-page-number') || '-1'),
+            itemIndex: parseInt(textSelection[0].getAttribute('data-item-index') || '-1'),
+            startOffset: range.startOffset,
+          }
+  
+          const end = {
+            pageNumber: parseInt(textSelection[textSelection.length - 1].getAttribute('data-page-number') || '-1'),
+            itemIndex: parseInt(textSelection[textSelection.length - 1].getAttribute('data-item-index') || '-1'),
+            endOffset: range.endOffset,
+          }
+  
+          const isInvalid = [...Object.values(start), ...Object.values(end)].some((v) => v === -1)
+          // The range.isCollapsed check above ensures the offsets are valid values.
+          if (isInvalid) {
+            console.log('invalid')
+            setHighlight(null)
+            return;
+          }
+          setHighlight({start, end});
+        } else if(fragment.childNodes[0].nodeType === NODE_TYPE_TEXT) {
+          const textSelection = range.commonAncestorContainer.parentElement;
+          
+          if(!textSelection) return
 
-        const isInvalid = [...Object.values(start), ...Object.values(end)].some((v) => v === -1)
-        // The range.isCollapsed check above ensures the offsets are valid values.
-        if (isInvalid) {
-          console.log('invalid')
-          setHighlight(null)
-          return;
+          const pageNumber = parseInt(textSelection.getAttribute('data-page-number') || '-1')
+          const itemIndex = parseInt(textSelection.getAttribute('data-item-index') || '-1')
+
+          const start = {
+            pageNumber,
+            itemIndex,
+            startOffset: range.startOffset,
+          }
+  
+          const end = {
+            pageNumber,
+            itemIndex,
+            endOffset: range.endOffset,
+          }
+
+          const isInvalid = [...Object.values(start), ...Object.values(end)].some((v) => v === -1)
+          if (isInvalid) {
+            console.log('invalid')
+            setHighlight(null)
+            return;
+          }
+          setHighlight({start, end});
+        } else {
+          console.log('unsoported')
         }
-        setHighlight({start, end});
+       
       };
 
       
