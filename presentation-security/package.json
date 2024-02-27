@@ -1,0 +1,10 @@
+{
+  "name": "presentation-security",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "styled-components": "^6.1.1"
+  }
+}
