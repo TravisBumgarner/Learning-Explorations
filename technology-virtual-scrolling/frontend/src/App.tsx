@@ -1,31 +1,50 @@
 import React, { useState } from 'react';
 import InfiniteScroll from './InfiniteScroll';
-import Current from './Current';
-import Performant from './Performant';
 import styled from 'styled-components';
+import PerformantWrapper from './PerformantWrapper'
+import CurrentWrapper from './CurrentWrapper'
+import { Route, Routes } from 'react-router-dom';
+import { pdfjs } from 'react-pdf';
 
 const App = () => {
-  const [selectedComponent, setSelectedComponent] = useState('Component1');
-  const [pdfPath, setPdfPath] = useState<string>('http://localhost:8080/static/edited.pdf');
-
-  const renderComponent = () => {
-    switch(selectedComponent) {
-      case 'InfiniteScroll':
-        return <InfiniteScroll />;
-      case 'Current':
-        return <Current pdfPath={pdfPath} />;
-      case 'Performant':
-        return <Performant pdfPath={pdfPath} />;
-    }
-  }
+  const [pdfPath, setPdfPath] = useState<string>('http://localhost:8080/static/bigfile100.pdf');
+  const [numComponents, setNumComponents] = useState<number>(1);
 
   return (
     <div className="App">
+      <nav>
+        <ul>
+          <li>
+            <a href="/infinitescroll">Infinite Scroll</a>
+          </li>
+          <li>
+            <a href="/current">Current</a>
+          </li>
+          <li>
+            <a href="/performant">Performant</a>
+          </li>
+        </ul>
+        </nav>
+
+      <label>PDF File</label>
       <Input width={500} type="text" value={pdfPath} onChange={(e) => setPdfPath(e.target.value)} /><br />
-      <button onClick={() => setSelectedComponent('InfiniteScroll')}>Infinite Scroll</button>
-      <button onClick={() => setSelectedComponent('Current')}>Current</button>
-      <button onClick={() => setSelectedComponent('Performant')}>Performant</button>
-      {renderComponent()}
+      <label>Number of Rendered PDFs</label>
+      <Input width={500} type="number" value={numComponents} onChange={(e) => setNumComponents(parseInt(e.target.value))} /><br />
+
+      <Routes>
+        <Route
+          path="/infinitescroll"
+          element={<InfiniteScroll  />}
+        />
+        <Route
+          path="/current"
+          element={<CurrentWrapper numComponents={numComponents} pdfPath={pdfPath}  />}
+        />
+        <Route
+          path="/performant"
+          element={<PerformantWrapper numComponents={numComponents} pdfPath={pdfPath} />}
+        />
+      </Routes>
     </div>
   )
 }
