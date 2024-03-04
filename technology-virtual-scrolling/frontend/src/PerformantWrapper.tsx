@@ -1,6 +1,7 @@
 import React from 'react';
 import Performant from './Performant';
 import { pdfjs } from 'react-pdf';
+import styled from 'styled-components';
 
 interface AppProps {
   numComponents: number;
@@ -18,9 +19,17 @@ const App: React.FC<AppProps> = ({ numComponents, pdfPath }) => {
   ));
 
   return <>
-  <h1>Performant</h1>
-  {components}
+    <h1>Performant</h1>
+    <Wrapper>
+      {components}
+    </Wrapper>
   </>;
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
 
 export default App;

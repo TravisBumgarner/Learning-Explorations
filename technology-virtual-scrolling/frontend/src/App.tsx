@@ -8,7 +8,7 @@ import { pdfjs } from 'react-pdf';
 
 const App = () => {
   const [pdfPath, setPdfPath] = useState<string>('http://localhost:8080/static/bigfile100.pdf');
-  const [numComponents, setNumComponents] = useState<number>(1);
+  const [numComponents, setNumComponents] = useState<number>(10);
 
   return (
     <div className="App">

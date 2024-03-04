@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
-const PAGE_HEIGHT = 1000
+const PAGE_HEIGHT = 400
 
 const WINDOW = 5 // Window should be an odd number where it's the sum of prevPages + current + nextPages rendered
 const lookAroundSize = (WINDOW - 1) / 2
@@ -123,7 +123,6 @@ const PDF = ({ pdfPath }: { pdfPath: string }) => {
 }
 
 const Wrapper = styled.div`
-  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;

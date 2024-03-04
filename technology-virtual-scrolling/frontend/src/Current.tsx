@@ -10,7 +10,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 
-const PAGE_HEIGHT = 1000
+const PAGE_HEIGHT = 400
 
 const formatId = (pageNumber: number, itemIndex: number): TextId => {
   return `pageNumber-${pageNumber}-itemIndex-${itemIndex}`
@@ -86,7 +86,6 @@ const PDF = ({pdfPath}: {pdfPath: string}) => {
 
 
 const Wrapper = styled.div`
-  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
