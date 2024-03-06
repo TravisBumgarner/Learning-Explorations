@@ -15,7 +15,7 @@ const App = () => {
   const searchParams = new URLSearchParams(location.search);
   const copies = searchParams.get('copies');
   console.log(copies)
-  const [numComponents, setNumComponents] = useState<number>(parseInt(copies || '1', 10));
+  const [numComponents, setNumComponents] = useState<number>(parseInt(copies || '10', 10));
 
   return (
     <div className="App">
@@ -42,6 +42,10 @@ const App = () => {
       <Input width={500} type="number" value={numComponents} onChange={(e) => setNumComponents(parseInt(e.target.value))} /><br />
 
       <Routes>
+      <Route
+          path="/"
+          element={<p>home</p>}
+        />
         <Route
           path="/infinitescroll"
           element={<InfiniteScroll  />}
