@@ -1,0 +1,12 @@
+{
+  "name": "technology-electron-windows",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.0.6"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
