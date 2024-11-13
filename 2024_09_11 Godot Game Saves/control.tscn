@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcaum1h2vxh61"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_y5pid"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y5pid")
+
+[node name="Increment" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Increment"
+
+[node name="Decrement" type="Button" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_right = 190.0
+offset_bottom = 31.0
+text = "Decrement"
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 131.0
+offset_right = 61.0
+offset_bottom = 154.0
+
+[node name="Value2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 126.0
+offset_right = 146.0
+offset_bottom = 149.0
+
+[node name="SaveFull" type="Button" parent="."]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 46.0
+offset_right = 206.0
+offset_bottom = 77.0
+text = "Save Full
+"
+
+[node name="Restore" type="Button" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 79.0
+offset_right = 103.0
+offset_bottom = 110.0
+text = "Restore"
+
+[node name="SavePartial" type="Button" parent="."]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 82.0
+offset_right = 240.0
+offset_bottom = 113.0
+text = "Save Partial"
+
+[connection signal="pressed" from="Increment" to="." method="_on_increment_pressed"]
+[connection signal="pressed" from="Decrement" to="." method="_on_decrement_pressed"]
+[connection signal="pressed" from="SaveFull" to="." method="_on_full_save_pressed"]
+[connection signal="pressed" from="Restore" to="." method="_on_restore_pressed"]
+[connection signal="pressed" from="SavePartial" to="." method="_on_save_partial_pressed"]
