@@ -100,18 +100,13 @@ const Canvas = () => {
 			const idx = ongoingTouchIndexById(touches[i].identifier);
 
 			if (idx >= 0) {
-				// console.log(`continuing touch ${idx}`);
 				ctx.beginPath();
-				// console.log(
-				// 	`ctx.moveTo( ${ongoingTouchesRef.current[idx].pageX}, ${ongoingTouchesRef.current[idx].pageY} );`
-				// );
 				ctx.moveTo(
 					ongoingTouchesRef.current[idx].pageX,
 					ongoingTouchesRef.current[idx].pageY
 				);
-				// console.log(`ctx.lineTo( ${touches[i].pageX}, ${touches[i].pageY} );`);
 				ctx.lineTo(touches[i].pageX, touches[i].pageY);
-				ctx.lineWidth = 4;
+				ctx.lineWidth = 8;
 				ctx.strokeStyle = color;
 				ctx.stroke();
 
