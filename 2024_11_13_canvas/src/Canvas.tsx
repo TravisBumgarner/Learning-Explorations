@@ -1,18 +1,29 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { mapRGBToNearestWebColor } from './webColors'
 
 const ASPECT_RATIO = 16 / 9
 const CANVAS_START_HEIGHT = 500
-const CANVAS_START_WIDTH = CANVAS_START_HEIGHT * ASPECT_RATIO
+const CANVAS_START_WIDTH = Math.round(CANVAS_START_HEIGHT * ASPECT_RATIO)
 
 const PALETTE_SIDE_LENGTH = 25
 const PALETTE_DIF = 25
+
+const getMousePosition = (canvas: HTMLCanvasElement, event: MouseEvent) => {
+  /// getBoundingClientRect is supported in most browsers and gives you
+  /// the absolute geometry of an element
+  var rect = canvas.getBoundingClientRect()
+
+  /// as mouse event coords are relative to document you need to
+  /// subtract the element's left and top position:
+  return { x: event.clientX - rect.left, y: event.clientY - rect.top }
+}
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [colorPicker, setColorPicker] = useState('')
 
   const getVideo = useCallback(() => {
     const video = videoRef.current
@@ -175,6 +186,67 @@ const Canvas = () => {
     // console.log('ended', newImageData)
   }, [])
 
+  // const colorPicker = useCallback(() => {
+  //   const ctx = getCanvasContext()
+  //   if (!ctx) return
+
+  //   const color = ctx.getImageData(0, 0, 1, 1).data
+  // }, [])
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!canvasRef.current) return
+      const position = getMousePosition(canvasRef.current, event)
+
+      if (
+        position.x < 0 ||
+        position.y < 0 ||
+        position.x > CANVAS_START_WIDTH ||
+        position.y > CANVAS_START_HEIGHT
+      )
+        return
+
+      console.log('canvas coords', position)
+
+      const ctx = getCanvasContext()
+      if (!ctx) return
+
+      const myImageData = ctx.getImageData(
+        0,
+        0,
+        CANVAS_START_WIDTH,
+        CANVAS_START_HEIGHT
+      )
+
+      const imageDataPosition =
+        (position.y * CANVAS_START_WIDTH + position.x) * 4
+      const r = myImageData.data[imageDataPosition]
+      const g = myImageData.data[imageDataPosition + 1]
+      const b = myImageData.data[imageDataPosition + 2]
+      const a = myImageData.data[imageDataPosition + 3]
+
+      if (
+        r === undefined ||
+        g === undefined ||
+        b === undefined ||
+        a === undefined
+      ) {
+        console.error('Invalid image data position:', imageDataPosition)
+        return
+      }
+
+      const newColor = `rgba(${r}, ${g}, ${b}, ${a})`
+      setColorPicker(newColor)
+      console.log('color', { r, g, b, a }, newColor)
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [canvasRef])
+
   return (
     <>
       <ScreenShotMenu ref={dialogRef}>
@@ -190,6 +262,7 @@ const Canvas = () => {
       <button onClick={drawImage}>Draw Image</button>
       <button onClick={toggleScreenshotMenu}>Take Screenshot</button>
       <button onClick={geocitiesify}>Geocitiesify</button>
+      <ColorPicker color={colorPicker} />
       <StyledCanvas
         ref={canvasRef}
         width={CANVAS_START_WIDTH}
@@ -198,6 +271,23 @@ const Canvas = () => {
         <p>This is an exploration into styled canvases.</p>
       </StyledCanvas>
     </>
+  )
+}
+
+const ColorPicker = ({ color }: { color: string }) => {
+  return (
+    <div>
+      <p>Color Picker</p>
+      <div
+        style={{
+          width: '100px',
+          height: '100px',
+          backgroundColor: color
+        }}
+      >
+        {color}
+      </div>
+    </div>
   )
 }
 
