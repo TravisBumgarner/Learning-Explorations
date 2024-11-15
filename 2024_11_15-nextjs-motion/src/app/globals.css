@@ -1,6 +1,19 @@
+/* Note, these are duplicated in theme.ts because motion doesn't support css vars. */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --blue50: #f1f9fe;
+  --blue100: #e1f2fd;
+  --blue200: #bde5fa;
+  --blue300: #82d2f7;
+  --blue400: #40bbf0;
+  --blue500: #17a3e0;
+  --blue600: #0a81bd;
+  --blue700: #09689b;
+  --blue800: #0c5880;
+  --blue900: ##10496a;
+  --blue950: #0b2e46;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,7 +26,7 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 body {
