@@ -1,20 +1,9 @@
 'use client'
 
-import styled from "styled-components";
+import Home from "./home";
 
-export default function Home() {
+export default function App() {
   return (
-    <Container>
-      Hello world.
-    </Container>
+      <Home />
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
-  font-family: var(--font-comfortaa);
-`;
