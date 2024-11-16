@@ -1,11 +1,13 @@
-import About from './About'
-import Hero from './Hero'
+import Hello from './1_Hello'
+import RoundWeGo from './2_RoundWeGo'
+import GettingSpringy from './3_GettingSpringy'
 
 const Home = () => {
   return (
     <>
-      <Hero />
-      <About />
+      <Hello />
+      <RoundWeGo />
+      <GettingSpringy />
     </>
   )
 }
