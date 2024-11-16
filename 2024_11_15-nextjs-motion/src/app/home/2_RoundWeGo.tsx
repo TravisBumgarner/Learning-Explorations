@@ -42,6 +42,7 @@ const About = () => {
         }}
       >
         <h2>Round and round we go!</h2>
+        <p>(move the mouse)</p>
         <RotatingCircle
           viewBox="0 0 100 100"
           animate={{ rotate: 360 }}
