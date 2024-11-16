@@ -4,7 +4,8 @@ import './globals.css'
 
 const comfortaa = Comfortaa({
   variable: '--font-comfortaa',
-  weight: '400'
+  weight: '400',
+  preload: false
 })
 
 export const metadata: Metadata = {

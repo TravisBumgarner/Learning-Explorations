@@ -1,5 +1,7 @@
+'use client'
+
 import { motion, useMotionValue, useTransform } from 'motion/react'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { colors } from '../global'
 import { Wrapper } from './sharedCSS'
@@ -11,8 +13,13 @@ const RotatingCircle = styled(motion.svg)`
 `
 
 const About = () => {
+  const [isClient, setIsClient] = useState(false)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const color = useTransform(
     y,
@@ -32,6 +39,10 @@ const About = () => {
     },
     [x, y]
   )
+
+  if (!isClient) {
+    return null
+  }
 
   return (
     <div onMouseMove={handleMouseMove}>

@@ -1,11 +1,21 @@
-import { useRef } from 'react'
+'use client'
+
+import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { colors } from '../global'
 import Hello from './1_Hello'
 import RoundWeGo from './2_RoundWeGo'
 import GettingSpringy from './3_GettingSpringy'
 
 const Home = () => {
   const pagesWrapperRef = useRef<HTMLDivElement>(null)
+  const [buttonHover, setButtonHover] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const scrollNextPage = () => {
     if (pagesWrapperRef.current) {
@@ -14,6 +24,10 @@ const Home = () => {
         behavior: 'smooth'
       })
     }
+  }
+
+  if (!isClient) {
+    return null
   }
 
   return (
@@ -27,7 +41,17 @@ const Home = () => {
         <GettingSpringy />
       </div>
       <div style={{ position: 'fixed', right: 30, bottom: 30 }}>
-        <Button onClick={scrollNextPage}>Next</Button>
+        <MotionButton
+          onMouseEnter={() => setButtonHover(true)}
+          onMouseLeave={() => setButtonHover(false)}
+          animate={{
+            backgroundColor: buttonHover ? colors.blue500 : colors.blue100,
+            color: buttonHover ? colors.blue100 : colors.blue500
+          }}
+          onClick={scrollNextPage}
+        >
+          Next
+        </MotionButton>
       </div>
     </>
   )
@@ -39,13 +63,8 @@ const Button = styled.button`
   padding: 10px 20px;
   border-radius: 5px;
   color: var(--blue500);
-  &:hover {
-    background-color: var(--blue300);
-  }
-
-  &:active {
-    background-color: var(--blue400);
-  }
 `
+
+const MotionButton = motion(Button)
 
 export default Home

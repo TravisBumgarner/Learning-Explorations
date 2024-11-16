@@ -1,9 +1,17 @@
+'use client'
+
 import { motion, useAnimation, useScroll, useTransform } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import ThumbsUpIcon from 'remixicon-react/ThumbUpFillIcon'
 import { Wrapper } from './sharedCSS'
 
 const Hero = () => {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const controls = useAnimation()
   const { scrollY } = useScroll()
   const color = useTransform(
@@ -17,6 +25,10 @@ const Hero = () => {
       controls.start({ color: latest })
     })
   }, [color, controls])
+
+  if (!isClient) {
+    return null
+  }
 
   return (
     <Wrapper $backgroundColor="var(--blue100)" $color="var(--blue800)">

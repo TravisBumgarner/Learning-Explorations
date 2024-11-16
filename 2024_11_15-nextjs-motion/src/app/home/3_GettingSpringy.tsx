@@ -29,9 +29,10 @@ const About = () => {
       style={{ position: 'relative' }}
       ref={wrapperRef}
     >
-      <motion.h2 ref={motionRef} style={{ left, top, position: 'absolute' }}>
-        Spring About
-      </motion.h2>
+      <motion.div ref={motionRef} style={{ left, top, position: 'absolute' }}>
+        <h2>Spring About</h2>
+        <p>(Move the mouse)</p>
+      </motion.div>
     </Wrapper>
   )
 }
