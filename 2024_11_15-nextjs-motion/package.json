@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "gcloud config set project silly-side-projects && gcloud builds submit --tag gcr.io/silly-side-projects/next-js-demo && gcloud run deploy next-js-demo --image gcr.io/silly-side-projects/next-js-demo --platform managed --region us-east1"
   },
   "dependencies": {
     "motion": "^11.11.17",
