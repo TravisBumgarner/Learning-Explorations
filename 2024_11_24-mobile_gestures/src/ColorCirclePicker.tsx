@@ -101,11 +101,17 @@ const ColorCirclePicker = () => {
         }
     }, [picker, handleOneFinger, handleTwoFinger])
 
-    // Attach event listeners on mount and set initial color.
+    // Attach event listeners and cleanup handlers on mount and set initial color. 
     useEffect(() => {
         toggleCallbacks()
         setSelectedColor(getColorAtRotation(rotation));
-    }, [toggleCallbacks, rotation])
+        
+        const circle = circleRef.current;
+        return () => {
+            circle?.removeEventListener("touchmove", handleOneFinger);
+            circle?.removeEventListener("touchmove", handleTwoFinger);
+        }
+    }, [toggleCallbacks, rotation, handleOneFinger, handleTwoFinger])
 
     const handleTogglePickerClick = useCallback(() => {
         setpicker(previous => previous === Picker.SingleFinger ? Picker.TwoFinger : Picker.SingleFinger);
@@ -122,8 +128,7 @@ const ColorCirclePicker = () => {
                 <StyledCircle  rotation={rotation} ref={circleRef} />
             </CircleWrapper>
         <TogglesWrapper>
-            <ToggleButton active={picker === Picker.SingleFinger} onClick={handleTogglePickerClick}>1 Finger</ToggleButton>
-            <ToggleButton active={picker === Picker.TwoFinger} onClick={handleTogglePickerClick}>2 Fingers</ToggleButton>
+            <ToggleButton onClick={handleTogglePickerClick}>{picker === Picker.SingleFinger ? 'Use Two Fingers': "Use One Finger"}</ToggleButton>
         </TogglesWrapper>
         </Wrapper>
         </>
@@ -150,20 +155,15 @@ const TogglesWrapper = styled.div`
     justify-content: end;
 `
 
-const ToggleButton = styled.button<{active?: boolean}>`
+const ToggleButton = styled.button`
     margin: 5px;
     border: 0;
-    background: #eee;
     border-radius: 5px;
     padding: 8px;
-    font-weight: 400;
     font-size: 20px;
-    width: 125px;
-
-    ${({active}) => active && `
-        background: #ddd;
-        font-weight: 900;
-    `}
+    width: 180px;
+    background: #ddd;
+    font-weight: 900;
 `
 
 const CircleWrapper = styled.div`
