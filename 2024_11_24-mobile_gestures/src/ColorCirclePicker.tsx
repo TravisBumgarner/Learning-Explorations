@@ -142,6 +142,7 @@ const Header = styled.h1`
 `
 
 const Wrapper = styled.div`
+    background-color: color-mix(in srgb, white, blue);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
