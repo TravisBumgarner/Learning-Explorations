@@ -1,0 +1,7 @@
+body, html, #root {
+    height: 100%;
+
+    font-family: "Anton", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}

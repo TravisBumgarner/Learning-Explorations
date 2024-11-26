@@ -1,5 +1,6 @@
 import { Reorder } from "framer-motion";
 import { useEffect, useState } from "react";
+import { RouteWrapper } from "./styles";
 import "./styles.css";
 
 interface Props {
@@ -39,10 +40,12 @@ export default function DragAndDrop() {
 	}, []);
 
 	return (
-		<Reorder.Group axis="y" onReorder={setKeys} values={keys}>
-			{keys.map((key) => (
-				<Item key={key} id={key} data={data[key]} />
-			))}
-		</Reorder.Group>
+		<RouteWrapper>
+			<Reorder.Group axis="y" onReorder={setKeys} values={keys}>
+				{keys.map((key) => (
+					<Item key={key} id={key} data={data[key]} />
+				))}
+			</Reorder.Group>
+		</RouteWrapper>
 	);
 }
