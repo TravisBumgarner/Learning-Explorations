@@ -9,7 +9,10 @@ const Navigation = () => {
 					<Link to="/">Home</Link>
 				</li>
 				<li>
-					<Link to="/dnd">Drag And Drop</Link>
+					<Link to="/dnd">0. Drag And Drop</Link>
+				</li>
+				<li>
+					<Link to="/basicsofmotion">1. Basics of Motion</Link>
 				</li>
 			</ul>
 		</Nav>
@@ -18,8 +21,9 @@ const Navigation = () => {
 
 const Nav = styled.nav`
 	width: 250px;
+	flex-shrink: 0;
 	height: 100%;
-	background-color: #f4f4f4;
+	background-color: #3c3c3c;
 
 	ul {
 		list-style-type: none;
