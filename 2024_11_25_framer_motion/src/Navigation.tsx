@@ -14,6 +14,18 @@ const Navigation = () => {
 				<li>
 					<Link to="/basicsofmotion">1. Basics of Motion</Link>
 				</li>
+				<li>
+					<Link to="/gestures">2. Gestures</Link>
+				</li>
+				<li>
+					<Link to="/animationcontrols">3. Animation Controls</Link>
+				</li>
+				<li>
+					<Link to="/viewbasedanimations">4. View Based Animations</Link>
+				</li>
+				<li>
+					<Link to="/scrollbasedanimations">5. Scroll Based Animations</Link>
+				</li>
 			</ul>
 		</Nav>
 	);
