@@ -5,6 +5,7 @@ import styled from "styled-components";
 const ViewBasedAnimations = () => {
 	const ref = useRef<HTMLDivElement>(null);
 	const isInView = useInView(ref, { once: true });
+	
 	<div ref={ref}>hii.</div>;
 	return (
 		<div>
