@@ -14,7 +14,7 @@
     "next": "15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -23,6 +23,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
-    "typescript": "^5"
+    "typescript": "^5",
+            "@mdx-js/loader": "^2.2.1",
+        "@types/mdx": "^2.0.3",
   }
 }
