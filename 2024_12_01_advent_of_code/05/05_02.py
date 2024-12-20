@@ -40,14 +40,11 @@ for update in updates:
     if not valid_update:
         invalid_updates.append(update)
 
-print('inv', invalid_updates)
-
 def make_valid(invalid_update: list[str]):
     pages_after_count = []
     for page in invalid_update:
         other_pages = set(invalid_update.copy())
         other_pages.remove(page)
-        print('pther', other_pages)
         pages_that_must_come_after = rules.get(page)
         if pages_that_must_come_after == None:
             pages_after_count.append(0)
@@ -55,12 +52,10 @@ def make_valid(invalid_update: list[str]):
             invalid_pages = other_pages.intersection(pages_that_must_come_after)
             pages_after_count.append(len(invalid_pages))
 
-    output = [None for _ in range(len(invalid_update))]
+    unsorted_pairs = zip(pages_after_count, invalid_update)
+    sorted_pairs = sorted(unsorted_pairs, key=lambda x: x[0], reverse=True)
 
-    for i in range(len(invalid_update)):
-        output[pages_after_count[i]] = invalid_update[i]
-    # Output is currently sorted by number of pages that come after so we need to reverse the orer.
-    output.reverse()
+    output = [page for [_order, page] in sorted_pairs]
     return output
 
 total = 0
