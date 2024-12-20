@@ -1,17 +1,23 @@
-def is_row_valid(row):
-    is_valid = True
+def check_row_validity(row):
     result = [row[i + 1] - row[i] for i in range(len(row) - 1)]
 
     acceptable_negative_count = len([x for x in result if x < 0 and abs(x) <= 3])
     acceptable_positive_count = len([x for x in result if x > 0 and abs(x) <= 3])
 
-    max_acceptable_count = max(acceptable_negative_count, acceptable_positive_count)
+    return acceptable_negative_count == len(result) or acceptable_positive_count == len(result)
 
-    if len(result) - max_acceptable_count > 1:
-        is_valid = False
+def is_any_subarray_valid(row: list[int]) -> bool:
+    for i in range(len(row)):
+        sub_array = row.copy()
+        sub_array.pop(i)
+        if check_row_validity(sub_array):
+            return True
+    return False
 
-    return is_valid
-
+def is_full_array_valid(row):
+   if check_row_validity(row):
+       return True
+   return False
 
 
 with open('02_01.txt', 'r') as file:
@@ -20,7 +26,9 @@ with open('02_01.txt', 'r') as file:
 valid_reports = 0
 for row in data:
     row = [int(x) for x in row.split()]
-    if is_row_valid(row):
+    if is_full_array_valid(row):
+        valid_reports += 1
+    elif is_any_subarray_valid(row):
         valid_reports += 1
 
 print(valid_reports)
