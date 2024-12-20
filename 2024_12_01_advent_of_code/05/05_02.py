@@ -22,7 +22,6 @@ with open('05_01.txt', 'r') as file:
         if line.find(',') > 0:
             updates.append([line for line in line.split(',')])
 
-print(rules)
 total = 0
 for update in updates:
     valid_update = True
@@ -32,7 +31,7 @@ for update in updates:
             continue
 
         pages_before = set(update[0:index])
-        print(page, ' pages cant be after ', pages_that_must_come_after, ' pages_before ', pages_before)
+
 
         invalid_pages = pages_before.intersection(pages_that_must_come_after)
         if len(invalid_pages) > 0:
@@ -42,10 +41,8 @@ for update in updates:
     if valid_update:
         middle_index = math.floor(len(update) / 2)
         total += int(update[middle_index])
-        print('addding: ', update[middle_index])
+
 
 print(total)
-
-
 
                 
