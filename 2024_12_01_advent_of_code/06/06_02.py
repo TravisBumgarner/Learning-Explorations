@@ -39,21 +39,52 @@ def build_row_graph_items(previous_row_index: int, previous_row: list[int], curr
     return local_graph
 
 def walk_rows(board: BoardType, graph: dict):
-    previous_row = None
+    previous_blockages = []
     for row_index, row in enumerate(board):
-        current_row = find_blockages(row)
-        if previous_row:
+        current_blockages = find_blockages(row)
+        if len(previous_blockages) > 0 and len(current_blockages) > 0:
             local_graph = build_row_graph_items(
                 previous_row_index=row_index - 1, 
-                previous_row=previous_row,
-                current_row=current_row
+                previous_row=previous_blockages,
+                current_row=current_blockages
             )
             graph.update(local_graph)
-        previous_row = current_row 
-        
+        previous_blockages = current_blockages 
+
+
+def build_column_graph_items(previous_column_index: int, previous_column: list[int], current_column: list[int]):
+    print('\tbuilding graph', previous_column_index, previous_column, current_column)
+    local_graph = dict()
+    for previous_row_index in previous_column:
+        for current_row_index in current_column:
+            if previous_row_index > current_row_index:
+                p1 = Point(previous_column_index, previous_row_index)
+                p2 = Point(previous_column_index + 1, current_row_index)
+                local_graph[p1] = p2
+                local_graph[p2] = p1
+    return local_graph
+
+def walk_columns(board: BoardType, graph: dict):
+    previous_blockages = []
+    for column_index in range(len(board[0])):
+        print('col index', column_index)
+        column = [row[column_index] for row in board]
+        print('\tcol: ', column)
+        current_blockages = find_blockages(column)
+        print('\tblocks:', current_blockages)
+        if len(previous_blockages) > 0 and len(current_blockages) > 0:
+            local_graph = build_column_graph_items(
+                previous_column_index = column_index - 1,
+                previous_column=previous_blockages,
+                current_column=current_blockages
+            )
+            print('\tlocalgraph:', local_graph)
+            graph.update(local_graph)
+        previous_blockages = current_blockages
 
 
 if __name__ == "__main__": 
     graph = dict()
     walk_rows(board, graph)
+    walk_columns(board, graph)
     print(graph)
