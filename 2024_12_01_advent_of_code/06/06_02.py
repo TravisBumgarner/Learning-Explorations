@@ -1,3 +1,7 @@
+# This is not the best way to be learning python right now.
+# Problem currently struggles from the fact that the graph is overriding beacuse A->B will be overwritten by A->C
+# Also, the graph is going to think A-> B -> C if they're all along a row are conencted, this is incorrect. 
+
 from typing import List
 from collections import namedtuple
 
@@ -53,7 +57,6 @@ def walk_rows(board: BoardType, graph: dict):
 
 
 def build_column_graph_items(previous_column_index: int, previous_column: list[int], current_column: list[int]):
-    print('\tbuilding graph', previous_column_index, previous_column, current_column)
     local_graph = dict()
     for previous_row_index in previous_column:
         for current_row_index in current_column:
@@ -67,24 +70,19 @@ def build_column_graph_items(previous_column_index: int, previous_column: list[i
 def walk_columns(board: BoardType, graph: dict):
     previous_blockages = []
     for column_index in range(len(board[0])):
-        print('col index', column_index)
         column = [row[column_index] for row in board]
-        print('\tcol: ', column)
         current_blockages = find_blockages(column)
-        print('\tblocks:', current_blockages)
         if len(previous_blockages) > 0 and len(current_blockages) > 0:
             local_graph = build_column_graph_items(
                 previous_column_index = column_index - 1,
                 previous_column=previous_blockages,
                 current_column=current_blockages
             )
-            print('\tlocalgraph:', local_graph)
             graph.update(local_graph)
         previous_blockages = current_blockages
 
 
 if __name__ == "__main__": 
-    graph = dict()
+    graph = []
     walk_rows(board, graph)
     walk_columns(board, graph)
-    print(graph)
