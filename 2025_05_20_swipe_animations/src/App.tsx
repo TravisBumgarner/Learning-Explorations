@@ -1,7 +1,8 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import {
 	AnimatePresence,
 	motion,
+	useAnimate,
 	useMotionValue,
 	useMotionValueEvent,
 } from "motion/react";
@@ -11,6 +12,13 @@ function getRandomHexColor(): string {
 	return `#${hex.padStart(6, "0")}`;
 }
 
+const DURATION_MS = 100;
+const EXIT_OPTIONS = { duration: DURATION_MS / 1000 };
+const exitAnimation = (polarity: 1 | -1) => ({
+	opacity: 0,
+	x: `${polarity * 100}%`,
+});
+
 const Card = ({
 	color,
 	handleSwipeCallback,
@@ -18,32 +26,35 @@ const Card = ({
 	color: string;
 	handleSwipeCallback: () => void;
 }) => {
-	const hasSwipedRef = useRef(false);
+	const [hitSwipeThreshold, setHitSwipeThreshold] = useState(false);
 	const x = useMotionValue(0);
-	const [polarity, setPolarity] = useState(1);
+	const [scope, animate] = useAnimate();
 
 	const variants = {};
 
 	useMotionValueEvent(x, "change", (latest) => {
-		if ((latest > 200 || latest < -200) && hasSwipedRef.current === false) {
-			console.log("I call", latest);
-			hasSwipedRef.current = true;
-			handleSwipeCallback();
+		if (!hitSwipeThreshold) {
+			let polarity: 1 | -1 | null = null;
+			if (latest > 100) polarity = 1;
+			if (latest < -100) polarity = -1;
+
+			if (polarity) {
+				setHitSwipeThreshold(true);
+				animate(scope.current, exitAnimation(polarity), EXIT_OPTIONS);
+				setTimeout(handleSwipeCallback, DURATION_MS);
+			}
 		}
 	});
 
 	return (
 		<motion.div
-			exit={{ transform: `translateX(${polarity * 100}%)` }}
+			ref={scope}
 			dragConstraints={{ left: 0, right: 0 }}
-			drag="x"
+			dragSnapToOrigin={false}
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1, transition: { delay: 0.1 } }}
+			drag={hitSwipeThreshold ? undefined : "x"}
 			variants={variants}
-			initial={{
-				opacity: 0,
-			}}
-			animate={{
-				opacity: 1,
-			}}
 			style={{
 				x,
 				width: "400px",
@@ -55,6 +66,7 @@ const Card = ({
 				alignItems: "center",
 				fontSize: "40px",
 				backgroundColor: color,
+				position: "absolute", // Forces animating cards to vertically stack.
 			}}
 		>
 			<p>{color}</p>
