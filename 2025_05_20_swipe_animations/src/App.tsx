@@ -12,11 +12,10 @@ function getRandomHexColor(): string {
 	return `#${hex.padStart(6, "0")}`;
 }
 
-const DURATION_MS = 100;
+const DURATION_MS = 300;
 const EXIT_OPTIONS = { duration: DURATION_MS / 1000 };
 const exitAnimation = (polarity: 1 | -1) => ({
-	opacity: 0,
-	x: `${polarity * 100}%`,
+	x: `${polarity * 100}dvw`,
 });
 
 const Card = ({
@@ -51,7 +50,6 @@ const Card = ({
 			ref={scope}
 			dragConstraints={{ left: 0, right: 0 }}
 			dragSnapToOrigin={false}
-			initial={{ opacity: 0 }}
 			animate={{ opacity: 1, transition: { delay: 0.1 } }}
 			drag={hitSwipeThreshold ? undefined : "x"}
 			variants={variants}
@@ -66,7 +64,6 @@ const Card = ({
 				alignItems: "center",
 				fontSize: "40px",
 				backgroundColor: color,
-				position: "absolute", // Forces animating cards to vertically stack.
 			}}
 		>
 			<p>{color}</p>
