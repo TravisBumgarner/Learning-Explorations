@@ -1,0 +1,25 @@
+{
+  "name": "@mock-db/server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "nodemon src/index.ts",
+    "start": "ts-node src/index.ts",
+    "migrate": "ts-node src/migrate.ts"
+  },
+  "dependencies": {
+    "@mock-db/temporal": "*",
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.9.1",
+    "@types/pg": "^8.11.10",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}

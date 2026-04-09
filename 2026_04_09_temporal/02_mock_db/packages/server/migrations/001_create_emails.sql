@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS emails (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  message TEXT NOT NULL,
+  is_sent BOOLEAN NOT NULL DEFAULT FALSE
+);
