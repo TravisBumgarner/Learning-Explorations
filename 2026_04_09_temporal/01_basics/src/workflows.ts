@@ -15,6 +15,6 @@ export async function countWorkflow(): Promise<number> {
   return await count();
 }
 
-export async function screamWorkflow(): Promise<string> {
-  return await scream();
+export async function screamWorkflow(count: number): Promise<string> {
+  return await scream(count);
 }
