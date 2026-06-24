@@ -12,3 +12,6 @@ gt create --all --message "feat(api): Add new API method for fetching users"
 
 # push changes
 gt submit
+```
+
+- Syncing - whether the repo has been connected/regiseted with Graphite's service. 
