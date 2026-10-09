@@ -29,6 +29,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "middleware.StytchSessionMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -74,3 +75,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # localhost) need distinct cookie names or they clobber each other's sessions.
 SESSION_COOKIE_NAME = "consumer_sessionid"
 CSRF_COOKIE_NAME = "consumer_csrftoken"
+
+STYTCH_PROJECT_ID = os.environ.get("STYTCH_PROJECT_ID")
+STYTCH_SECRET = os.environ.get("STYTCH_SECRET")
