@@ -11,13 +11,16 @@ client = stytch.Client(
 
 
 def get_django_user(stytch_user):
-    """Get or create the local user for a Stytch user, keyed on the Stytch user id."""
+    """Get or create the local user for a Stytch user, keyed on the Stytch user id.
+
+    Email follows Stytch. Names are owned by this app (set via PATCH /api/me/),
+    so they are never synced from Stytch.
+    """
     user, _ = get_user_model().objects.get_or_create(username=stytch_user.user_id)
     email = stytch_user.emails[0].email if stytch_user.emails else ""
-    first_name = (stytch_user.name.first_name if stytch_user.name else None) or ""
-    if (user.email, user.first_name) != (email, first_name):
-        user.email, user.first_name = email, first_name
-        user.save(update_fields=["email", "first_name"])
+    if user.email != email:
+        user.email = email
+        user.save(update_fields=["email"])
     return user
 
 
