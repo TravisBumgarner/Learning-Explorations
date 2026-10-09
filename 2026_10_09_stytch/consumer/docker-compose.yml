@@ -1,0 +1,21 @@
+name: oidc-consumer
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: consumer
+      POSTGRES_USER: consumer
+      POSTGRES_PASSWORD: consumer
+    ports:
+      - "54923:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U consumer -d consumer"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:

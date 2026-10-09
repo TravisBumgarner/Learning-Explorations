@@ -1,0 +1,21 @@
+name: oidc-provider
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: provider
+      POSTGRES_USER: provider
+      POSTGRES_PASSWORD: provider
+    ports:
+      - "54817:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U provider -d provider"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:

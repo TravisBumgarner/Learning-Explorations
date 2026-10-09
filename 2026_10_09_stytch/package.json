@@ -1,0 +1,16 @@
+{
+  "name": "oidc-provider-consumer",
+  "private": true,
+  "scripts": {
+    "setup": "./setup.sh",
+    "db": "docker compose -f provider/docker-compose.yml up -d --wait && docker compose -f consumer/docker-compose.yml up -d --wait",
+    "db:down": "docker compose -f provider/docker-compose.yml down && docker compose -f consumer/docker-compose.yml down",
+    "dev": "npm run db && concurrently -k -n provider,consumer-api,consumer-web -c blue,green,magenta npm:dev:provider npm:dev:consumer-api npm:dev:consumer-web",
+    "dev:provider": "cd provider && .venv/bin/python manage.py runserver 8100",
+    "dev:consumer-api": "cd consumer/backend && .venv/bin/python manage.py runserver 8200",
+    "dev:consumer-web": "npm --prefix consumer/frontend run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}
