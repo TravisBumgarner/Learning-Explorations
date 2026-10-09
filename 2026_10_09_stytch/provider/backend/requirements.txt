@@ -1,3 +1,5 @@
 Django>=4.2,<5.0
 psycopg[binary]>=3.1
 python-dotenv>=1.0
+stytch>=15.3
+django-ninja>=1.3

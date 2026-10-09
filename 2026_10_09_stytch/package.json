@@ -5,8 +5,10 @@
     "setup": "./setup.sh",
     "db": "docker compose -f provider/docker-compose.yml up -d --wait && docker compose -f consumer/docker-compose.yml up -d --wait",
     "db:down": "docker compose -f provider/docker-compose.yml down && docker compose -f consumer/docker-compose.yml down",
-    "dev": "npm run db && concurrently -k -n provider,consumer-api,consumer-web -c blue,green,magenta npm:dev:provider npm:dev:consumer-api npm:dev:consumer-web",
-    "dev:provider": "cd provider && .venv/bin/python manage.py runserver 8100",
+    "dev": "npm run db && concurrently -k -n provider-api,provider-web,consumer-api,consumer-web -c blue,cyan,green,magenta npm:dev:provider-api npm:dev:provider-web npm:dev:consumer-api npm:dev:consumer-web",
+    "dev:provider": "docker compose -f provider/docker-compose.yml up -d --wait && concurrently -k -n provider-api,provider-web -c blue,cyan npm:dev:provider-api npm:dev:provider-web",
+    "dev:provider-api": "cd provider/backend && .venv/bin/python manage.py runserver 8100",
+    "dev:provider-web": "npm --prefix provider/frontend run dev",
     "dev:consumer": "docker compose -f consumer/docker-compose.yml up -d --wait && concurrently -k -n consumer-api,consumer-web -c green,magenta npm:dev:consumer-api npm:dev:consumer-web",
     "dev:consumer-api": "cd consumer/backend && .venv/bin/python manage.py runserver 8200",
     "dev:consumer-web": "npm --prefix consumer/frontend run dev"
