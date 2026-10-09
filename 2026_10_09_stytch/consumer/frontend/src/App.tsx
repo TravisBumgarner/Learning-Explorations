@@ -1,36 +1,41 @@
-import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import LoginOrSignup from "./Login";
+import { useStytch, useStytchSession } from "@stytch/react";
+import { useCallback, useEffect } from "react";
+import stytch from "@stytch/react";
 
-type User = { id: number; username: string; email: string; name: string };
-type State = { status: "loading" } | { status: "anonymous" } | { status: "authenticated"; user: User };
+const Logout = () => {
+  const stytch = useStytch();
+
+  const logout = useCallback(() => {
+    stytch.session.revoke();
+  }, [stytch]);
+
+  return <button onClick={logout}>Logout</button>;
+}
+
+const Authed = () => {
+  return (
+    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <h1>You're logged in!</h1>
+      <Logout />
+    </Box>
+  );
+}
 
 export default function App() {
-  const [state, setState] = useState<State>({ status: "loading" });
+  const { session } = useStytchSession();
+  const stytch = useStytch();
 
   useEffect(() => {
-    fetch("/api/me/")
-      .then(async (res) => {
-        if (res.status === 401) return setState({ status: "anonymous" });
-        if (!res.ok) throw new Error(`Unexpected ${res.status}`);
-        setState({ status: "authenticated", user: await res.json() });
-      })
-      .catch(() => setState({ status: "anonymous" }));
+    stytch.authenticateByUrl({ session_duration_minutes: 60 });
   }, []);
 
-  return (
-    <main style={{ fontFamily: "system-ui", maxWidth: 480, margin: "4rem auto" }}>
-      <h1>Consumer</h1>
-      {state.status === "loading" && <p>Loading…</p>}
-      {state.status === "anonymous" && (
-        <p>Not signed in.</p>
-      )}
-      {state.status === "authenticated" && (
-        <>
-          <p>
-            Signed in as <b>{state.user.name || state.user.email || state.user.username}</b>
-          </p>
-          <pre>{JSON.stringify(state.user, null, 2)}</pre>
-        </>
-      )}
-    </main>
-  );
+  console.log(session)
+
+  return session ? <Authed /> : (
+    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <LoginOrSignup />
+    </Box>
+  )
 }

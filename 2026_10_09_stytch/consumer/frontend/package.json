@@ -8,6 +8,11 @@
     "build": "tsc --noEmit && vite build"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource/roboto": "^5.3.0",
+    "@mui/material": "^9.5.0",
+    "@stytch/react": "^20.3.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
