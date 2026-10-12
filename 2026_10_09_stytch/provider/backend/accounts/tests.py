@@ -1,3 +1,6 @@
+from types import SimpleNamespace
+from unittest import mock
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
@@ -34,3 +37,57 @@ class MeTests(TestCase):
             "/api/me/", {"first_name": "  ", "last_name": "B"}, content_type="application/json"
         )
         self.assertEqual(res.status_code, 422)
+
+
+class ColorTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create(username="user-test-123")
+
+    def add(self, hex):
+        return self.client.post("/api/colors/", {"hex": hex}, content_type="application/json")
+
+    def test_anonymous_cannot_list_or_add(self):
+        self.assertEqual(self.client.get("/api/colors/").status_code, 401)
+        self.assertEqual(self.add("#ff0000").status_code, 401)
+
+    def test_add_and_list(self):
+        self.client.force_login(self.user)
+        self.assertEqual(self.add("#FF0000").status_code, 200)
+        self.add("#00ff00")
+        self.add("#ff0000")
+        hexes = [color["hex"] for color in self.client.get("/api/colors/").json()]
+        self.assertEqual(hexes, ["#ff0000", "#00ff00"])
+
+    def test_only_own_colors_listed(self):
+        other = get_user_model().objects.create(username="user-test-456")
+        self.client.force_login(other)
+        self.add("#0000ff")
+        self.client.force_login(self.user)
+        self.assertEqual(self.client.get("/api/colors/").json(), [])
+
+    def test_invalid_hex_rejected(self):
+        self.client.force_login(self.user)
+        self.assertEqual(self.add("red").status_code, 422)
+
+    @mock.patch("accounts.api.client")
+    def test_everyone_lists_each_person_with_colors(self, client):
+        client.users.connected_apps.side_effect = lambda user_id: SimpleNamespace(
+            connected_apps=[SimpleNamespace(name="Consumer")] if user_id == "user-test-456" else []
+        )
+        self.assertEqual(self.client.get("/api/colors/everyone/").status_code, 401)
+        other = get_user_model().objects.create(username="user-test-456", first_name="Ada", last_name="Lovelace")
+        get_user_model().objects.create(username="user-test-789", first_name="No", last_name="Colors")
+        self.client.force_login(other)
+        self.add("#0000ff")
+        self.add("#00ff00")
+        self.client.force_login(self.user)
+        self.add("#ff0000")
+        people = self.client.get("/api/colors/everyone/").json()
+        self.assertEqual(
+            [(p["first_name"], p["authed_from"], [c["hex"] for c in p["colors"]]) for p in people],
+            [
+                ("", ["Color Colors"], ["#ff0000"]),
+                ("Ada", ["Color Colors", "Consumer"], ["#0000ff", "#00ff00"]),
+                ("No", ["Color Colors"], []),
+            ],
+        )

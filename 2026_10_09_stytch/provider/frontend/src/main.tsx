@@ -20,7 +20,7 @@ const theme = createTheme();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Typography variant="h1"  >Provider</Typography>
+    <Typography variant="h1"  >Color Colors</Typography>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <StytchProvider stytch={stytch}>

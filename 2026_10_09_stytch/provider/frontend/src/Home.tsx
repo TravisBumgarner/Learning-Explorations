@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import Centered from "./Centered";
+import Colors from "./Colors";
 import Logout from "./Logout";
 import ProfileForm from "./ProfileForm";
 import { useMe } from "./useMe";
@@ -14,6 +15,7 @@ const Home = () => {
       {me === null && <Typography>Loading…</Typography>}
       {me && !hasName && <ProfileForm onSubmit={saveNames} />}
       {me && hasName && <h1>You're logged in, {me.first_name} {me.last_name}!</h1>}
+      {me && hasName && <Colors />}
       <Logout />
     </Centered>
   );
