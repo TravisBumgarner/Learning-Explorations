@@ -3,9 +3,6 @@ from typing import Annotated
 from django.contrib.auth import get_user_model
 from ninja import Router, Schema
 from pydantic import StringConstraints
-from stytch.core.response_base import StytchError
-
-from middleware import client
 
 from .models import FavoriteColor
 
@@ -46,8 +43,13 @@ class PersonColorsOut(Schema):
     id: int
     first_name: str
     last_name: str
-    authed_from: list[str]
+    authed_from: str
     colors: list[ColorOut]
+
+    @staticmethod
+    def resolve_authed_from(obj):
+        # "Log in with Consumer" users have an external identity (see provider_auth); the rest logged in here.
+        return "Consumer" if obj.external_identities.all() else "Color Colors"
 
     @staticmethod
     def resolve_colors(obj):
@@ -86,22 +88,11 @@ def add_color(request, payload: ColorIn):
     return 200, color
 
 
-def authed_from(user):
-    """Apps the user has logged in from: this one, plus any Connected Apps they authorized."""
-    try:
-        apps = client.users.connected_apps(user_id=user.username).connected_apps
-    except StytchError:
-        apps = []
-    return ["Color Colors", *(app.name for app in apps)]
-
-
 @router.get("/colors/everyone/", response={200: list[PersonColorsOut], 401: AnonymousOut})
 def list_everyone_colors(request):
     if not request.user.is_authenticated:
         return 401, {}
-    people = list(
-        get_user_model().objects.order_by("first_name", "last_name", "id").prefetch_related("favorite_colors")
+    return 200, (
+        get_user_model().objects.order_by("first_name", "last_name", "id")
+        .prefetch_related("favorite_colors", "external_identities")
     )
-    for person in people:
-        person.authed_from = authed_from(person)
-    return 200, people

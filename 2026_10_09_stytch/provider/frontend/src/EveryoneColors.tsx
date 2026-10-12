@@ -11,7 +11,7 @@ const EveryoneColors = ({ refreshKey }: { refreshKey: unknown }) => {
       <List>
         {people.map((person) => (
           <ListItem key={person.id} disableGutters>
-            <ListItemText primary={`${person.first_name} ${person.last_name}`} secondary={`Authed in from ${person.authed_from.join(", ")}`} />
+            <ListItemText primary={`${person.first_name} ${person.last_name}`} secondary={`Authed in from ${person.authed_from}`} />
             <Stack direction="row" spacing={0.5}>
               {person.colors.map((color) => (
                 <Box key={color.id} title={color.hex} sx={{ width: 20, height: 20, borderRadius: 1, border: 1, borderColor: "divider", bgcolor: color.hex }} />

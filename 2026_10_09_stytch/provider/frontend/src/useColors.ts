@@ -2,19 +2,20 @@ import { useStytch } from "@stytch/react";
 import { useCallback, useEffect, useState } from "react";
 
 export type Color = { id: number; hex: string };
-export type PersonColors = { id: number; first_name: string; last_name: string; authed_from: string[]; colors: Color[] };
+export type PersonColors = { id: number; first_name: string; last_name: string; authed_from: string; colors: Color[] };
 
 const useRequest = (path: string) => {
   const stytch = useStytch();
 
   // Read the JWT at request time: it is short-lived and the SDK refreshes it.
+  // No JWT means a "Log in with Consumer" login, which rides on the Django session cookie.
   return useCallback(async (init?: RequestInit) => {
     const tokens = stytch.session.getTokens();
     const response = await fetch(path, {
       ...init,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${tokens?.session_jwt}`,
+        ...(tokens ? { Authorization: `Bearer ${tokens.session_jwt}` } : {}),
       },
     });
     if (!response.ok) throw new Error(`Request failed: ${response.status}`);

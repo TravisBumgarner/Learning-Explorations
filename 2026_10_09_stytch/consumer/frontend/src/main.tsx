@@ -13,7 +13,7 @@ const theme = createTheme();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Typography variant="h1"  >Consumer</Typography>
+    <Typography variant="h1"  >Trav's Page</Typography>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <StytchProvider stytch={stytch}>

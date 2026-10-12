@@ -1,4 +1,3 @@
-import { Button, Stack } from '@mui/material';
 import { Products, StytchLogin } from '@stytch/react';
 
 const config = {
@@ -9,12 +8,7 @@ const config = {
 };
 
 const LoginOrSignup = () => {
-  return (
-    <Stack spacing={2} sx={{ alignItems: "center" }}>
-      <StytchLogin config={config} />
-      <Button variant="outlined" href="/api/auth/login/">Log in with Color Colors</Button>
-    </Stack>
-  );
+  return <StytchLogin config={config} />;
 };
 
 export default LoginOrSignup;

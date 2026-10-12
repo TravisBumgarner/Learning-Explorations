@@ -1,15 +1,21 @@
+import { Typography } from "@mui/material";
 import Centered from "./Centered";
+import ConnectedServices from "./ConnectedServices";
 import Logout from "./Logout";
 import ProfileForm from "./ProfileForm";
-import type { Me, Names } from "./useMe";
+import { useMe } from "./useMe";
 
 /** What a signed-in user sees: the profile form on first login, a welcome after. */
-const Home = ({ me, saveNames }: { me: Me; saveNames: (names: Names) => Promise<void> }) => {
-  const hasName = Boolean(me.first_name || me.last_name);
+const Home = () => {
+  const { me, saveNames } = useMe();
+  const hasName = Boolean(me?.first_name || me?.last_name);
 
   return (
     <Centered>
-      {hasName ? <h1>You're logged in, {me.first_name} {me.last_name}!</h1> : <ProfileForm onSubmit={saveNames} />}
+      {me === null && <Typography>Loading…</Typography>}
+      {me && !hasName && <ProfileForm onSubmit={saveNames} />}
+      {me && hasName && <h1>You're logged in, {me.first_name} {me.last_name}!</h1>}
+      {me && hasName && <ConnectedServices />}
       <Logout />
     </Centered>
   );

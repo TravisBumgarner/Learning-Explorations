@@ -1,7 +1,8 @@
-"""'Log in with Provider': this app is an OIDC client of the Provider (authorization code + PKCE)."""
+"""'Log in with Consumer': this app is an OIDC client of Consumer (authorization code + PKCE)."""
 import base64
 import hashlib
 import secrets
+import uuid
 from functools import lru_cache
 from typing import Optional
 from urllib.parse import urlencode
@@ -10,8 +11,11 @@ import jwt
 import requests
 from django.conf import settings
 from django.contrib.auth import get_user_model, login, logout
+from django.db import transaction
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from ninja import Router
+
+from .models import ExternalIdentity
 
 router = Router()
 
@@ -64,6 +68,18 @@ def fetch_userinfo(access_token):
     return res.json()
 
 
+def get_or_create_user(issuer, subject):
+    """Get or create the local user linked to this Provider account."""
+    identity = ExternalIdentity.objects.select_related("user").filter(issuer=issuer, subject=subject).first()
+    if identity:
+        return identity.user
+    with transaction.atomic():
+        # The identity is the key; the username only has to be unique.
+        user = get_user_model().objects.create(username=uuid.uuid4().hex)
+        ExternalIdentity.objects.create(user=user, issuer=issuer, subject=subject)
+    return user
+
+
 @router.get("/login/")
 def provider_login(request):
     code_verifier = secrets.token_urlsafe(64)
@@ -101,8 +117,7 @@ def provider_callback(
     if "email" not in claims:
         claims = {**claims, **fetch_userinfo(tokens["access_token"])}
 
-    # Namespaced so Provider ids can't collide with this app's own Stytch user ids.
-    user, _ = get_user_model().objects.get_or_create(username=f"provider|{claims['sub']}")
+    user = get_or_create_user(claims["iss"], claims["sub"])
     email = claims.get("email", "")
     if user.email != email:
         user.email = email

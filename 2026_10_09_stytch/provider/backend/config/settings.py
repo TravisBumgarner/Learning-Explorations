@@ -78,3 +78,10 @@ CSRF_COOKIE_NAME = "provider_csrftoken"
 
 STYTCH_PROJECT_ID = os.environ.get("STYTCH_PROJECT_ID")
 STYTCH_SECRET = os.environ.get("STYTCH_SECRET")
+# "Log in with Consumer": Consumer's Stytch project is the OIDC issuer.
+PROVIDER_ISSUER = os.environ.get("PROVIDER_ISSUER", "").rstrip("/")
+PROVIDER_CLIENT_ID = os.environ.get("PROVIDER_CLIENT_ID")
+PROVIDER_CLIENT_SECRET = os.environ.get("PROVIDER_CLIENT_SECRET")
+PROVIDER_REDIRECT_URI = os.environ.get(
+    "PROVIDER_REDIRECT_URI", "http://localhost:5274/api/auth/callback/"
+)
