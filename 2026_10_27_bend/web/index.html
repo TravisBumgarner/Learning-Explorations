@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bend Lab</title>
+<style>
+  :root {
+    --bg: #f7f5f1; --panel: #ffffff; --ink: #2f3b4c; --dim: #7a7f88; --line: #e3e0da;
+    --floor1: #ebe8e2; --floor2: #e1ded7; --wall: #8e8b87; --cap: #a8a5a1;
+    --pole: #87847d; --cloth: #7e9a5e; --skin: #78c0e3; --eye: #2f3b4c;
+    --ok: #3f7d4e; --okbg: #e3f1e6; --bad: #b5483d; --badbg: #f8e3e0; --vio: #6b5fb5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d; --panel: #1f2227; --ink: #e4e6ea; --dim: #9096a0; --line: #30343b;
+      --floor1: #2a2d33; --floor2: #262930; --wall: #6d6a66; --cap: #85827e;
+      --pole: #a09d96; --cloth: #93b26f; --skin: #78c0e3; --eye: #17191d;
+      --ok: #7cc68d; --okbg: #1e3325; --bad: #ee8b80; --badbg: #3a2220; --vio: #a99ff0;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 24px 16px 48px;
+         display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; }
+  @media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+  h1 { grid-column: 1 / -1; margin: 0; font-size: 20px; font-weight: 650; }
+  h1 small { color: var(--dim); font-weight: 400; font-size: 14px; margin-left: 8px; }
+  h2 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  #stage { position: relative; }
+  canvas { width: 100%; display: block; border-radius: 8px; outline: none; }
+  canvas:focus-visible { box-shadow: 0 0 0 2px var(--vio); }
+  .shake { animation: shake .18s; }
+  @keyframes shake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+  #won { position: absolute; inset: 0; display: none; place-items: center; background: rgba(246,228,225,.85);
+         color: #c46a60; font: 700 40px ui-monospace, monospace; border-radius: 8px; }
+  #won.on { display: grid; }
+  .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 12px; color: var(--dim); }
+  .row b { color: var(--ink); font-weight: 600; }
+  button { font: inherit; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--line);
+           background: var(--bg); color: var(--ink); cursor: pointer; }
+  kbd { font: 12px ui-monospace, monospace; border: 1px solid var(--line); border-bottom-width: 2px;
+        border-radius: 4px; padding: 0 5px; background: var(--bg); }
+  #moves { font: 13px ui-monospace, monospace; color: var(--dim); word-break: break-all; min-height: 1.5em; }
+  aside { display: flex; flex-direction: column; gap: 16px; }
+  #badge { display: inline-block; padding: 6px 12px; border-radius: 999px; font-weight: 650; }
+  #badge.ok { color: var(--ok); background: var(--okbg); }
+  #badge.bad { color: var(--bad); background: var(--badbg); }
+  #badge.wait { color: var(--dim); background: var(--bg); }
+  #when { color: var(--dim); font-size: 13px; margin-left: 8px; }
+  ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  li code { font: 600 13px ui-monospace, monospace; color: var(--vio); }
+  li p { margin: 2px 0 0; color: var(--dim); font-size: 14px; }
+  pre { margin: 8px 0 0; white-space: pre-wrap; font: 12px/1.45 ui-monospace, monospace; max-height: 260px;
+        overflow: auto; background: var(--bg); padding: 10px; border-radius: 8px; }
+  details summary { cursor: pointer; color: var(--dim); font-size: 13px; margin-top: 10px; }
+  .tip { color: var(--dim); font-size: 14px; margin: 0; }
+  .tip q { color: var(--ink); quotes: "“" "”"; }
+  #chat { display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow: auto; margin-bottom: 10px; }
+  .msg { margin: 0; white-space: pre-wrap; font-size: 14px; }
+  .msg.you { align-self: flex-end; background: var(--vio); color: #fff; padding: 6px 10px; border-radius: 10px 10px 2px 10px; max-width: 90%; }
+  .msg.claude { color: var(--ink); }
+  .steps { margin: 0 0 4px; font: 12px/1.5 ui-monospace, monospace; color: var(--dim); }
+  #ask { display: flex; flex-direction: column; gap: 8px; }
+  textarea { font: inherit; width: 100%; resize: vertical; padding: 8px 10px; border-radius: 8px;
+             border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+  #send { align-self: flex-end; background: var(--vio); color: #fff; border-color: var(--vio); }
+  #send:disabled { opacity: .5; cursor: default; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Winning Is Impossible <small>local lab · your repo's .bend files</small></h1>
+
+  <section class="card">
+    <div id="stage">
+      <canvas id="board" tabindex="0" aria-label="game board"></canvas>
+      <div id="won">YOU WON !?</div>
+    </div>
+    <div class="row">
+      <span>Move: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrows</span>
+      <span>Position <b id="pos">–</b></span>
+      <button id="reset">Reset</button>
+    </div>
+    <div class="row"><span id="moves"></span></div>
+  </section>
+
+  <aside>
+    <section class="card">
+      <h2>Proof check</h2>
+      <span id="badge" class="wait">checking…</span><span id="when"></span>
+      <details><summary>bend PROOF.bend output</summary><pre id="proof"></pre></details>
+      <pre id="build" hidden></pre>
+    </section>
+    <section class="card">
+      <h2>Laws <span style="text-transform:none;letter-spacing:0">(LAWS.bend)</span></h2>
+      <ul id="laws"></ul>
+    </section>
+    <section class="card">
+      <h2>Ask Claude</h2>
+      <div id="chat"><p class="tip">e.g. <q>use bend: let the player walk through walls</q>.
+        Claude edits the .bend files; the game and proof check update on save.</p></div>
+      <form id="ask">
+        <textarea id="text" rows="3" placeholder="use bend: …"></textarea>
+        <button id="send">Send</button>
+      </form>
+    </section>
+  </aside>
+</main>
+
+<script type="module">
+const $ = id => document.getElementById(id);
+const canvas = $("board"), ctx = canvas.getContext("2d");
+const KEYS = { ArrowUp: "w", ArrowDown: "s", ArrowLeft: "a", ArrowRight: "d" };
+const ARROW = { Up: "↑", Down: "↓", Left: "←", Right: "→" };
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+let G = null, cells = [], g = null, moves = [], version = -1;
+
+function load() {
+  cells = G.grid(G.map_h() - 1).split("\n").map(r => [...r]);
+  g = G.start();
+  for (const m of moves) g = G.step(m, g);
+  draw();
+}
+
+function draw() {
+  const rows = cells.length, cols = cells[0]?.length ?? 0;
+  const dpr = devicePixelRatio || 1, w = canvas.clientWidth, s = w / cols;
+  canvas.width = w * dpr; canvas.height = s * rows * dpr;
+  canvas.style.height = s * rows + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+    const c = cells[y][x];
+    ctx.fillStyle = css((x + y) % 2 ? "--floor2" : "--floor1");
+    ctx.fillRect(x * s, y * s, s, s);
+    if (c === "#") {
+      ctx.fillStyle = css("--wall"); ctx.fillRect(x * s, y * s, s, s);
+      ctx.fillStyle = css("--cap"); ctx.fillRect(x * s, y * s, s, s * 0.22);
+    } else if (c === "F") {
+      ctx.fillStyle = css("--pole"); ctx.fillRect(x * s + s * 0.3, y * s + s * 0.15, s * 0.07, s * 0.72);
+      ctx.fillStyle = css("--cloth");
+      ctx.beginPath(); ctx.moveTo(x * s + s * 0.37, y * s + s * 0.15);
+      ctx.lineTo(x * s + s * 0.78, y * s + s * 0.3); ctx.lineTo(x * s + s * 0.37, y * s + s * 0.45); ctx.fill();
+    }
+  }
+  if (g) {
+    const px = g.x * s + s / 2, py = g.y * s + s / 2;
+    ctx.fillStyle = css("--skin");
+    ctx.beginPath(); ctx.arc(px, py, s * 0.34, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = css("--eye");
+    for (const dx of [-0.11, 0.11]) { ctx.beginPath(); ctx.arc(px + dx * s, py - s * 0.05, s * 0.05, 0, Math.PI * 2); ctx.fill(); }
+    $("pos").textContent = `(${g.x}, ${g.y})`;
+    $("won").classList.toggle("on", !!g.won);
+  }
+  $("moves").textContent = moves.length ? `${moves.length} moves: ` + moves.map(m => ARROW[m.$] ?? m.$).join("") : "";
+}
+
+function press(code) {
+  if (!G || !g) return;
+  const mv = G.key(code);
+  if (mv.$ !== "Some") return;
+  const before = g;
+  g = G.step(mv.value, g);
+  moves.push(mv.value);
+  if (g.x === before.x && g.y === before.y) {
+    canvas.classList.remove("shake"); void canvas.offsetWidth; canvas.classList.add("shake");
+  }
+  draw();
+}
+
+addEventListener("keydown", e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.target.closest?.("textarea, input")) return;
+  const k = KEYS[e.key] ?? e.key;
+  if (k.length !== 1) return;
+  e.preventDefault();
+  press(k.toLowerCase().charCodeAt(0));
+});
+$("reset").onclick = () => { moves = []; if (G) load(); canvas.focus(); };
+addEventListener("resize", draw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+
+function showStatus(st) {
+  const badge = $("badge");
+  if (!st.build?.ok) { badge.className = "bad"; badge.textContent = "main.bend doesn't build"; }
+  else if (st.proof?.ok) { badge.className = "ok"; badge.textContent = "✓ all proofs check"; }
+  else { badge.className = "bad"; badge.textContent = "✗ proofs fail"; }
+  $("when").textContent = st.at ? "at " + new Date(st.at).toLocaleTimeString() : "";
+  $("proof").textContent = st.proof?.text ?? "";
+  $("build").hidden = !!st.build?.ok;
+  $("build").textContent = st.build?.ok ? "" : st.build?.text ?? "";
+  $("laws").replaceChildren(...st.laws.map(l => {
+    const li = document.createElement("li");
+    li.innerHTML = "<code></code><p></p>";
+    li.firstChild.textContent = l.name;
+    li.lastChild.textContent = l.note;
+    return li;
+  }));
+}
+
+let chatKey = "";
+function showChat(st) {
+  $("send").disabled = st.thinking;
+  const key = JSON.stringify([st.chat, st.thinking]);
+  if (key === chatKey || !st.chat.length) return;
+  chatKey = key;
+  const box = $("chat");
+  box.replaceChildren(...st.chat.map((m, i) => {
+    const div = document.createElement("div");
+    if (m.steps?.length) {
+      const steps = document.createElement("p");
+      steps.className = "steps"; steps.textContent = m.steps.map(s => "· " + s).join("\n");
+      div.append(steps);
+    }
+    const p = document.createElement("p");
+    p.className = "msg " + m.role;
+    p.textContent = m.text || (st.thinking && i === st.chat.length - 1 ? "working…" : "");
+    div.append(p);
+    if (m.role === "you") div.style.alignSelf = "flex-end";
+    return div;
+  }));
+  box.scrollTop = box.scrollHeight;
+}
+
+async function send(e) {
+  e.preventDefault();
+  const text = $("text").value.trim();
+  if (!text) return;
+  $("send").disabled = true;
+  const r = await fetch("/ask", { method: "POST", body: JSON.stringify({ text }) });
+  if (r.ok) $("text").value = "";
+}
+$("ask").onsubmit = send;
+$("text").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) send(e); });
+
+async function poll() {
+  try {
+    const st = await (await fetch("/status")).json();
+    showChat(st);
+    if (st.version !== version && st.version > 0) {
+      version = st.version;
+      showStatus(st);
+      if (st.build.ok) { G = (await import(`/game.mjs?v=${version}`)).default; load(); }
+    } else if (st.busy) {
+      $("badge").className = "wait"; $("badge").textContent = "checking…";
+    }
+  } catch (e) {
+    $("badge").className = "bad"; $("badge").textContent = "server not running";
+  }
+  setTimeout(poll, 700);
+}
+poll();
+canvas.focus();
+</script>
+</body>
+</html>
